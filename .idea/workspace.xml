@@ -54,6 +54,9 @@
   <component name="FavoritesManager">
     <favorites_list name="sc2019" />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1ZQXxc5vjQ51sW2dLoRfqDRWJuq" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -67,10 +70,11 @@
     <property name="RequestMappingsPanelWidth0" value="75" />
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="RequestMappingsPanelWidth2" value="75" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="dynamic.classpath" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/resources/mybatis/mapper" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -380,6 +384,14 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1586422889601" />
+    <state x="156" y="6" key="CommitChangelistDialog2" timestamp="1586741903249">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="156" y="6" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1586741903249" />
+    <state x="209" y="68" key="DiffContextDialog" timestamp="1586741902146">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="209" y="68" key="DiffContextDialog/0.0.1536.824@0.0.1536.824" timestamp="1586741902146" />
     <state width="1024" height="208" key="GridCell.Tab.0.bottom" timestamp="1586423478933">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
