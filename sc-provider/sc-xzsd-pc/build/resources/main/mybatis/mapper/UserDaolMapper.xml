@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzsd.pc.user.dao.UserDao">
+
+    <!--统计用户账号数量-->
+    <select id="countUserAcct" parameterType="com.xzsd.pc.user.entity.UserInfo" resultType="int">
+        select count(user_code)
+        from user
+        where is_delete = 0
+        and user_code = #{userId}
+    </select>
+
+    <!--新增用户-->
+    <insert id="addUser" parameterType="com.xzsd.pc.user.entity.UserInfo">
+        insert into user
+        (user_code,
+         user_id,
+         user_name,
+         user_password,
+         sex,
+         phone,
+         email,
+         idcard,
+         role,
+         is_delete,
+         create_user,
+         create_time,
+         update_user,
+         update_time,
+         verson)
+        values
+           (#{userId},
+            #{userAcct},
+            #{userName},
+            #{userPassword},
+            #{sex},
+            #{phone},
+            #{mail},
+            #{idCard},
+            #{role},
+            0,
+            #{createUser},
+            now(),
+            #{updateUser},
+            now(),
+            0)
+    </insert>
+
+    <!--用户列表-->
+    <select id="listUsersByPage" parameterType="com.xzsd.pc.user.entity.UserInfo" resultType="com.xzsd.pc.user.entity.UserInfo">
+        select
+        user_code       'userId',
+        user_name       'userName',
+        user_id         'userAcct',
+        user_password   'userPassword',
+        idcard          'idCard',
+        sex                     ,
+        phone                   ,
+        email           'mail'  ,
+        verson          'version'  ,
+        role
+        from user
+        where  is_delete = 0
+        <if test="userAcct != null and userAcct != ''">
+            and user_id like concat('%', #{userAcct}, '%')
+        </if>
+        <if test="userName != null and userName != ''">
+            and user_name like concat('%', #{userName}, '%')
+        </if>
+        <if test="role != null and role != ''">
+            and role = #{role}
+        </if>
+    </select>
+
+    <!--删除用户-->
+    <update id="deleteUser" parameterType="com.xzsd.pc.user.entity.UserInfo">
+        update
+           user
+        set
+            is_delete = 1,
+            update_user = #{userAcct},
+            verson = verson + 1
+        where user_code in
+            <foreach item="item" index="index" collection="listCode" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+    </update>
+
+    <!--修改用户信息-->
+    <update id="updateUser" parameterType="com.xzsd.pc.user.entity.UserInfo">
+        update user
+        set
+            user_code    = #{userId},
+            user_id      = #{userAcct},
+            user_name    = #{userName},
+            sex          = #{sex},
+            phone        = #{phone},
+            <if test="mail != null and mail != ''">
+            email        = #{mail},
+            </if>
+            <if test="idCard != null and idCard != ''">
+            idcard       = #{idCard},
+            </if>
+            user_password =#{userPassword},
+            update_time   = now(),
+            update_user   = #{updateUser},
+            verson        = verson + 1,
+            role          = #{role}
+        where user_code   = #{userId}
+        and   is_delete   = 0
+        and verson = #{version}
+    </update>
+
+    <!--获取用户信息-->
+    <select id="getUserByUserCode" parameterType="java.lang.String" resultType="com.xzsd.pc.user.entity.UserInfo">
+        select
+            user_id        'userAcct' ,
+            user_name      'userName' ,
+            user_password  'userPassword',
+            role                        ,
+            idcard         'idCard',
+            sex                     ,
+            phone                   ,
+            email           'mail' ,
+        from user
+        where user_code = #{userId}
+        and is_delete = 0
+    </select>
+</mapper>
