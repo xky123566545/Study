@@ -1,7 +1,136 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9c8584e3-c1ce-4b77-932f-464935fa490b" name="Default" comment="" />
+    <list default="true" id="9c8584e3-c1ce-4b77-932f-464935fa490b" name="Default" comment="111">
+      <change afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/goods/controller/GoodsController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/goods/dao/GoodsDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/goods/entity/ClassifyInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/goods/entity/GoodsInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/goods/entity/GoodsVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/goods/service/GoodsService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/picture/controller/PictureController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/picture/dao/PictureDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/picture/entity/GoodsInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/picture/entity/PictureInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/picture/service/PictureService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/resources/mybatis/mapper/GoodsDaoMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/resources/mybatis/mapper/PictureDaoMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.3.1/fileContent/annotation-processors.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.3.1/fileContent/annotation-processors.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.3.1/fileContent/fileContent.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.3.1/fileContent/fileContent.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.3.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.3.1/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.3.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.3.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.3.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.3.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.3.1/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.3.1/taskHistory/taskHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.3.1/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.3.1/taskHistory/taskHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-api-gateway/sc2019.sc-api-gateway.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-api-gateway/sc2019.sc-api-gateway.main.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-api-gateway/sc2019.sc-api-gateway.test.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-common/sc-common-base/sc2019.sc-common.sc-common-base.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-common/sc-common-base/sc2019.sc-common.sc-common-base.main.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-common/sc-common-base/sc2019.sc-common.sc-common-base.test.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-common/sc-common-client/sc2019.sc-common.sc-common-client.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-common/sc-common-client/sc2019.sc-common.sc-common-client.main.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-common/sc-common-client/sc2019.sc-common.sc-common-client.test.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-common/sc-common-log/sc2019.sc-common.sc-common-log.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-common/sc-common-log/sc2019.sc-common.sc-common-log.main.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-common/sc-common-log/sc2019.sc-common.sc-common-log.test.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-common/sc-common-util/sc2019.sc-common.sc-common-util.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-common/sc-common-util/sc2019.sc-common.sc-common-util.main.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-common/sc-common-util/sc2019.sc-common.sc-common-util.test.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-common/sc-core/sc2019.sc-common.sc-core.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-common/sc-core/sc2019.sc-common.sc-core.main.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-common/sc-core/sc2019.sc-common.sc-core.test.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-common/sc2019.sc-common.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-common/sc2019.sc-common.main.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-common/sc2019.sc-common.test.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-config-server/sc2019.sc-config-server.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-config-server/sc2019.sc-config-server.main.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-config-server/sc2019.sc-config-server.test.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-eureka-server/sc2019.sc-eureka-server.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-eureka-server/sc2019.sc-eureka-server.main.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-eureka-server/sc2019.sc-eureka-server.test.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-monitor/sc-admin-server/sc2019.sc-monitor.sc-admin-server.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-monitor/sc-admin-server/sc2019.sc-monitor.sc-admin-server.main.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-monitor/sc-admin-server/sc2019.sc-monitor.sc-admin-server.test.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-monitor/sc-zipkin-server/sc2019.sc-monitor.sc-zipkin-server.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-monitor/sc-zipkin-server/sc2019.sc-monitor.sc-zipkin-server.main.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-monitor/sc-zipkin-server/sc2019.sc-monitor.sc-zipkin-server.test.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-monitor/sc2019.sc-monitor.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-monitor/sc2019.sc-monitor.main.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-monitor/sc2019.sc-monitor.test.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-provider-api/sc-service-api/sc2019.sc-provider-api.sc-service-api.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-provider-api/sc-service-api/sc2019.sc-provider-api.sc-service-api.main.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-provider-api/sc-service-api/sc2019.sc-provider-api.sc-service-api.test.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-provider-api/sc2019.sc-provider-api.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-provider-api/sc2019.sc-provider-api.main.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-provider-api/sc2019.sc-provider-api.test.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-provider/sc-project/sc2019.sc-provider.sc-project.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-provider/sc-project/sc2019.sc-provider.sc-project.main.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-provider/sc-project/sc2019.sc-provider.sc-project.test.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-provider/sc-service/sc2019.sc-provider.sc-service.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-provider/sc-service/sc2019.sc-provider.sc-service.main.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-provider/sc-service/sc2019.sc-provider.sc-service.test.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-provider/sc-web-auth/sc2019.sc-provider.sc-web-auth.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-provider/sc-web-auth/sc2019.sc-provider.sc-web-auth.main.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-provider/sc-web-auth/sc2019.sc-provider.sc-web-auth.test.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-provider/sc-web/sc2019.sc-provider.sc-web.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-provider/sc-web/sc2019.sc-provider.sc-web.main.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-provider/sc-web/sc2019.sc-provider.sc-web.test.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-provider/sc-xzsd-app/sc2019.sc-provider.sc-xzsd-app.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-provider/sc-xzsd-app/sc2019.sc-provider.sc-xzsd-app.main.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-provider/sc-xzsd-app/sc2019.sc-provider.sc-xzsd-app.test.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-provider/sc-xzsd-pc/sc2019.sc-provider.sc-xzsd-pc.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-provider/sc-xzsd-pc/sc2019.sc-provider.sc-xzsd-pc.main.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-provider/sc-xzsd-pc/sc2019.sc-provider.sc-xzsd-pc.test.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-provider/sc2019.sc-provider.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-provider/sc2019.sc-provider.main.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-provider/sc2019.sc-provider.test.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-security/sc-security-client/sc2019.sc-security.sc-security-client.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-security/sc-security-client/sc2019.sc-security.sc-security-client.main.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-security/sc-security-client/sc2019.sc-security.sc-security-client.test.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-security/sc-security-core/sc2019.sc-security.sc-security-core.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-security/sc-security-core/sc2019.sc-security.sc-security-core.main.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-security/sc-security-core/sc2019.sc-security.sc-security-core.test.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-security/sc-security-uaa/sc2019.sc-security.sc-security-uaa.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-security/sc-security-uaa/sc2019.sc-security.sc-security-uaa.main.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-security/sc-security-uaa/sc2019.sc-security.sc-security-uaa.test.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-security/sc2019.sc-security.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-security/sc2019.sc-security.main.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-security/sc2019.sc-security.test.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-support/sc-job/sc2019.sc-support.sc-job.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-support/sc-job/sc2019.sc-support.sc-job.main.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-support/sc-job/sc2019.sc-support.sc-job.test.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-support/sc-log/sc2019.sc-support.sc-log.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-support/sc-log/sc2019.sc-support.sc-log.main.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-support/sc-log/sc2019.sc-support.sc-log.test.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-support/sc-shardingjdbc/sc2019.sc-support.sc-shardingjdbc.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-support/sc-shardingjdbc/sc2019.sc-support.sc-shardingjdbc.main.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-support/sc-shardingjdbc/sc2019.sc-support.sc-shardingjdbc.test.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-support/sc2019.sc-support.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-support/sc2019.sc-support.main.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-support/sc2019.sc-support.test.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-web-static/sc2019.sc-web-static.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-web-static/sc2019.sc-web-static.main.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-web-static/sc2019.sc-web-static.test.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc-api-gateway/build/resources/main/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/sc-api-gateway/build/resources/main/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc-api-gateway/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/sc-api-gateway/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc-common/sc-common-base/build/libs/sc-common-base-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/sc-common/sc-common-base/build/libs/sc-common-base-0.0.1-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc-common/sc-common-log/build/libs/sc-common-log-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/sc-common/sc-common-log/build/libs/sc-common-log-0.0.1-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc-common/sc-common-util/build/libs/sc-common-util-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/sc-common/sc-common-util/build/libs/sc-common-util-0.0.1-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc-common/sc-core/build/libs/sc-core-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/sc-common/sc-core/build/libs/sc-core-0.0.1-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/classes/java/main/com/xzsd/pc/menu/controller/MenuController.class" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/classes/java/main/com/xzsd/pc/menu/controller/MenuController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/menu/controller/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/menu/controller/MenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc2019.iml" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -28,10 +157,16 @@
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
+    <projectState path="$PROJECT_DIR$/sc-provider/demo">
+      <ProjectState />
+    </projectState>
   </component>
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
+        <task path="$PROJECT_DIR$/sc-provider/demo">
+          <activation />
+        </task>
         <projects_view>
           <tree_state>
             <expand>
@@ -74,7 +209,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="dynamic.classpath" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/resources/mybatis/mapper" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -94,9 +229,9 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Administrator\Desktop\作业\Java作业\数据库设计\项目设计\sc2019\sc-provider\sc-xzsd-pc\src\main\resources\mybatis\mapper" />
       <recent name="C:\Users\Administrator\Desktop\作业\Java作业\数据库设计\项目设计\sc2019\sc-provider\sc-xzsd-pc\src\main\java\com\xzsd\pc" />
+      <recent name="C:\Users\Administrator\Desktop\作业\Java作业\数据库设计\项目设计\sc2019\sc-provider" />
       <recent name="C:\Users\Administrator\Desktop\作业\Java作业\数据库设计\项目设计\sc2019\sc-provider\sc-xzsd-pc\src\main\resources\mybatis" />
       <recent name="C:\Users\Administrator\Desktop\作业\Java作业\数据库设计\项目设计\sc2019\sc-provider\sc-xzsd-pc\src\main\java\com\xzsd\pc\user" />
-      <recent name="C:\Users\Administrator\Desktop\FY2020 课件20200220\京东行走书店项目资料\sc2019\sc-provider" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -122,6 +257,13 @@
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <option name="TEST_OBJECT" value="class" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DemoApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="rollcall.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.DemoApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -357,7 +499,19 @@
       <workItem from="1586402255456" duration="74000" />
       <workItem from="1586402340957" duration="1203000" />
       <workItem from="1586404350494" duration="7399000" />
+      <workItem from="1586741798110" duration="212000" />
+      <workItem from="1586785750302" duration="3760000" />
+      <workItem from="1586824841185" duration="894000" />
+      <workItem from="1586825767086" duration="2128000" />
     </task>
+    <task id="LOCAL-00001" summary="111">
+      <created>1586741936509</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1586741936509</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -370,6 +524,10 @@
     <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
       <collection />
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="111" />
+    <option name="LAST_COMMIT_MESSAGE" value="111" />
   </component>
   <component name="WindowStateProjectService">
     <state x="499" y="167" key="#com.intellij.codeInsight.editorActions.RestoreReferencesDialog" timestamp="1586422959430">
@@ -384,46 +542,50 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1586422889601" />
-    <state x="156" y="6" key="CommitChangelistDialog2" timestamp="1586741903249">
+    <state x="156" y="6" key="CommitChangelistDialog2" timestamp="1586828011560">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="156" y="6" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1586741903249" />
+    <state x="156" y="6" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1586828011560" />
     <state x="209" y="68" key="DiffContextDialog" timestamp="1586741902146">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="209" y="68" key="DiffContextDialog/0.0.1536.824@0.0.1536.824" timestamp="1586741902146" />
-    <state width="1024" height="208" key="GridCell.Tab.0.bottom" timestamp="1586423478933">
+    <state x="511" y="167" key="FileChooserDialogImpl" timestamp="1586825287735">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1024" height="208" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1586423478933" />
-    <state width="1024" height="208" key="GridCell.Tab.0.center" timestamp="1586423478933">
+    <state x="511" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1586825287735" />
+    <state width="952" height="199" key="GridCell.Tab.0.bottom" timestamp="1586828011714">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1024" height="208" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1586423478933" />
-    <state width="1024" height="208" key="GridCell.Tab.0.left" timestamp="1586423478933">
+    <state width="952" height="199" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1586828011714" />
+    <state width="952" height="199" key="GridCell.Tab.0.center" timestamp="1586828011714">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1024" height="208" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1586423478933" />
-    <state width="1024" height="208" key="GridCell.Tab.0.right" timestamp="1586423478933">
+    <state width="952" height="199" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1586828011714" />
+    <state width="952" height="199" key="GridCell.Tab.0.left" timestamp="1586828011713">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1024" height="208" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1586423478933" />
-    <state width="1024" height="208" key="GridCell.Tab.1.bottom" timestamp="1586423478933">
+    <state width="952" height="199" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1586828011713" />
+    <state width="952" height="199" key="GridCell.Tab.0.right" timestamp="1586828011714">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1024" height="208" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1586423478933" />
-    <state width="1024" height="208" key="GridCell.Tab.1.center" timestamp="1586423478933">
+    <state width="952" height="199" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1586828011714" />
+    <state width="952" height="199" key="GridCell.Tab.1.bottom" timestamp="1586828011714">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1024" height="208" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1586423478933" />
-    <state width="1024" height="208" key="GridCell.Tab.1.left" timestamp="1586423478933">
+    <state width="952" height="199" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1586828011714" />
+    <state width="952" height="199" key="GridCell.Tab.1.center" timestamp="1586828011714">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1024" height="208" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1586423478933" />
-    <state width="1024" height="208" key="GridCell.Tab.1.right" timestamp="1586423478933">
+    <state width="952" height="199" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1586828011714" />
+    <state width="952" height="199" key="GridCell.Tab.1.left" timestamp="1586828011714">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1024" height="208" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1586423478933" />
+    <state width="952" height="199" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1586828011714" />
+    <state width="952" height="199" key="GridCell.Tab.1.right" timestamp="1586828011714">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="952" height="199" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1586828011714" />
     <state width="1390" height="246" key="GridCell.Tab.2.bottom" timestamp="1586403553118">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -440,13 +602,17 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1390" height="246" key="GridCell.Tab.2.right/0.0.1536.824@0.0.1536.824" timestamp="1586403553118" />
-    <state x="242" y="59" key="SettingsEditor" timestamp="1586402301721">
+    <state x="478" y="44" key="SettingsEditor" timestamp="1586825857424">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="242" y="59" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1586402301721" />
-    <state x="435" y="88" width="670" height="676" key="search.everywhere.popup" timestamp="1586423105154">
+    <state x="478" y="44" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1586825857424" />
+    <state x="457" y="241" key="com.intellij.ide.util.TipDialog" timestamp="1586824841480">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="435" y="88" width="670" height="676" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1586423105154" />
+    <state x="457" y="241" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1586824841480" />
+    <state x="435" y="87" width="670" height="676" key="search.everywhere.popup" timestamp="1586788931672">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="435" y="87" width="670" height="676" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1586788931672" />
   </component>
 </project>

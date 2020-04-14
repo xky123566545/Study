@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.goods.dao.GoodsDao">
+<!--   统计goodsId的数量-->
+    <select id="countGoodsId" parameterType="com.xzsd.pc.goods.entity.GoodsInfo" resultType="int">
+        select count(book_id)
+        from goods
+        where book_id = #{goodsId}
+        and is_delete = 0
+    </select>
+<!--    新增商品-->
+    <insert id="saveGoods" parameterType="com.xzsd.pc.goods.entity.GoodsInfo">
+        insert into goods
+        (
+            book_id,
+            book_name,
+            first_classfiy,
+            second_classfiy,
+            advert,
+            book_introduce,
+            store_name,
+            cost_price,
+            present_price,
+            picture_id,
+            storage,
+            shop_issell,
+            author,
+            book_public,
+            book_sell,
+            create_user,
+            create_time,
+            verson,
+            is_delete,
+            isbn,
+            goodsShelfTime,
+            update_user,
+            update_time
+
+        )
+        values
+        (
+            #{goodsId},
+            #{goodsName},
+            #{oneClassifyId},
+            #{twoClassifyId},
+            #{goodsAdvertise},
+            #{goodsDescribe},
+            #{supplierName},
+            #{goodsOriginalCost},
+            #{goodsPrice},
+            #{imagePath},
+            #{goodsInventory},
+            1,
+            #{goodsAuthor},
+            #{goodsPress},
+            10000-#{goodsInventory},
+            #{createUser},
+            now(),
+            #{version},
+            #{isDelete},
+            #{isbn},
+            now(),
+            #{createUser},
+            now()
+        )
+    </insert>
+<!--    查询商品-->
+    <select id="getGoodsByGoodsId" parameterType="java.lang.String" resultType="com.xzsd.pc.goods.entity.GoodsVO">
+        select
+            book_name       'goodsName',
+            first_classfiy  'oneClassifyName',
+            second_classfiy 'twoClassifyName',
+            advert          'goodsAdvertise',
+            book_introduce  'goodsDescribe',
+            store_name      'supplierName',
+            cost_price      'goodsOriginalCost',
+            present_price   'goodsPrice',
+            author          'goodsAuthor',
+            book_public     'goodsPress',
+            storage         'goodsOriginalCost',
+            isbn,
+            picture_id      'goodsImagePath'
+        from goods
+        where is_delete = 0
+        and book_id = #{goodsId}
+    </select>
+<!--    分页查询商品信息-->
+    <select id="listGoods" parameterType="com.xzsd.pc.goods.entity.GoodsVO" resultType="com.xzsd.pc.goods.entity.GoodsVO">
+        select
+            book_name       'goodsName',
+            first_classfiy  'oneClassifyName',
+            second_classfiy 'twoClassifyName',
+            advert          'goodsAdvertise',
+            book_introduce  'goodsDescribe',
+            store_name      'supplierName',
+            cost_price      'goodsOriginalCost',
+            present_price   'goodsPrice',
+            shop_issell     'goodsStateId',
+            book_sell       'goodsSales',
+            page_view       'goodsViewsNum',
+            goodsShelfTime  'goodsShelfTime',
+            storage         'goodsInventory',
+            book_id         'goodsId',
+            picture_id      'goodsImagePath',
+            isbn,
+            verson          'version'
+        from goods
+        where is_delete = 0
+        <if test="goodsName != null and goodsName != ''">
+            and book_name like concat('%', #{goodsName}, '%')
+        </if>
+        <if test="goodsStateId != null and goodsStateId != ''">
+            and shop_issell like concat('%', #{goodsStateId}, '%')
+        </if>
+        <if test="goodsAdvertise != null and goodsAdvertise != ''">
+            and advert like concat('%', #{goodsAdvertise}, '%')
+        </if>
+        <if test="goodsAuthor != null and goodsAuthor != ''">
+            and author like concat('%', #{goodsAuthor}, '%')
+        </if>
+        <if test="goodsPress != null and goodsPress != ''">
+            and book_public like concat('%', #{goodsPress}, '%')
+        </if>
+    </select>
+<!--    修改商品信息-->
+    <update id="updateGoods" parameterType="com.xzsd.pc.goods.entity.GoodsInfo">
+        update goods
+        set
+            book_name       = #{goodsName},
+            isbn            = #{isbn},
+            first_classfiy  = #{oneClassifyId},
+            second_classfiy = #{twoClassifyId},
+        <if test="goodsDescribe != null and goodsDescribe != ''">
+            book_introduce  = #{goodsDescribe},
+        </if>
+        <if test="goodsAdvertise != null and goodsAdvertise != ''">
+            advert  = #{goodsAdvertise},
+        </if>
+            book_sell       = #{goodsInventory},
+            store_name      = #{supplierName},
+            cost_price      = #{goodsOriginalCost},
+            present_price   = #{goodsPrice},
+            update_user     = #{updateUser},
+            update_time     = Now(),
+            verson          = verson + 1,
+            author          = #{goodsAuthor},
+            book_public     = #{goodsPress},
+            picture_id      = #{imagePath}
+        where book_id = #{goodsId}
+        and is_delete = 0
+        and verson = #{version}
+    </update>
+
+<!--    删除商品信息-->
+    <delete id="deleteGoods" parameterType="com.xzsd.pc.goods.entity.GoodsInfo">
+        update goods
+        set
+        is_delete   = 1,
+        update_user = #{userId},
+        update_time = now(),
+        verson      = verson +1
+        where book_id in
+        <foreach collection="listCode" index="index" open="(" close=")" separator="," item="item">
+            #{item}
+        </foreach>
+        and is_delete = 0
+    </delete>
+<!--    商品上架下架操作-->
+    <update id="goodsSell" parameterType="com.xzsd.pc.goods.entity.GoodsInfo">
+        update goods
+        set
+            shop_issell = #{goodsIsSell},
+            update_user = #{userId},
+            update_time = now(),
+            verson      = verson + 1
+        where is_delete = 0
+        and book_id in
+        <foreach collection="listCode" item="item" separator="," close=")" open="(" index="index">
+            #{item}
+        </foreach>
+        and verson in
+        <foreach collection="listVersion" item="item" separator="," close=")" open="(" index="index">
+            #{item}
+        </foreach>
+    </update>
+<!--    查询商品分类下拉框接口-->
+    <select id="listGoodsClassify" parameterType="com.xzsd.pc.goods.entity.ClassifyInfo" resultType="com.xzsd.pc.goods.entity.ClassifyInfo">
+        select
+            classify_id     'classifyId',
+            classify_name   'classifyName'
+        from goodsclassify
+        where is_delete = 0
+        and parent_id = #{classifyId}
+    </select>
+
+
+</mapper>

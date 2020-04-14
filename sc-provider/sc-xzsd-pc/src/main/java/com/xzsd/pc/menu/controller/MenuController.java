@@ -1,5 +1,7 @@
 package com.xzsd.pc.menu.controller;
 
+import com.neusoft.security.client.utils.SecurityUtils;
+import com.neusoft.util.AuthUtils;
 import com.xzsd.pc.menu.entity.MenuInfo;
 import com.xzsd.pc.menu.service.MenuService;
 import com.xzsd.pc.util.AppResponse;
@@ -37,7 +39,7 @@ public class MenuController {
     public AppResponse addMenu(MenuInfo menuInfo) {
         try {
             //获取用户id
-            String userAcct = AuthUtils.getCurrentUserId();
+            String userAcct = SecurityUtils.getCurrentUserId();
             menuInfo.setCreateUser(userAcct);
             AppResponse appResponse = menuService.addMenu(menuInfo);
             return appResponse;
@@ -95,7 +97,7 @@ public class MenuController {
     public AppResponse updateMenu(MenuInfo menuInfo){
         try{
             //获取用户id
-            String userId = AuthUtils.getCurrentUserId();
+            String userId = SecurityUtils.getCurrentUserId();
             menuInfo.setUpdateUser(userId);
             return menuService.updateMenu(menuInfo);
         }catch (Exception e){

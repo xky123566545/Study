@@ -1,3 +1,5 @@
+server:
+  port: 8081
 security:
   oauth2:
     resource:
@@ -41,6 +43,10 @@ zuul:
     app:
       path: /app/**
       serviceId: sc-xzsd-app
+      sensitiveHeaders:
+    demo:
+      path: /demo/**
+      serviceId: demo
       sensitiveHeaders:
   add-proxy-headers: true
   add-host-header: true
