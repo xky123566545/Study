@@ -3,11 +3,11 @@
 <mapper namespace="com.xzsd.pc.user.dao.UserDao">
 
     <!--统计用户账号数量-->
-    <select id="countUserAcct" parameterType="com.xzsd.pc.user.entity.UserInfo" resultType="int">
-        select count(user_code)
+    <select id="countUserAcct" parameterType="java.lang.String" resultType="int">
+        select count(user_id)
         from user
         where is_delete = 0
-        and user_code = #{userId}
+        and user_id = #{userAcct}
     </select>
 
     <!--新增用户-->
@@ -95,12 +95,8 @@
             user_name    = #{userName},
             sex          = #{sex},
             phone        = #{phone},
-            <if test="mail != null and mail != ''">
             email        = #{mail},
-            </if>
-            <if test="idCard != null and idCard != ''">
             idcard       = #{idCard},
-            </if>
             user_password =#{userPassword},
             update_time   = now(),
             update_user   = #{updateUser},
@@ -108,7 +104,7 @@
             role          = #{role}
         where user_code   = #{userId}
         and   is_delete   = 0
-        and verson = #{version}
+        and   verson      = #{version}
     </update>
 
     <!--获取用户信息-->
@@ -121,7 +117,7 @@
             idcard         'idCard',
             sex                     ,
             phone                   ,
-            email           'mail' ,
+            email           'mail'
         from user
         where user_code = #{userId}
         and is_delete = 0

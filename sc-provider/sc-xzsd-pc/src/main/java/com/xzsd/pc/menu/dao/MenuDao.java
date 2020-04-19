@@ -45,7 +45,7 @@ public interface MenuDao {
     * @Author: xukunyuan
     * @Date: 2020/3/26
     */
-    List<MenuInfo> listMenus(MenuInfo menuInfo);
+    List<MenuInfo> listMenu(MenuInfo menuInfo);
     /**
     * @Description:修改菜单信息
     * @Param:   menuInfo 菜单信息
@@ -63,4 +63,12 @@ public interface MenuDao {
     * @Date: 2020/3/27
     */
     int deleteMenu(@Param("listCode") List<String> listCode, @Param("userId") String userId);
+    /**
+     * @Description: 根据角色列表分页查询
+     * @Param:  menuInfo 列表信息
+     * @return:  List<MenuInfo></MenuInfo>
+     * @Author: xukunyuan
+     * @Date: 2020/3/26
+     */
+    List<MenuInfo> listMenuHome(MenuInfo menuInfo);
 }

@@ -45,6 +45,7 @@
 <!--菜单查询-->
     <select  id="getMenuByMenuName" parameterType="java.lang.String" resultType="com.xzsd.pc.menu.entity.MenuInfo">
     select
+        menu_id       'menuId',
         menu_name     'menuName',
         menu_routing  'menuPath',
         is_menu       'isMenu',
@@ -58,18 +59,14 @@
     </select>
 
 <!--菜单分页查询-->
-    <select id="listMenus" parameterType="com.xzsd.pc.menu.entity.MenuInfo" resultType="com.xzsd.pc.menu.entity.MenuInfo">
+    <select id="listMenu" parameterType="com.xzsd.pc.menu.entity.MenuInfo" resultType="com.xzsd.pc.menu.entity.MenuInfo">
         select
         menu_name     'menuName',
         menu_routing  'menuPath',
-        is_menu       'isMenu',
         menu_id        'menuId'
         from menu
         where  is_menu = 1
         and is_delete = 0
-        <if test="menuName != null and menuName != ''">
-        and menu_name like concat('%', #{menuName}, '%')
-    </if>
 
     </select>
 
@@ -105,5 +102,16 @@
         and is_delete = 0
     </delete>
 
+    <!--菜单分页查询店长权限-->
+    <select id="listMenuHome" parameterType="com.xzsd.pc.menu.entity.MenuInfo" resultType="com.xzsd.pc.menu.entity.MenuInfo">
+        select
+        menu_name     'menuName',
+        menu_routing  'menuPath',
+        menu_id        'menuId'
+        from menu
+        where  is_menu = 1
+        and is_delete = 0
+        and menu_id in (4,7,8,10,11)
 
+    </select>
 </mapper>

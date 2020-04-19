@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzsd.pc.order.dao.OrderDao">
+<!--    查询订单详情-->
+    <select id="getListOrder" resultType="com.xzsd.pc.order.entity.OrderInfo" parameterType="java.lang.String">
+        select
+            s1.user_code        'userId',
+            s1.order_id         'orderId',
+            s1.book_id          'goodsId',
+            s2.book_name        'goodsName',
+            s1.books_cnt        'goodsCount',
+            s1.order_price      'theGoodsAllPrice',
+            s2.cost_price       'goodsShelfCost',
+            s2.present_price    'goodsPrice'
+        from order_table s1
+        inner join goods s2
+        on s1.book_id = s2.book_id
+        where s1.is_delete = 0
+        and s2.is_delete = 0
+        and s1.order_id = #{orderId}
+    </select>
+<!--    分页查询订单信息-->
+    <select id="listOrders" parameterType="com.xzsd.pc.order.entity.OrderInfo" resultType="com.xzsd.pc.order.entity.OrderInfo">
+        select
+            s1.order_id     'orderId',
+            s1.order_price  'orderAllCost',
+            s1.order_state  'orderStateId',
+            s1.store_id     'storeId',
+            s2.user_name    'userName',
+            s2.phone        'phone',
+            s1.verson       'version',
+            s1.pay_time     'payTime'
+        from order_table s1
+        inner join user s2
+        on s1.user_code = s2.user_code
+        where s1.is_delete = 0
+        and s2.is_delete = 0
+        and s2.role = #{role}
+        <if test="userName != null and userName != ''">
+            and s2.user_name = #{userName}
+        </if>
+        <if test="phone != null and phone != ''">
+            and s2.phone = #{phone}
+        </if>
+        <if test="orderId != null and orderId != ''">
+            and s1.order_id = #{orderId}
+        </if>
+        <if test="orderStateId != null and orderStateId != ''">
+            and s1.order_state = #{orderStateId}
+        </if>
+        <if test="payTimeStart != null and payTimeStart != ''">
+            and s1.pay_time_start = #{payTimeStart}
+        </if>
+        <if test="payTimeEnd != null and payTimeEnd != ''">
+            and s1.pay_time_end = #{payTimeEnd}
+        </if>
+    </select>
+<!--    修改订单状态接口-->
+    <update id="updateOrderState" parameterType="com.xzsd.pc.order.entity.OrderInfo">
+        update order_table
+        set
+            order_state     = #{orderStateId},
+            update_user     = #{userId},
+            update_time     = now(),
+            verson          = verson + 1
+        where is_delete = 0
+        and order_id in
+        <foreach collection="listCode" item="item" separator="," close=")" open="(" index="index">
+            #{item}
+        </foreach>
+        and verson in
+        <foreach collection="listVersion" item="item" separator="," close=")" open="(" index="index">
+            #{item}
+        </foreach>
+    </update>
+</mapper>

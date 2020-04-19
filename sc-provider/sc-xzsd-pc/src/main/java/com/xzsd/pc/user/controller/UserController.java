@@ -1,7 +1,6 @@
 package com.xzsd.pc.user.controller;
 
 
-import com.neusoft.security.client.utils.SecurityUtils;
 import com.xzsd.pc.user.entity.UserInfo;
 import com.xzsd.pc.user.service.UserService;
 import com.xzsd.pc.util.AppResponse;
@@ -38,9 +37,6 @@ public class UserController {
     @PostMapping("addUser")
     public AppResponse addUser(UserInfo userInfo) {
         try {
-            //获取用户id
-            String userId = SecurityUtils.getCurrentUserId();
-            userInfo.setCreateUser(userId);
             AppResponse appResponse = userService.addUser(userInfo);
             return appResponse;
         } catch (Exception e) {
@@ -58,8 +54,8 @@ public class UserController {
      * @author xukunyuan
      * @Date 2020-03-25
      */
-    @RequestMapping(value = "listUsersPage")
-    public AppResponse listUsersPage(UserInfo userInfo) {
+    @RequestMapping(value = "listUsers")
+    public AppResponse listUsers(UserInfo userInfo) {
         try {
             return userService.listUsersPage(userInfo);
         } catch (Exception e) {
@@ -79,11 +75,7 @@ public class UserController {
     @PostMapping("deleteUser")
     public AppResponse deleteUser(String userId) {
         try {
-            //获取用户id
-
-            String userAcct = SecurityUtils.getCurrentUserId();
-            userAcct="管理员";
-            return userService.deleteUser(userId,userAcct);
+            return userService.deleteUser(userId);
         } catch (Exception e) {
             logger.error("用户删除错误", e);
             System.out.println(e.toString());
@@ -101,9 +93,6 @@ public class UserController {
     @PostMapping("updateUser")
     public AppResponse updateUser(UserInfo userInfo) {
         try {
-            //获取用户id
-            String userAcct = SecurityUtils.getCurrentUserId();
-            userInfo.setUpdateUser(userAcct);
             return userService.updateUser(userInfo);
         } catch (Exception e) {
             logger.error("修改用户信息错误", e);

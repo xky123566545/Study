@@ -2,9 +2,11 @@ package com.xzsd.pc.user.service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.neusoft.security.client.utils.SecurityUtils;
 import com.xzsd.pc.user.dao.UserDao;
 import com.xzsd.pc.user.entity.UserInfo;
 import com.xzsd.pc.util.AppResponse;
+import com.xzsd.pc.util.PasswordUtils;
 import com.xzsd.pc.util.StringUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,14 +35,18 @@ public class UserService {
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse addUser(UserInfo userInfo) {
+        //获取用户id
+        String userId = SecurityUtils.getCurrentUserId();
+        userInfo.setCreateUser(userId);
         userInfo.setUserId(StringUtil.getCommonCode(2));
         userInfo.setIsDelete(0);
+        //密码加密
+        userInfo.setUserPassword(PasswordUtils.generatePassword(userInfo.getUserPassword()));
         // 校验账号是否存在
-        int countUserAcct = userDao.countUserAcct(userInfo);
+        int countUserAcct = userDao.countUserAcct(userInfo.getUserAcct());
         if(0 != countUserAcct) {
             return AppResponse.bizError("用户账号已存在，请重新输入！");
         }
-
         // 新增用户
         int count = userDao.addUser(userInfo);
         if(0 == count) {
@@ -61,29 +67,25 @@ public class UserService {
         List<UserInfo> userInfoList = userDao.listUsersByPage(userInfo);
         // 包装Page对象
         PageInfo<UserInfo> list = new PageInfo<UserInfo>(userInfoList);
+        if (userInfoList.size() == 0){
+            return AppResponse.bizError("查询失败，请重试");
+        }
         return AppResponse.success("查询成功！",list);
     }
 
     /**
      * demo 删除用户
-     * @param userAcct
      * @param userId
      * @return
      * @Author xukunyuan
      * @Date 2020-03-25
      */
     @Transactional(rollbackFor = Exception.class)
-    public AppResponse deleteUser(String userId, String userAcct) {
+    public AppResponse deleteUser(String userId) {
+        //获取用户id
+        String userAcct = SecurityUtils.getCurrentUserId();
         List<String> listCode = Arrays.asList(userId.split(","));
         AppResponse appResponse = AppResponse.success("删除成功！");
-        // 校验账号是否存在
-        for (int i = 0;i < listCode.size();i++) {
-            int countUserAcct = userDao.countUserAcct(listCode.get(i));
-            if (1 != countUserAcct) {
-                return AppResponse.bizError("用户账号" + listCode.get(i) + "不存在，请重新输入！");
-            }
-
-        }
         //删除用户
         int count = userDao.deleteUser(listCode,userAcct);
         if(0 == count) {
@@ -101,12 +103,12 @@ public class UserService {
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse updateUser(UserInfo userInfo) {
+        //获取用户id
+        String userId = SecurityUtils.getCurrentUserId();
+        userInfo.setUpdateUser(userId);
+        //密码加密
+        userInfo.setUserPassword(PasswordUtils.generatePassword(userInfo.getUserPassword()));
         AppResponse appResponse = AppResponse.success("修改成功");
-        // 校验账号是否存在
-        int countUserAcct = userDao.countUserAcct(userInfo);
-        if(0 == countUserAcct) {
-            return AppResponse.bizError("用户账号不存在，请重新输入！");
-        }
         // 修改用户信息
         int count = userDao.updateUser(userInfo);
         if (0 == count) {

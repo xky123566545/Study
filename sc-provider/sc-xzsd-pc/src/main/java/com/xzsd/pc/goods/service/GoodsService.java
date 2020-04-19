@@ -3,6 +3,7 @@ package com.xzsd.pc.goods.service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.neusoft.security.client.utils.SecurityUtils;
 import com.xzsd.pc.goods.dao.GoodsDao;
 import com.xzsd.pc.goods.entity.ClassifyInfo;
 import com.xzsd.pc.goods.entity.GoodsInfo;
@@ -39,13 +40,8 @@ public class GoodsService {
     public AppResponse saveGoods(GoodsInfo goodsInfo){
         //将商品是否存在設置为0 存在
         goodsInfo.setIsDelete(0);
-        goodsInfo.setCreateUser("管理员");
+        goodsInfo.setCreateUser(SecurityUtils.getCurrentUserId());
         goodsInfo.setVersion("0");
-
-        if (goodsDao.countGoodsId(goodsInfo) != 0){
-            return AppResponse.bizError("商品id生成错误，请重新点击修改");
-        }
-
         if (goodsDao.saveGoods(goodsInfo) == 0){
             return AppResponse.bizError("新增失败,请重试");
         }
@@ -62,7 +58,7 @@ public class GoodsService {
     public AppResponse getGoods(String goodsId){
         GoodsVO goodsVO = goodsDao.getGoodsByGoodsId(goodsId);
         if (goodsVO == null){
-           return AppResponse.bizError("该账号不存在，请重试");
+           return AppResponse.bizError("查询失败，请重试");
         }
         return AppResponse.success("查询成功",goodsVO);
     }
@@ -79,8 +75,8 @@ public class GoodsService {
             List<GoodsVO> goodsVOList = goodsDao.listGoods(goodsVO);
             //包装page对象
             PageInfo<GoodsVO> list = new PageInfo<>(goodsVOList);
-            if (list == null){
-                AppResponse.bizError("输入账号不存在，请重新输入");
+            if (goodsVOList.size() ==0){
+                AppResponse.bizError("查询失败，请重试");
             }
             return AppResponse.success("查询成功",list);
         }
@@ -92,7 +88,7 @@ public class GoodsService {
     * @Date: 2020/3/27
     */
     public AppResponse updateGoods(GoodsInfo goodsInfo){
-        goodsInfo.setUpdateUser("许坤源");
+        goodsInfo.setUpdateUser(SecurityUtils.getCurrentUserId());
         if (goodsDao.countGoodsId(goodsInfo) == 0){
             return AppResponse.bizError("账号不存在，请重新输入");
         }
@@ -111,7 +107,7 @@ public class GoodsService {
     */
     public AppResponse deleteGoods(String goodsId){
         List<String> listCode = Arrays.asList(goodsId.split(","));
-        String userId = "管理员";
+        String userId = SecurityUtils.getCurrentUserId();
         if (goodsDao.deleteGoods(listCode,userId) == 0){
             return AppResponse.bizError("删除失败，请重试");
         }
@@ -127,7 +123,7 @@ public class GoodsService {
     public AppResponse goodsSell(GoodsInfo goodsInfo){
         List<String> listCode = Arrays.asList(goodsInfo.getGoodsId().split(","));
         List<String> listVersion = Arrays.asList(goodsInfo.getVersion().split(","));
-        String userId = "管理员";
+        String userId = SecurityUtils.getCurrentUserId();
         //提取出需求 商品上架还是下架 2为下架 1为上架
         System.out.println("-------"+goodsInfo.getGoodsStateId());
         if (goodsInfo.getGoodsStateId().equals("2")) {

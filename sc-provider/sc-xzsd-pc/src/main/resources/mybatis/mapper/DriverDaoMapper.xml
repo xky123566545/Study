@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzsd.pc.driver.dao.DriverDao">
+<!--    新增司机信息-->
+    <insert id="addDriver" parameterType="com.xzsd.pc.driver.entity.DriverInfo">
+        insert into user
+        (
+            user_code,
+            user_id,
+            user_name,
+            phone,
+            image_path,
+            user_password,
+            idcard,
+            province_id,
+            city_id,
+            area_id,
+            create_user,
+            create_time,
+            update_user,
+            update_time,
+            is_delete,
+            role,
+            verson
+        )
+        values
+        (
+            #{driverId},
+            #{userAcct},
+            #{userName},
+            #{phone},
+            #{imagePath},
+            #{userPassword},
+            #{idCard},
+            #{provinceId},
+            #{cityId},
+            #{areaId},
+            #{createUser},
+            now(),
+            #{createUser},
+            now(),
+            0,
+            3,
+            0
+        )
+    </insert>
+<!--    查询司机详细信息-->
+    <select id="getDriver" parameterType="java.lang.String" resultType="com.xzsd.pc.driver.entity.DriverInfo">
+        select
+            user_code           'driverId',
+            user_id             'userAcct',
+            user_name           'userName',
+            phone,
+            user_password       'userPassword',
+            image_path          'userImage',
+            idcard              'idCard',
+            province_id         'provinceId',
+            city_id             'cityId',
+            area_id             'areaId',
+            verson              'version'
+        from user
+        where is_delete = 0
+        and role = 3
+        and user_code = #{driverId}
+    </select>
+<!--    分页查询司机信息，店长权限-->
+    <select id="listDriversStore" parameterType="com.xzsd.pc.driver.entity.DriverInfo" resultType="com.xzsd.pc.driver.entity.DriverInfo">
+        select
+            s1.user_code        'driverId',
+            s1.user_name        'userName',
+            s1.phone            'phone',
+            s1.idcard           'idCard',
+            s1.user_id          'userAcct',
+            s1.verson           'version'
+        from user s1
+        inner join store s2
+        on s1.area_id = s2.area_id
+        where s1.is_delete = 0
+        and s2.is_delete = 0
+        and s1.role = 3
+        and s2.user_code = #{userId}
+        <if test="driverId != null and driverId != ''">
+            and s1.user_code = #{driverId}
+        </if>
+        <if test="userName != null and userName != ''">
+            and s1.user_name like concat('%',#{userName},'%')
+        </if>
+        <if test="provinceId != null and provinceId != ''">
+            and s1.province_id = #{provinceId}
+        </if>
+        <if test="cityId != null and cityId != ''">
+            and s1.city_id = #{cityId}
+        </if>
+        <if test="areaId != null and areaId != ''">
+            and s1.area_id = #{areaId}
+        </if>
+    </select>
+<!--    分页查询司机信息，管理员权限-->
+    <select id="listDriversAdmin" parameterType="com.xzsd.pc.driver.entity.DriverInfo" resultType="com.xzsd.pc.driver.entity.DriverInfo">
+        select
+            s1.user_code        'driverId',
+            s1.user_name        'userName',
+            s1.phone            'phone',
+            s1.idcard           'idCard',
+            s1.user_id          'userAcct',
+            s1.verson           'version'
+        from user s1
+        where s1.is_delete = 0
+        and s1.role = 3
+        <if test="driverId != null and driverId != ''">
+            and s1.user_code = #{driverId}
+        </if>
+        <if test="userName != null and userName != ''">
+            and s1.user_name like concat('%',#{userName},'%')
+        </if>
+        <if test="provinceId != null and provinceId != ''">
+            and s1.province_id = #{provinceId}
+        </if>
+        <if test="cityId != null and cityId != ''">
+            and s1.city_id = #{cityId}
+        </if>
+        <if test="areaId != null and areaId != ''">
+            and s1.area_id = #{areaId}
+        </if>
+    </select>
+<!--    修改司机信息-->
+    <update id="updateDriver" parameterType="com.xzsd.pc.driver.entity.DriverInfo">
+        update user
+        set
+            user_name       = #{userName},
+            phone           = #{phone},
+            user_id         = #{userAcct},
+            user_password   = #{userPassword},
+            image_path      = #{imagePath},
+            idcard          = #{idCard},
+            province_id     = #{provinceId},
+            city_id         = #{cityId},
+            area_id         = #{areaId},
+            update_user     = #{updateUser},
+            update_time     = now(),
+            verson          = verson + 1
+        where is_delete = 0
+        and user_code = #{driverId}
+        and role = 3
+        and verson = #{version}
+    </update>
+<!--    删除司机信息-->
+    <delete id="deleteDriver" parameterType="java.lang.String">
+        update user
+        set
+            is_delete = 1,
+            update_user = #{userId},
+            update_time = now(),
+            verson = verson +1
+        where user_code in
+        <foreach collection="listCode" item="item" separator="," close=")" open="(" index="index">
+            #{item}
+        </foreach>
+    </delete>
+
+
+
+</mapper>

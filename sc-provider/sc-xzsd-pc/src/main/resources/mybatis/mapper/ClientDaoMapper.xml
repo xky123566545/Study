@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzsd.pc.client.dao.ClientDao">
+<!--    管理员分页查询客户信息-->
+    <select id="listClients" parameterType="com.xzsd.pc.client.entity.ClientInfo" resultType="com.xzsd.pc.client.entity.ClientInfo">
+        select
+            user_id     'userAcct',
+            user_name   'userName',
+            sex,
+            phone,
+            email       'mail',
+            idcard     'idCard'
+        from user
+        where is_delete = 0
+        and role = 4
+        <if test="userName != null and userName != ''">
+            and user_name like concat('%',#{userName},'%')
+        </if>
+        <if test="userAcct != null and userAcct != ''">
+            and user_id = #{userAcct}
+        </if>
+    </select>
+    <!--    店长分页查询客户信息-->
+    <select id="listClientsStore" parameterType="com.xzsd.pc.client.entity.ClientInfo" resultType="com.xzsd.pc.client.entity.ClientInfo">
+        select
+        s1.user_id		'userAcct',
+        s1.user_name	'userName',
+        s1.sex,
+        s1.phone,
+        s1.email 			'mail',
+        s1.idCard			'idCard'
+        from user s1
+        inner JOIN store s2
+        on s1.invite_code = s2.invite_code
+        and s2.user_code = #{userId}
+        <if test="userName != null and userName != ''">
+            and user_name like concat('%',#{userName},'%')
+        </if>
+        <if test="userAcct != null and userAcct != ''">
+            and user_id = #{userAcct}
+        </if>
+    </select>
+</mapper>

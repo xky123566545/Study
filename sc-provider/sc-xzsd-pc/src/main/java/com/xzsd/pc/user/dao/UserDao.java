@@ -15,17 +15,11 @@ import java.util.List;
 @Mapper
 public interface UserDao {
     /**
-     * 统计用户账号数量
-     * @param userInfo 用户信息
+     * 统计userAcct数量
+     * @param userAcct 用户编码
      * @return
      */
-    int countUserAcct(UserInfo userInfo);
-    /**
-     * 统计listcode中user_code账号数量
-     * @param user_code 用户编码
-     * @return
-     */
-    int countUserAcct(String user_code);
+    int countUserAcct(String userAcct);
     /**
      * 新增用户
      * @param userInfo 用户信息

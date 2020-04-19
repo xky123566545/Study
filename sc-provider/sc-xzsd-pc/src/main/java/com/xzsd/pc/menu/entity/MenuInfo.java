@@ -32,6 +32,10 @@ public class MenuInfo {
      */
     private String menuId;
     /**
+     * 角色编号
+     */
+    private String role;
+    /**
      * 作废标记
      */
     private int isDelete;

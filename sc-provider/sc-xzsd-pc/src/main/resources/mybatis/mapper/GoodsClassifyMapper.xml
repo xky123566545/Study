@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzsd.pc.goodsClassify.dao.GoodsClassifyDao">
+
+<!--    计算分类名称数量-->
+    <select id="countClassifyName" parameterType="com.xzsd.pc.goodsClassify.entity.GoodsClassifyInfo" resultType="int">
+        select count(classify_name)
+        from goodsclassify
+        where is_delete = 0
+        and classify_name = #{classifyName}
+    </select>
+<!--    计算分类id数量-->
+    <select id="countClassifyId" parameterType="java.lang.String" resultType="int">
+        select count(classify_id)
+        from goodsclassify
+        where is_delete = 0
+        and classify_id = #{classifyid}
+    </select>
+<!--    新增商品分类-->
+    <insert id="addClassify" parameterType="com.xzsd.pc.goodsClassify.entity.GoodsClassifyInfo">
+        insert into goodsclassify
+        (
+            classify_id,
+            parent_id,
+            classify_name,
+            remarks,
+            is_delete,
+            create_user,
+            create_time,
+            update_user,
+            update_time,
+            verson
+        )
+        values
+        (
+            #{classifyId},
+            #{classifyParent},
+            #{classifyName},
+            #{classifyComment},
+            0,
+            #{createUser},
+            now(),
+            #{createUser},
+            now(),
+            0
+
+        )
+    </insert>
+<!--    查询商品分类信息-->
+    <select id="getClassify" parameterType="java.lang.String" resultType="com.xzsd.pc.goodsClassify.entity.GoodsClassifyInfo">
+        select
+            classify_name       'classifyName',
+            remarks             'classifyComment'
+        from goodsclassify
+        where is_delete = 0
+        and classify_id = #{classifyId}
+    </select>
+<!--    商品一二级分类映射集合-->
+    <resultMap id="listClassify" type="com.goodsClassify.entity.GoodsClassifyInfo">
+        <id property="classifyId" column="fclassify_id" jdbcType="VARCHAR"/>
+        <result property="classifyName" column="fclassify_name" jdbcType="VARCHAR"/>
+        <result property="classifyParent" column="fparent_id" jdbcType="VARCHAR"/>
+        <result property="version" column="fverson" jdbcType="VARCHAR"/>
+        <collection property="goodsClassifyVOS" ofType="com.goodsClassify.entity.GoodsClassifyVO">
+            <result property="classifyId" column="sclassify_id" jdbcType="VARCHAR"/>
+            <result property="classifyParent" column="sparent_id" jdbcType="VARCHAR"/>
+            <result property="classifyName" column="sclassify_name" jdbcType="VARCHAR"/>
+            <result property="version" column="sverson" jdbcType="VARCHAR"/>
+        </collection>
+    </resultMap>
+<!--    查询商品一二级分类列表-->
+    <select id="getListClassify" resultMap="listClassify">
+        select
+            c1.classify_id      as fclassify_id,
+            c1.classify_name    as fclassify_name,
+            c1.parent_id        as fparent_id,
+            c1.verson           as fverson,
+            c2.classify_id      as sclassify_id,
+            c2.classify_name    as sclassify_name,
+            c2.parent_id        as sparent_id,
+            c2.verson           as sverson
+         from goodsclassify c1
+         left join goodsclassify c2
+         on c1.classify_id = c2.parent_id
+         and c1.is_delete = 0
+         and c2.is_delete = 0
+         where c1.parent_id = 0
+        </select>
+<!--    修改商品分类信息-->
+    <update id="updateClassify" parameterType="com.xzsd.pc.goodsClassify.entity.GoodsClassifyInfo">
+        update goodsclassify
+        set
+            classify_name       = #{classifyName},
+            <if test="classifyComment != null and classifyComment != ''">
+                remarks         = #{classifyComment},
+            </if>
+            verson              = verson + 1,
+            update_user         = #{updateUser},
+            update_time         = now()
+        where is_delete = 0
+        and classify_id = #{classifyId}
+        and verson      = #{version}
+    </update>
+<!--    删除商品分类信息-->
+    <update id="deleteClassify" parameterType="java.lang.String">
+        update goodsclassify
+        set
+            is_delete   = 1,
+            update_user = #{userId},
+            update_time = now(),
+            verson      = verson + 1
+        where classify_id in
+        <foreach collection="listCode" index="index" open="(" close=")" separator="," item="item">
+            #{item}
+        </foreach>
+        and is_delete = 0
+    </update>
+
+
+</mapper>

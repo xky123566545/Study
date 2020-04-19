@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzsd.pc.store.dao.StoreDao">
+<!--    查询省市区信息-->
+    <select id="listArea" parameterType="com.xzsd.pc.store.entity.AreaInfo" resultType="com.xzsd.pc.store.entity.AreaInfo">
+        select
+            Id      'areaId',
+            Name    'areaName'
+        from area
+        where Pid = #{areaId}
+    </select>
+    <!--    查询省市区名字-->
+    <select id="getArea" parameterType="com.xzsd.pc.store.entity.AreaInfo" resultType="com.xzsd.pc.store.entity.AreaInfo">
+        select
+            Name    'areaName'
+        from area
+        where id = #{areaId}
+    </select>
+<!--    查询门店编号数量-->
+    <select id="countStoreId" parameterType="java.lang.String" resultType="int">
+        select count(store_id)
+        from store
+        where is_delete = 0
+        and store_id = #{storeId}
+    </select>
+<!--    新增门店信息-->
+    <insert id="addStore" parameterType="com.xzsd.pc.store.entity.StoreInfo">
+        insert into store
+        (
+            store_id,
+            store_name,
+            store_phone,
+            store_address,
+            user_code,
+            business_code,
+            province_id,
+            city_id,
+            area_id,
+            is_delete,
+            create_user,
+            create_time,
+            update_user,
+            update_time,
+            verson,
+            invite_code
+        )
+        value
+        (
+            #{storeId},
+            #{storeName},
+            #{phone},
+            #{address},
+            #{userId},
+            #{businessCode},
+            #{provinceId},
+            #{cityId},
+            #{areaId},
+            0,
+            #{createUser},
+            now(),
+            #{createUser},
+            now(),
+            0,
+            #{inviteCode}
+        )
+    </insert>
+<!--    查询门店信息详情-->
+    <select id="getStore" parameterType="java.lang.String" resultType="com.xzsd.pc.store.entity.StoreInfo">
+        select
+            store_name          'storeName',
+            store_phone         'phone',
+            user_code           'userId',
+            shop_code           'businessCode',
+            store_address       'address',
+            store_id            'storeId',
+            verson              'version',
+            province_id         'provinceId',
+            city_id             'cityId',
+            area_id             'areaId'
+        from store
+        where is_delete = 0
+        and store_id = #{storeId}
+
+    </select>
+<!--    列表查询门店信息 店长权限 查看自己门店信息-->
+    <select id="listStores" resultType="com.xzsd.pc.store.entity.StoreInfo" parameterType="com.xzsd.pc.store.entity.StoreInfo">
+        select
+            s1.store_id         'storeId',
+            s1.store_name       'storeName',
+            s1.store_phone      'phone',
+            s1.store_address    'address',
+            s1.invite_code      'inviteCode',
+            s2.user_name        'userName',
+            s2.user_id        'userAcct',
+            s1.verson           'version'
+        from store s1
+        inner join user s2
+        on s1.user_code = s2.user_code
+        where s1.is_delete = 0
+        and s2.is_delete = 0
+        and s2.user_code  = #{userId}
+        <if test="storeId != null and storeId != ''">
+            and s1.store_id = #{storeId}
+        </if>
+        <if test="provinceId != null and provinceId != ''">
+            and s1.province_id = #{provinceId}
+        </if>
+        <if test="cityId != null and cityId != ''">
+            and s1.city_id = #{cityId}
+        </if>
+        <if test="areaId != null and areaId != ''">
+            and s1.area_id = #{areaId}
+        </if>
+        <if test="storeName != null and storeName != ''">
+            and s1.store_name like concat('%',#{storeName},'%')
+        </if>
+        <if test="userName != null and userName != ''">
+            and s2.user_name like concat('%',#{userName},'%')
+        </if>
+    </select>
+    <!--    列表查询门店信息 管理员权限 查看所有门店信息-->
+    <select id="adminListStores" resultType="com.xzsd.pc.store.entity.StoreInfo" parameterType="com.xzsd.pc.store.entity.StoreInfo">
+        select
+            s1.store_id         'storeId',
+            s1.store_name       'storeName',
+            s1.store_phone      'phone',
+            s1.store_address    'address',
+            s1.invite_code      'inviteCode',
+            s2.user_name        'userName',
+            s2.user_id        'userAcct',
+            s1.verson           'version'
+        from store s1
+        inner join user s2
+        on s1.user_code = s2.user_code
+        where s1.is_delete = 0
+        and s2.is_delete = 0
+        <if test="storeId != null and storeId != ''">
+            and s1.store_id = #{storeId}
+        </if>
+        <if test="provinceId != null and provinceId != ''">
+            and s1.province_id = #{provinceId}
+        </if>
+        <if test="cityId != null and cityId != ''">
+            and s1.city_id = #{cityId}
+        </if>
+        <if test="areaId != null and areaId != ''">
+            and s1.area_id = #{areaId}
+        </if>
+        <if test="storeName != null and storeName != ''">
+            and s1.store_name like concat('%',#{storeName},'%')
+        </if>
+        <if test="userName != null and userName != ''">
+            and s2.user_name like concat('%',#{userName},'%')
+        </if>
+    </select>
+<!--    修改门店信息接口-->
+    <update id="updateStore" parameterType="com.xzsd.pc.store.entity.StoreInfo">
+        update store
+        set
+            store_name      = #{storeName},
+            store_phone     = #{phone},
+            user_code       = #{userId},
+            business_code   = #{businessCode},
+            province_id     = #{provinceId},
+            city_id         = #{cityId},
+            area_id         = #{areaId},
+            store_address   = #{address},
+            update_user     = #{updateUser},
+            update_time     = now(),
+            verson          = verson + 1
+        where is_delete = 0
+        and verson = #{version}
+        and store_id = #{storeId}
+    </update>
+<!--    删除门店信息-->
+    <delete id="deleteStore" parameterType="java.lang.String">
+        update store
+        set
+            is_delete       = 1,
+            update_user     = #{userId},
+            update_time     = now(),
+            verson          = verson + 1
+        where store_id in
+        <foreach collection="listCode" index="index" open="(" close=")" separator="," item="item">
+            #{item}
+        </foreach>
+    </delete>
+
+
+
+</mapper>

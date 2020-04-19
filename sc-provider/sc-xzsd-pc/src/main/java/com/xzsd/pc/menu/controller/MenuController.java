@@ -1,10 +1,10 @@
 package com.xzsd.pc.menu.controller;
 
 import com.neusoft.security.client.utils.SecurityUtils;
-import com.neusoft.util.AuthUtils;
 import com.xzsd.pc.menu.entity.MenuInfo;
 import com.xzsd.pc.menu.service.MenuService;
 import com.xzsd.pc.util.AppResponse;
+import com.xzsd.pc.util.AuthUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,9 +38,6 @@ public class MenuController {
     @PostMapping("addMenu")
     public AppResponse addMenu(MenuInfo menuInfo) {
         try {
-            //获取用户id
-            String userAcct = SecurityUtils.getCurrentUserId();
-            menuInfo.setCreateUser(userAcct);
             AppResponse appResponse = menuService.addMenu(menuInfo);
             return appResponse;
         } catch (Exception e) {
@@ -79,7 +76,7 @@ public class MenuController {
     @GetMapping("listMenu")
     public AppResponse listMenu(MenuInfo menuInfo){
         try {
-            return menuService.listMenus(menuInfo);
+            return menuService.listMenu(menuInfo);
         }catch (Exception e){
             logger.error("菜单列表查询失败，请重试",e);
             System.out.printf(e.toString());
@@ -96,9 +93,6 @@ public class MenuController {
     @PostMapping("updateMenu")
     public AppResponse updateMenu(MenuInfo menuInfo){
         try{
-            //获取用户id
-            String userId = SecurityUtils.getCurrentUserId();
-            menuInfo.setUpdateUser(userId);
             return menuService.updateMenu(menuInfo);
         }catch (Exception e){
             logger.error("修改失败，请重试");
@@ -116,11 +110,29 @@ public class MenuController {
     @PostMapping("deleteMenu")
     public AppResponse deleteMenu(String menuId){
         try{
-            String userId = "管理员";
-            return menuService.deleteMenu(menuId,userId);
+
+            return menuService.deleteMenu(menuId);
         }catch(Exception e){
             logger.error("删除失败,请重试");
             System.out.println(e.toString());
+            throw e;
+        }
+    }
+
+    /**
+     * @Description: 根据角色菜单列表查询
+     * @Param:  menuInfo 菜单信息
+     * @return:  AppResponse
+     * @Author: xukunyuan
+     * @Date: 2020/3/26
+     */
+    @GetMapping("listMenuHome")
+    public AppResponse listMenuHome(MenuInfo menuInfo){
+        try {
+            return menuService.listMenuHome(menuInfo);
+        }catch (Exception e){
+            logger.error("菜单列表查询失败，请重试",e);
+            System.out.printf(e.toString());
             throw e;
         }
     }

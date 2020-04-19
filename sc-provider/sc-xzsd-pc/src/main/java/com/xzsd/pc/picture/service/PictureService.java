@@ -2,6 +2,7 @@ package com.xzsd.pc.picture.service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.neusoft.security.client.utils.SecurityUtils;
 import com.xzsd.pc.picture.dao.PictureDao;
 import com.xzsd.pc.picture.entity.GoodsInfo;
 import com.xzsd.pc.picture.entity.PictureInfo;
@@ -31,12 +32,9 @@ public class PictureService {
     * @Date: 2020/3/30
     */
     public AppResponse savePicture(PictureInfo pictureInfo){
-        pictureInfo.setCreateUser("管理员");
+        pictureInfo.setCreateUser(SecurityUtils.getCurrentUserId());
         //随机生成图片id
         pictureInfo.setSlideshowId(StringUtil.getCommonCode(2));
-        if (pictureDao.countPictureByPictureId(pictureInfo) != 0){
-            return AppResponse.bizError("图片账号已存在，请重新输入");
-        }
         if (pictureDao.savePicture(pictureInfo) == 0){
             return AppResponse.bizError("新增失败，请重试");
         }
@@ -54,6 +52,9 @@ public class PictureService {
         List<PictureInfo> pictureInfoList = pictureDao.listPicture(pictureInfo);
         //包装page对象
         PageInfo<PictureInfo> list = new PageInfo(pictureInfoList);
+        if (pictureInfoList.size() == 0){
+            return AppResponse.bizError("查询失败，请重试");
+        }
         return AppResponse.success("查询成功",list);
     }
     /**
@@ -64,7 +65,7 @@ public class PictureService {
     * @Date: 2020/4/2
     */
     public AppResponse deletePicture(String pictureId){
-        String userId = "管理员";
+        String userId = SecurityUtils.getCurrentUserId();
         List<String> listCode = Arrays.asList(pictureId.split(","));
         if (0 == pictureDao.deletePicture(listCode,userId)){
             return AppResponse.bizError("删除失败，请重试");
@@ -79,14 +80,16 @@ public class PictureService {
     * @Date: 2020/4/13 
     */
     public AppResponse updateState(PictureInfo pictureInfo){
-        String userId = "管理员";
+        String userId = SecurityUtils.getCurrentUserId();
         List<String> listCode = Arrays.asList(pictureInfo.getSlideshowId().split(","));
         List<String> listVersion = Arrays.asList(pictureInfo.getVersion().split(","));
+        //轮播图禁用
         if(pictureInfo.getSlideshowStateId().equals("0")) {
             if (0 == pictureDao.updateState(listCode, listVersion, userId,"0")) {
                 return AppResponse.bizError("修改失败，请重试");
             }
         }
+        //轮播图启用
         else{
             if (0 == pictureDao.updateState(listCode, listVersion, userId,"1")) {
                 return AppResponse.bizError("修改失败，请重试");

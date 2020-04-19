@@ -3,6 +3,7 @@ package com.xzsd.pc.menu.service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.neusoft.security.client.utils.SecurityUtils;
 import com.xzsd.pc.menu.dao.MenuDao;
 import com.xzsd.pc.menu.entity.MenuInfo;
 import com.xzsd.pc.util.AppResponse;
@@ -34,6 +35,9 @@ public class MenuService {
     */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse addMenu(MenuInfo menuInfo) {
+        //获取用户id
+        String userAcct = SecurityUtils.getCurrentUserId();
+        menuInfo.setCreateUser(userAcct);
         menuInfo.setMenuId(StringUtil.getCommonCode(2));
         //检验菜单名字是否存在
         int countMenuName = menuDao.countMenuName(menuInfo);
@@ -72,12 +76,15 @@ public class MenuService {
     * @Author: xukunyuan
     * @Date: 2020/3/26
     */
-    public AppResponse listMenus(MenuInfo menuInfo){
+    public AppResponse listMenu(MenuInfo menuInfo){
         PageHelper.startPage(menuInfo.getPageNum(),menuInfo.getPageSize());
-        List<MenuInfo> menuInfoList = menuDao.listMenus(menuInfo);
+        List<MenuInfo> menuInfoList = menuDao.listMenu(menuInfo);
         //包装page对象
-        PageInfo<MenuInfo> pageDate = new PageInfo(menuInfoList);
-        return AppResponse.success("查询成功！",pageDate);
+        PageInfo<MenuInfo> menuList = new PageInfo(menuInfoList);
+        if (menuInfoList.size() == 0){
+            return AppResponse.bizError("查询失败，请重试");
+        }
+        return AppResponse.success("查询成功！",menuList);
     }
     /**
     * @Description: 修改菜单信息
@@ -87,6 +94,9 @@ public class MenuService {
     * @Date: 2020/3/26
     */
     public AppResponse updateMenu(MenuInfo menuInfo){
+        //获取用户id
+        String userId = SecurityUtils.getCurrentUserId();
+        menuInfo.setUpdateUser(userId);
         if (menuDao.updateMenu(menuInfo) == 0){
             return AppResponse.bizError("修改失败，请重试");
         }
@@ -100,13 +110,32 @@ public class MenuService {
     * @Author: xukunyuan
     * @Date: 2020/3/27 
     */
-    public AppResponse deleteMenu(String menuId, String userId){
+    public AppResponse deleteMenu(String menuId){
         List<String> listCode = Arrays.asList(menuId.split(","));
+        String userId = SecurityUtils.getCurrentUserId();
         // 校验菜单是否存在
         if (menuDao.deleteMenu(listCode,userId) == 0){
             AppResponse.bizError("删除失败,请重试");
         }
         return AppResponse.success("删除成功");
+    }
+    /**
+     * @Description: 根据角色菜单列表查询
+     * @Param:  menuInfo 菜单信息
+     * @return:  AppResponse
+     * @Author: xukunyuan
+     * @Date: 2020/3/26
+     */
+    public AppResponse listMenuHome(MenuInfo menuInfo){
+        PageHelper.startPage(menuInfo.getPageNum(),menuInfo.getPageSize());
+        //角色为0或1能看全部菜单，角色为2只能查看商品，客户管理，订单管理、门店信息、司机信息
+        List<MenuInfo> menuInfoList = menuDao.listMenuHome(menuInfo);
+        //包装page对象
+        PageInfo<MenuInfo> menuList = new PageInfo(menuInfoList);
+        if (menuInfoList.size() == 0){
+            return AppResponse.bizError("查询失败，请重试");
+        }
+        return AppResponse.success("查询成功！",menuList);
     }
 
 }
