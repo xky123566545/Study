@@ -9,6 +9,7 @@ import com.xzsd.pc.store.entity.StoreInfo;
 import com.xzsd.pc.user.dao.UserDao;
 import com.xzsd.pc.util.AppResponse;
 import com.xzsd.pc.util.AuthUtils;
+import com.xzsd.pc.util.InviteCode;
 import com.xzsd.pc.util.StringUtil;
 import org.springframework.stereotype.Service;
 
@@ -51,8 +52,8 @@ public class StoreService {
     public AppResponse addStore(StoreInfo storeInfo){
        storeInfo.setCreateUser(SecurityUtils.getCurrentUserId());
        storeInfo.setStoreId(StringUtil.getCommonCode(2));
-       storeInfo.setInviteCode(StringUtil.getCommonCode(1));
-       if (userDao.countUserAcct(storeInfo.getUserId()) == 0){
+       storeInfo.setInviteCode(InviteCode.getItemID(5));
+       if (storeDao.countUserId(storeInfo.getUserId()) == 0){
            return AppResponse.versionError("店长编号不存在,请重试");
        }
        if (storeDao.addStore(storeInfo) == 0){

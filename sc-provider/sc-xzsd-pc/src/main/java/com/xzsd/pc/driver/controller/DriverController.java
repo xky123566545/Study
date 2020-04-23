@@ -48,7 +48,7 @@ public class DriverController {
      * @Author: xukunyuan
      * @Date: 2020/4/17
      */
-    @GetMapping("getDriver")
+    @PostMapping("getDriver")
     public AppResponse getDriver(String driverId){
         try{
             return driverServer.getDriver(driverId);
@@ -66,7 +66,7 @@ public class DriverController {
      * @Author: xukunyuan
      * @Date: 2020/4/17
      */
-    @GetMapping("listDrivers")
+    @PostMapping("listDrivers")
     public AppResponse listDrivers(DriverInfo driverInfo){
         try{
             return driverServer.listDrivers(driverInfo);

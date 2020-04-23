@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzsd.pc.hotGoods.dao.HotGoodsDao">
+<!--    查询热门位序号是否存在-->
+    <select id="countHotGoodsNum" parameterType="int" resultType="int">
+        select count(sort_num)
+        from goodshot
+        where is_delete = 0
+        and  sort_num = #{hotGoodsNum}
+    </select>
+<!--    查询热门位序号是否存在(不包括当前行)-->
+    <select id="countHotGoodsNum1"  resultType="int">
+        select count(sort_num)
+        from goodshot
+        where is_delete = 0
+        and  sort_num = #{hotGoodsNum}
+        and hot_goodsId != #{hotGoodsId}
+    </select>
+    <!--   统计goodsId的数量-->
+    <select id="countGoodsId" parameterType="java.lang.String" resultType="int">
+        select count(book_id)
+        from goods
+        where book_id = #{goodsId}
+        and is_delete = 0
+    </select>
+<!--    新增热门位商品-->
+    <insert id="addHotGoods" parameterType="com.xzsd.pc.hotGoods.entity.HotGoodsInfo">
+        insert into goodshot
+        (
+            sort_num,
+            hot_goodsId,
+            book_id,
+            is_delete,
+            create_user,
+            create_time,
+            update_user,
+            update_time,
+            verson
+        )
+        values
+        (
+            #{hotGoodsNum},
+            #{hotGoodsId},
+            #{goodsId},
+            0,
+            #{createUser},
+            now(),
+            #{createUser},
+            now(),
+            0
+        )
+    </insert>
+<!--   统计HotGoodsId的数量-->
+    <select id="countHotGoodsId" parameterType="java.lang.String" resultType="int">
+        select count(hot_goodsId)
+        from goodshot
+        where hot_goodsId = #{hotGoodsId}
+        and is_delete = 0
+    </select>
+<!--    查询热门位商品信息-->
+    <select id="getHotGoods" parameterType="java.lang.String" resultType="com.xzsd.pc.hotGoods.entity.HotGoodsInfo">
+        select
+            s2.book_id      'goodsId',
+            s1.sort_num     'hotGoodsNum',
+            s2.book_name    'goodsName',
+            s1.hot_goodsId  'hotGoodsId',
+            s1.verson       'version'
+        from goodshot s1
+        inner join goods s2
+        on s1.book_id = s2.book_id
+        where s1.is_delete = 0
+        and s2.is_delete = 0
+        and s1.hot_goodsId = #{hotGoodsId}
+    </select>
+<!--    分页查询热门商品接口-->
+    <select id="listHotGoods" parameterType="com.xzsd.pc.hotGoods.entity.HotGoodsInfo" resultType="com.xzsd.pc.hotGoods.entity.HotGoodsInfo">
+        select
+        s1.sort_num        'hotGoodsNum',
+        s1.book_id         'goodsId',
+        s2.book_name       'goodsName',
+        s2.present_price   'goodsPrice',
+        s2.book_introduce  'goodsDescribe',
+        s1.hot_goodsId     'hotGoodsId',
+        s1.verson          'version'
+        from goodshot s1
+        inner join goods s2
+        on s1.book_id = s2.book_id
+        where s1.is_delete = 0
+        and s2.is_delete = 0
+        <if test="goodsName != null and goodsName != ''">
+            and s2.book_name like concat('%', #{goodsName}, '%')
+        </if>
+        <if test="goodsId != null and goodsId != ''">
+            and s1.book_id = #{goodsId}
+        </if>
+        order by s1.sort_num
+        limit #{hotGoodsShowNum}
+
+    </select>
+<!--    修改热门商品接口-->
+    <update id="updateHotGoods" parameterType="com.xzsd.pc.hotGoods.entity.HotGoodsInfo">
+        update goodshot
+        set
+            book_id     = #{goodsId},
+            sort_num    = #{hotGoodsNum},
+            update_user = #{updateUser},
+            update_time = now(),
+            verson      = verson + 1
+        where hot_goodsId = #{hotGoodsId}
+        and is_delete = 0
+        and verson = #{version}
+    </update>
+<!--    删除热门商品-->
+    <update id="deleteHotGoods" parameterType="com.xzsd.pc.hotGoods.entity.HotGoodsInfo">
+        update goodshot
+        set
+            is_delete   = 1,
+            update_user = #{userId},
+            update_time = now(),
+            verson      = verson + 1
+        where hot_goodsId in
+        <foreach collection="listCode" index="index" open="(" close=")" separator="," item="item">
+            #{item}
+        </foreach>
+    </update>
+<!--    查询热门商品展示数量-->
+    <select id="getHotGoodsNum" resultType="com.xzsd.pc.hotGoods.entity.HotGoodsInfo">
+            select
+                cnt         'hotGoodsShowNum',
+                verson      'version'
+            from goodshotNum
+    </select>
+<!--    修改热门商品展示数量-->
+    <update id="updateHotGoodsNum" parameterType="com.xzsd.pc.hotGoods.entity.HotGoodsInfo">
+        update goodshotNum
+        set
+            cnt         = #{hotGoodsShowNum},
+            update_user = #{updateUser},
+            update_time = now(),
+            verson      = verson + 1
+        where verson = #{version}
+    </update>
+
+
+
+</mapper>

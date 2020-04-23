@@ -1,6 +1,7 @@
 package com.xzsd.pc.driver.dao;
 
 import com.xzsd.pc.driver.entity.DriverInfo;
+import org.apache.ibatis.annotations.Param;
 import org.mapstruct.Mapper;
 
 import java.util.List;
@@ -59,5 +60,5 @@ public interface DriverDao {
      * @Author: xukunyuan
      * @Date: 2020/4/17
      */
-    int deleteDriver(List<String> listCode, String userId);
+    int deleteDriver(@Param("listCode") List<String> listCode,@Param("userId") String userId);
 }

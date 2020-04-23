@@ -1,6 +1,7 @@
 package com.xzsd.pc.order.dao;
 
 import com.xzsd.pc.order.entity.OrderInfo;
+import org.apache.ibatis.annotations.Param;
 import org.mapstruct.Mapper;
 
 import java.util.List;
@@ -33,5 +34,5 @@ public interface OrderDao {
     * @Author: xukunyuan
     * @Date: 2020/4/14
     */
-    int updateOrderState(List<String> listCode, List<String> listVersion, String orderStateId, String userId);
+    int updateOrderState(@Param("listCode") List<String> listCode,@Param("listVersion") List<String> listVersion,@Param("orderStateId") String orderStateId,@Param("userId") String userId);
 }

@@ -64,10 +64,10 @@ public class UserService {
      */
     public AppResponse listUsersPage(UserInfo userInfo) {
         PageHelper.startPage(userInfo.getPageNum(), userInfo.getPageSize());
-        List<UserInfo> userInfoList = userDao.listUsersByPage(userInfo);
+        List<UserInfo> User = userDao.listUsersByPage(userInfo);
         // 包装Page对象
-        PageInfo<UserInfo> list = new PageInfo<UserInfo>(userInfoList);
-        if (userInfoList.size() == 0){
+        PageInfo<UserInfo> list = new PageInfo<UserInfo>(User);
+        if (User.size() == 0){
             return AppResponse.bizError("查询失败，请重试");
         }
         return AppResponse.success("查询成功！",list);

@@ -1,6 +1,7 @@
 package com.xzsd.pc.goodsClassify.dao;
 
 import com.xzsd.pc.goodsClassify.entity.GoodsClassifyInfo;
+import org.apache.ibatis.annotations.Param;
 import org.mapstruct.Mapper;
 
 import java.util.List;
@@ -68,5 +69,21 @@ public interface GoodsClassifyDao {
    * @Author: xukunyuan
    * @Date: 2020/4/14
    */
-   int deleteClassify(List<String> listCode, String userId);
+   int deleteClassify(@Param("listCode") List<String> listCode,@Param("userId") String userId);
+   /**
+     * @Description: 查看一级分类下是否存在二级分类
+     * @Param:  classifyId
+     * @return:  int
+     * @Author: xukunyuan
+     * @Date: 2020/4/22
+     */
+    int countSecondClassify(String classifyId);
+    /**
+     * @Description: 查看二级级分类下是否存在商品
+     * @Param:  classifyId
+     * @return:  int
+     * @Author: xukunyuan
+     * @Date: 2020/4/22
+     */
+    int countgoods(String classifyId);
 }

@@ -31,7 +31,7 @@ public class OrderController {
     * @Author: xukunyuan
     * @Date: 2020/4/14 
     */
-    @GetMapping("getListOrder")
+    @PostMapping("getListOrder")
     public AppResponse getListOrder(String orderId){
         try{
             return orderService.getListOrder(orderId);
@@ -48,7 +48,7 @@ public class OrderController {
     * @Author: xukunyuan
     * @Date: 2020/4/14
     */
-    @GetMapping("listOrders")
+    @PostMapping("listOrders")
     public AppResponse listOrders(OrderInfo orderInfo){
         try{
             return orderService.listOrders(orderInfo);

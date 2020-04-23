@@ -56,7 +56,7 @@ public interface PictureDao {
     * @Author: xukunyuan
     * @Date: 2020/4/13
     */
-    int updateState(@Param("listCode") List<String> listCode, @Param("listVersion") List<String> listVersion, String userId, String slideshowStateId);
+    int updateState(@Param("listCode") List<String> listCode, @Param("listVersion") List<String> listVersion,@Param("userId") String userId,@Param("slideshowStateId") String slideshowStateId);
     /**
      * @Description: 查询商品接口
      * @Param:  goodsInfo

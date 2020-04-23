@@ -97,6 +97,25 @@ public class GoodsClassifyService {
     public AppResponse deleteClassify(String classifyId){
         List<String> listCode = Arrays.asList(classifyId.split(","));
         String userId = SecurityUtils.getCurrentUserId();
+        for (int i = 0;i < listCode.size();i++) {
+            //根据classifyId查看其属于一级分类还是二级分类
+            GoodsClassifyInfo goodsClassifyInfo = goodsClassifyDao.getClassify(listCode.get(i));
+            //当他是一级分类时，查看其是否存在二级分类
+            if (goodsClassifyInfo.getClassifyParent().equals("0")) {
+                //查看他是否存在二级分类
+                int count = goodsClassifyDao.countSecondClassify(listCode.get(i));
+                if (count != 0) {
+                    return AppResponse.versionError("分类id:" + listCode.get(i) + "为一级分类，且存在跟其关联的二级分类，无法删除！");
+                }
+            }
+            //该分类为二级分类，查看其分类下是否有商品存在
+            else {
+                int count = goodsClassifyDao.countgoods(listCode.get(i));
+                if (count != 0) {
+                    return AppResponse.versionError("分类id:" + listCode.get( i ) + "为二级分类，且存在跟其关联的商品，无法删除！");
+                }
+            }
+        }
         if (goodsClassifyDao.deleteClassify(listCode,userId) == 0){
             return AppResponse.bizError("删除失败，请重试");
         }

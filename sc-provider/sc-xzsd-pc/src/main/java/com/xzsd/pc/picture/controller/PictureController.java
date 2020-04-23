@@ -50,7 +50,7 @@ public class PictureController {
     * @Author: xukunyuan
     * @Date: 2020/4/2 
     */
-    @GetMapping("listSlideshowHome")
+    @PostMapping("listSlideshowHome")
     public AppResponse listSlideshowHome(PictureInfo pictureInfo){
         try{
             return pictureService.listPicture(pictureInfo);
@@ -103,7 +103,7 @@ public class PictureController {
     * @Author: xukunyuan
     * @Date: 2020/4/13
     */
-    @GetMapping("listGoods")
+    @PostMapping("listGoods")
     public AppResponse listGoods(GoodsInfo goodsInfo){
         try{
             return pictureService.listGoods(goodsInfo);

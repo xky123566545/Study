@@ -18,6 +18,13 @@ spring:
     datebase: 0
     host: 127.0.0.1
     port: 6379
+  tengxun:
+    accessKey: AKIDf9SbXH0kV3OXlnmbQ2SbSS8ZjinhnuAD
+    secretKey: A6nMnpa8OPFwAA0awWqpUR9i27zd2BVa
+    bucket: ap-chengdu
+    bucketName: xky-1301905305
+    path: https://xky-1301905305.cos.ap-chengdu.myqcloud.com
+    qianzui: xky
   datasource:
     name: dataSource
     type: com.alibaba.druid.pool.DruidDataSource

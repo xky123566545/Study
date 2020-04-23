@@ -41,7 +41,7 @@ public class GoodsClassifyController {
             throw e;
         }
     }
-    @GetMapping("getGoodsClassify")
+    @PostMapping("getGoodsClassify")
     private AppResponse getGoodsClassify(String classifyId){
         try{
             return goodsClassifyService.getClassify(classifyId);
@@ -58,7 +58,7 @@ public class GoodsClassifyController {
     * @Author: xukunyuan
     * @Date: 2020/4/14 
     */
-    @GetMapping("listAllGoodsClassify")
+    @PostMapping("listAllGoodsClassify")
     public AppResponse listAllGoodsClassify(GoodsClassifyInfo goodsClassifyInfo){
         try{
             return goodsClassifyService.listClassify(goodsClassifyInfo);

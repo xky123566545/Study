@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzsd.app.register.dao.RegisterDao">
+<!--    新增用户信息-->
+    <insert id="clientRegister" parameterType="com.xzsd.app.register.entity.RegisterInfo">
+        insert into user
+        (
+            user_code,
+            user_id,
+            user_name,
+            sex,
+            phone,
+            email,
+            idcard,
+            user_password,
+            image_path,
+            invite_code,
+            create_user,
+            create_time,
+            update_user,
+            update_time,
+            verson,
+            is_delete,
+            role
+        )
+        values
+        (
+            #{userId},
+            #{userAcct},
+            #{userName},
+            #{sex},
+            #{phone},
+            #{mail},
+            #{idCard},
+            #{userPassword},
+            #{imagePath},
+            #{inviteCode},
+            #{createUser},
+            now(),
+            #{createUser},
+            now(),
+            0,
+            0,
+            4
+       )
+    </insert>
+<!--    获取用户角色-->
+    <select id="getRole" parameterType="java.lang.String" resultType="int">
+        select
+            role
+        from user
+        where user_code = #{userId}
+    </select>
+<!--    查询用户信息-->
+    <select id="getUser" resultType="com.xzsd.app.register.entity.UserInfo">
+        select
+            <if test="role == 2">
+                s1.user_name        'userName',
+                s1.image_path       'userImage',
+                s1.role,
+                s2.store_id         'storeId',
+                s2.store_name       'storeName',
+                s2.invite_code      'inviteCode',
+                s2.store_address    'address',
+                s1.verson           'version'
+            </if>
+            <if test="role == 3">
+                s1.user_name        'driverName',
+                s1.phone,
+                s1.role,
+                s1.verson           'version'
+           </if>
+           <if test="role == 4">
+               s1.user_name         'userName',
+               s1.image_path        'userImage',
+               s1.role              'role'
+           </if>
+        from user s1
+        <if test="role == 2">
+        inner join store s2
+        on s1.user_code = s2.user_code
+        where role = #{role}
+        and s1.user_code = #{userId}
+        </if>
+        <if test="role != 2">
+            where s1.user_code = #{userId}
+        </if>
+
+    </select>
+    <!--统计用户账号数量-->
+    <select id="countUserAcct" parameterType="java.lang.String" resultType="int">
+        select count(user_id)
+        from user
+        where is_delete = 0
+        and user_id = #{userAcct}
+    </select>
+<!--    获取用户密码-->
+    <select id="getUserById" parameterType="java.lang.String" resultType="com.xzsd.app.register.entity.RegisterInfo">
+        select
+            user_password       'userPassword',
+            role
+        from user
+        where user_code = #{user_password}
+        and is_delete = 0
+    </select>
+<!--    修改密码-->
+    <update id="updateUserPwd" parameterType="com.xzsd.app.register.entity.RegisterInfo">
+        update user
+        set
+            user_password       = #{userNewPassword},
+            update_user         = #{createUser},
+            update_time         = now(),
+            verson              = verson + 1
+        where user_code = #{createUser}
+        <if test="role != 4">
+            and verson = #{version}
+        </if>
+    </update>
+</mapper>

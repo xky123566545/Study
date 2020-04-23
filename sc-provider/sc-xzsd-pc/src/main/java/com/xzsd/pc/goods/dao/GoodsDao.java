@@ -72,7 +72,7 @@ public interface GoodsDao {
     * @Author: xukunyuan
     * @Date: 2020/3/28
     */
-    int goodsSell(@Param("listCode") List<String> listCode, int goodsIsSell, String userId, List<String> listVersion);
+    int goodsSell(@Param("listCode") List<String> listCode,@Param("goodsIsSell") int goodsIsSell,@Param("userId") String userId,@Param("listVersion") List<String> listVersion);
     /** 
     * @Description: 查询商品分类详情接口
     * @Param:  goodsVO

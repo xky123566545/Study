@@ -28,7 +28,7 @@ public interface HotGoodsDao {
      * @Author: xukunyuan
      * @Date: 2020/4/15
      */
-    int countHotGoodsNum1(int hotGoodsNum, String hotGoodsId);
+    int countHotGoodsNum1(@Param("hotGoodsNum") int hotGoodsNum,@Param("hotGoodsId") String hotGoodsId);
     /**
      * @Description: 计算商品id数量
      * @Param:  goodsInfo
@@ -85,7 +85,7 @@ public interface HotGoodsDao {
      * @Author: xukunyuan
      * @Date: 2020/4/15
      */
-    int deleteHotGoods(@Param("listCode") List<String> listCode, String userId);
+    int deleteHotGoods(@Param("listCode") List<String> listCode,@Param("userId") String userId);
     /**
      * @Description: 查询热门商品展示数量
      * @Param:

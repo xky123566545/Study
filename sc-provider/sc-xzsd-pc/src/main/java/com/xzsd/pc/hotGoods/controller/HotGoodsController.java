@@ -48,7 +48,7 @@ public class HotGoodsController {
      * @Author: xukunyuan
      * @Date: 2020/4/15
      */
-    @GetMapping("getHotGoods")
+    @PostMapping("getHotGoods")
     public AppResponse getHotGoods(String hotGoodsId){
         try{
             return hotGoodsService.getHotGoods(hotGoodsId);
@@ -65,7 +65,7 @@ public class HotGoodsController {
      * @Author: xukunyuan
      * @Date: 2020/4/15
      */
-    @GetMapping("listHotGoods")
+    @PostMapping("listHotGoods")
     public AppResponse listHotGoods(HotGoodsInfo hotGoodsInfo){
         try{
             return hotGoodsService.listHotGoods(hotGoodsInfo);
@@ -116,7 +116,7 @@ public class HotGoodsController {
     * @Author: xukunyuan
     * @Date: 2020/4/19 
     */
-    @GetMapping("getHotGoodsShowNum")
+    @PostMapping("getHotGoodsShowNum")
     public AppResponse getHotGoodsNum(){
         try{
             return hotGoodsService.getHotGoodsNum();

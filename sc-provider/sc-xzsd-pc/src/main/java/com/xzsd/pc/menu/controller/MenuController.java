@@ -53,7 +53,7 @@ public class MenuController {
     * @Author: xukunyuan
     * @Date: 2020/3/26
     */
-    @GetMapping("getMenu")
+    @PostMapping("getMenu")
     public AppResponse getMenu(String menuId){
         try{
             AppResponse appResponse = menuService.getMenuByMenuName(menuId);
@@ -73,7 +73,7 @@ public class MenuController {
     * @Author: xukunyuan
     * @Date: 2020/3/26
     */
-    @GetMapping("listMenu")
+    @PostMapping("listMenu")
     public AppResponse listMenu(MenuInfo menuInfo){
         try {
             return menuService.listMenu(menuInfo);
@@ -126,7 +126,7 @@ public class MenuController {
      * @Author: xukunyuan
      * @Date: 2020/3/26
      */
-    @GetMapping("listMenuHome")
+    @PostMapping("listMenuHome")
     public AppResponse listMenuHome(MenuInfo menuInfo){
         try {
             return menuService.listMenuHome(menuInfo);

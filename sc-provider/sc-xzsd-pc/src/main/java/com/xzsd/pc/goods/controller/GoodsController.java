@@ -56,7 +56,7 @@ public class GoodsController {
     * @Author: xukunyuan
     * @Date: 2020/3/27 
     */
-    @GetMapping("getGoods")
+    @PostMapping("getGoods")
     public AppResponse getGoods(String goodsId){
         try{
             AppResponse appResponse = goodsService.getGoods(goodsId);
@@ -74,7 +74,7 @@ public class GoodsController {
     * @Author: xukunyuan
     * @Date: 2020/3/27 
     */
-    @GetMapping("listGoods")
+    @PostMapping("listGoods")
     public AppResponse listGoods(GoodsVO goodsVO){
         try{
             return goodsService.listGoods(goodsVO);
@@ -143,7 +143,7 @@ public class GoodsController {
      * @Author: xukunyuan
      * @Date: 2020/4/13
      */
-    @GetMapping("listGoodsClassify")
+    @PostMapping("listGoodsClassify")
     public AppResponse listGoodsClassify(ClassifyInfo classifyInfo){
         try{
             return goodsService.listGoodsClassify(classifyInfo);

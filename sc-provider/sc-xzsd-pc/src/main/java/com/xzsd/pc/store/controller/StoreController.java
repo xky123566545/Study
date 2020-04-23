@@ -31,7 +31,7 @@ public class StoreController {
      * @Author: xukunyuan
      * @Date: 2020/4/15
      */
-    @GetMapping("/selectCombox/listArea")
+    @PostMapping("/selectCombox/listArea")
     public AppResponse listArea(String areaId){
         try{
             return storeService.listArea(areaId);
@@ -66,7 +66,7 @@ public class StoreController {
      * @Author: xukunyuan
      * @Date: 2020/4/16
      */
-    @GetMapping("/store/getStore")
+    @PostMapping("/store/getStore")
     public AppResponse getStore(String storeId){
         try{
             return storeService.getStore(storeId);
@@ -84,7 +84,7 @@ public class StoreController {
      * @Author: xukunyuan
      * @Date: 2020/4/16
      */
-    @GetMapping("/store/listStores")
+    @PostMapping("/store/listStores")
     public AppResponse listStores(StoreInfo storeInfo){
         try{
             return storeService.listStores(storeInfo);

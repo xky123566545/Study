@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzsd.app.clientGoods.dao.ClientGoodsDao">
+<!--    查询商品信息详情接口-->
+    <select id="getGoods"  parameterType="java.lang.String" resultType="com.xzsd.app.clientGoods.entity.ClientGoodsInfo">
+        select
+            s1.book_name           'goodsName',
+            s1.isbn                'isbn',
+            s1.book_introduce      'goodsDescribe',
+            s1.present_price       'goodsPrice',
+            s1.picture_id          'goodsImagePath',
+            s2.level               'goodsEvaluateScore',
+            s1.author              'goodsAuthor',
+            s1.book_public         'goodsPress',
+            s1.store_name          'storeName'
+        from goods s1
+        inner join goodseva s2
+        on s1.book_id = s2.book_id
+        where s1.is_delete = 0
+        and s2.is_delete = 0
+        and s1.book_id = #{goodsId}
+    </select>
+<!--    查询商品评价列表接口-->
+    <select id="listGoodsEvaluates" parameterType="com.xzsd.app.clientGoods.entity.ClientGoodsInfo" resultType="com.xzsd.app.clientGoods.entity.ClientGoodsInfo">
+        select
+            user_id         'userAcct',
+            content         'evaluateContent',
+            level           'evaluateScore',
+            create_time     'createTime',
+            imagePath       'imagePath'
+        from goodseva
+        where is_delete = 0
+        and book_id = #{goodsId}
+        <if test="evaluateScore != null and evaluateScore != ''">
+            and level = #{evaluateScore}
+        </if>
+    </select>
+<!--    查询一级分类列表接口-->
+    <select id="listOneGoodsClassify" resultType="com.xzsd.app.clientGoods.entity.ClientGoodsInfo">
+        select
+            classify_id         'classifyId',
+            classify_name       'classifyName'
+        from goodsclassify
+        where is_delete = 0
+        and parent_id = 0
+    </select>
+    <!--    商品一二级分类映射集合-->
+    <resultMap id="twoClassifyList" type="com.xzsd.app.clientGoods.entity.ClientGoodsInfo">
+        <id property="classifyId" column="fclassify_id" jdbcType="VARCHAR"/>
+        <result property="classifyName" column="fclassify_name" jdbcType="VARCHAR"/>
+        <collection property="goodsList" ofType="com.xzsd.app.clientGoods.entity.ClientGoodsVO">
+            <result property="goodsId" column="sbook_id" jdbcType="VARCHAR"/>
+            <result property="goodsName" column="sbook_name" jdbcType="VARCHAR"/>
+            <result property="goodsImagePath" column="spicture_id" jdbcType="VARCHAR"/>
+            <result property="goodsPrice" column="spresent_price" jdbcType="VARCHAR"/>
+        </collection>
+    </resultMap>
+    <!--    查询商品一二级分类列表-->
+    <select id="listGetClassGoods" resultMap="twoClassifyList">
+        select
+            c1.classify_id      as fclassify_id,
+            c1.classify_name    as fclassify_name,
+            c2.book_id          as sbook_id,
+            c2.book_name        as sbook_name,
+            c2.picture_id       as spicture_id,
+            c2.present_price    as spresent_price
+         from goodsclassify c1
+         left join goods c2
+         on c1.classify_name = c2.second_classfiy
+         and c1.is_delete = 0
+         and c2.is_delete = 0
+         where c1.parent_id = #{classifyId}
+        </select>
+</mapper>

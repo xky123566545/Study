@@ -6,6 +6,7 @@ import com.xzsd.pc.util.AppResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,7 +31,7 @@ public class ClientController {
     * @Author: xukunyuan
     * @Date: 2020/4/14
     */
-    @GetMapping("listClients")
+    @PostMapping("listClients")
     public AppResponse listClients(ClientInfo clientInfo){
         try{
             return clientService.listClients(clientInfo);

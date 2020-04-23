@@ -2,6 +2,7 @@ package com.xzsd.pc.store.dao;
 
 import com.xzsd.pc.store.entity.AreaInfo;
 import com.xzsd.pc.store.entity.StoreInfo;
+import org.apache.ibatis.annotations.Param;
 import org.mapstruct.Mapper;
 
 import java.util.List;
@@ -85,7 +86,13 @@ public interface StoreDao {
      * @Author: xukunyuan
      * @Date: 2020/4/16
      */
-    int deleteStore(List<String> listCode, String userId);
+    int deleteStore(@Param("listCode") List<String> listCode,@Param("userId") String userId);
+    /**
+     * 统计userId数量
+     * @param userId 用户编码
+     * @return
+     */
+    int countUserId(String userId);
 
 
 }

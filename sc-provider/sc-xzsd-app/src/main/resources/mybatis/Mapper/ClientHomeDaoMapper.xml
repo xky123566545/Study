@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzsd.app.clientHome.dao.ClientHomeDao">
+<!--    查询首页轮播图-->
+    <select id="listRotationCharHome" resultType="com.xzsd.app.clientHome.entity.ClientHomeInfo">
+        select
+            picture_address     'slideshowPath',
+            book_id             'goodsId'
+        from picture
+        where is_delete = 0
+        order by sort_num
+    </select>
+<!--    查询热门商品接口-->
+    <select id="listHotGoods" resultType="com.xzsd.app.clientHome.entity.ClientHomeInfo">
+        select
+            s1.book_id       'goodsId',
+            s1.book_name     'goodsName',
+            s1.picture_id    'goodsImagePath',
+            s1.present_price 'goodsPrice'
+        from goods s1
+        inner join goodshot s2
+        on s1.book_id = s2.book_id
+        where s1.is_delete = 0
+        and s2.is_delete = 0
+        order by s2.sort_num
+    </select>
+
+</mapper>
