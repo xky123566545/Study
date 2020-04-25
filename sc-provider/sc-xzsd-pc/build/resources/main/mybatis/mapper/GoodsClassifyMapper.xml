@@ -58,12 +58,12 @@
         and classify_id = #{classifyId}
     </select>
 <!--    商品一二级分类映射集合-->
-    <resultMap id="listClassify" type="com.xzsd.pc.goodsClassify.entity.GoodsClassifyInfo">
+    <resultMap id="oneClassifyList" type="com.xzsd.pc.goodsClassify.entity.GoodsClassifyInfo">
         <id property="classifyId" column="fclassify_id" jdbcType="VARCHAR"/>
         <result property="classifyName" column="fclassify_name" jdbcType="VARCHAR"/>
         <result property="classifyParent" column="fparent_id" jdbcType="VARCHAR"/>
         <result property="version" column="fverson" jdbcType="VARCHAR"/>
-        <collection property="goodsClassifyVOS" ofType="com.xzsd.pc.goodsClassify.entity.GoodsClassifyVO">
+        <collection property="twoClassifyList" ofType="com.xzsd.pc.goodsClassify.entity.GoodsClassifyVO">
             <result property="classifyId" column="sclassify_id" jdbcType="VARCHAR"/>
             <result property="classifyParent" column="sparent_id" jdbcType="VARCHAR"/>
             <result property="classifyName" column="sclassify_name" jdbcType="VARCHAR"/>
@@ -71,7 +71,7 @@
         </collection>
     </resultMap>
 <!--    查询商品一二级分类列表-->
-    <select id="getListClassify" resultMap="listClassify">
+    <select id="getListClassify" resultMap="oneClassifyList">
         select
             c1.classify_id      as fclassify_id,
             c1.classify_name    as fclassify_name,

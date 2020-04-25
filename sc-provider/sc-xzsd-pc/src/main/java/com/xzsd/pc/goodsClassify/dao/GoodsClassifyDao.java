@@ -28,7 +28,7 @@ public interface GoodsClassifyDao {
      * @Author: xukunyuan
      * @Date: 2020/4/14
      */
-    int countClassifyId(String classifyId);
+    int countClassifyId(@Param("classifyId") String classifyId);
     /**
      * @Description: 新增商品分类
      * @Param:  goodsClassifyInfo
@@ -44,7 +44,7 @@ public interface GoodsClassifyDao {
     * @Author: xukunyuan
     * @Date: 2020/4/14
     */
-    GoodsClassifyInfo getClassify(String classifyId);
+    GoodsClassifyInfo getClassify(@Param("classifyId") String classifyId);
     /**
     * @Description: 列表查询一级分类信息
     * @Param:  goodsClassifyInfo
@@ -77,7 +77,7 @@ public interface GoodsClassifyDao {
      * @Author: xukunyuan
      * @Date: 2020/4/22
      */
-    int countSecondClassify(String classifyId);
+    int countSecondClassify(@Param("classifyId") String classifyId);
     /**
      * @Description: 查看二级级分类下是否存在商品
      * @Param:  classifyId
@@ -85,5 +85,5 @@ public interface GoodsClassifyDao {
      * @Author: xukunyuan
      * @Date: 2020/4/22
      */
-    int countgoods(String classifyId);
+    int countgoods(@Param("classifyId") String classifyId);
 }

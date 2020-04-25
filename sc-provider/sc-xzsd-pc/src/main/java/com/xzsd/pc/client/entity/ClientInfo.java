@@ -44,7 +44,7 @@ public class ClientInfo {
     /**
      * 性别:0男1女
      */
-    private int sex;
+    private String sex;
 
     public String getUserId() {
         return userId;
@@ -118,11 +118,11 @@ public class ClientInfo {
         this.idCard = idCard;
     }
 
-    public int getSex() {
+    public String getSex() {
         return sex;
     }
 
-    public void setSex(int sex) {
+    public void setSex(String sex) {
         this.sex = sex;
     }
 
@@ -138,7 +138,7 @@ public class ClientInfo {
                 ", phone='" + phone + '\'' +
                 ", mail='" + mail + '\'' +
                 ", idCard='" + idCard + '\'' +
-                ", sex=" + sex +
+                ", sex='" + sex + '\'' +
                 '}';
     }
 }

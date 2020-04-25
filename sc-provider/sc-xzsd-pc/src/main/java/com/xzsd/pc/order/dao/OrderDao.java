@@ -15,7 +15,7 @@ public interface OrderDao {
     * @Author: xukunyuan
     * @Date: 2020/4/14
     */
-    OrderInfo getListOrder(String orderId);
+    OrderInfo getListOrder(@Param("orderId") String orderId);
     /**
      * @Description: 分页查询列表接口
      * @Param:  orderInfo

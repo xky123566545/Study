@@ -38,7 +38,7 @@ public interface GoodsDao {
     * @Author: xukunyuan
     * @Date: 2020/3/27
     */
-    GoodsVO getGoodsByGoodsId(String goodsId);
+    GoodsVO getGoodsByGoodsId(@Param("goodsId") String goodsId);
     /**
     * @Description: 分页查询商品信息
     * @Param:  goodVOList

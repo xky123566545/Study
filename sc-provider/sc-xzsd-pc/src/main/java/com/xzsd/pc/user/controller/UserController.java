@@ -54,7 +54,7 @@ public class UserController {
      * @author xukunyuan
      * @Date 2020-03-25
      */
-    @RequestMapping(value = "listUsers")
+    @PostMapping("listUsers")
     public AppResponse listUsers(UserInfo userInfo) {
         try {
             return userService.listUsersPage(userInfo);
@@ -108,7 +108,7 @@ public class UserController {
      * @author xukunyuan
      * @Date 2020-03-25
      */
-    @RequestMapping(value = "getUser")
+    @PostMapping("getUser")
     public AppResponse getUser(String userId) {
         try {
             return userService.getUser(userId);

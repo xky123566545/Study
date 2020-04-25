@@ -21,7 +21,7 @@ public interface StoreDao {
      * @Author: xukunyuan
      * @Date: 2020/4/15
      */
-    List<AreaInfo> listArea(String areaId);
+    List<AreaInfo> listArea(@Param("areaId") String areaId);
     /**
      * @Description: 查询省市区名字
      * @Param:  areaId
@@ -29,7 +29,7 @@ public interface StoreDao {
      * @Author: xukunyuan
      * @Date: 2020/4/15
      */
-    AreaInfo getArea(String areaId);
+    AreaInfo getArea(@Param("areaId") String areaId);
     /**
      * @Description: 新增门店信息接口
      * @Param:  storeInfo
@@ -45,7 +45,7 @@ public interface StoreDao {
      * @Author: xukunyuan
      * @Date: 2020/4/16
      */
-    int countStoreId(String storeId);
+    int countStoreId(@Param("storeId") String storeId);
     /**
      * @Description: 查询书店信息
      * @Param:  storeId
@@ -53,7 +53,7 @@ public interface StoreDao {
      * @Author: xukunyuan
      * @Date: 2020/4/16
      */
-    StoreInfo getStore(String storeId);
+    StoreInfo getStore(@Param("storeId") String storeId);
     /**
      * @Description: 分页查询门店信息接口（店长查询）
      * @Param:  storeInfo
@@ -92,7 +92,7 @@ public interface StoreDao {
      * @param userId 用户编码
      * @return
      */
-    int countUserId(String userId);
+    int countUserId(@Param("userId") String userId);
 
 
 }

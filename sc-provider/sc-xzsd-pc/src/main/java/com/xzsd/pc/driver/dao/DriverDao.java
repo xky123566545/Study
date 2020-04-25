@@ -28,7 +28,7 @@ public interface DriverDao {
      * @Author: xukunyuan
      * @Date: 2020/4/17
      */
-    DriverInfo getDriver(String driverId);
+    DriverInfo getDriver(@Param("driverId") String driverId);
     /**
      * @Description:  列表查询司机信息(店长权限)
      * @Param:  driverInfo

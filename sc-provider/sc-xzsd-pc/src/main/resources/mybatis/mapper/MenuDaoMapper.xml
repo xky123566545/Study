@@ -103,7 +103,7 @@
     </delete>
 
     <!--菜单分页查询店长权限-->
-    <select id="listMenuHome" parameterType="com.xzsd.pc.menu.entity.MenuInfo" resultType="com.xzsd.pc.menu.entity.MenuInfo">
+    <select id="listMenuHome" parameterType="java.lang.String" resultType="com.xzsd.pc.menu.entity.MenuInfo">
         select
         menu_name     'menuName',
         menu_routing  'menuPath',
@@ -111,7 +111,11 @@
         from menu
         where  is_menu = 1
         and is_delete = 0
-        and menu_id in (4,7,8,10,11)
+        <if test="role == 2">
+            and menu_id in (5,7,8,9)
+        </if>
+        order by menu_id
+
 
     </select>
 </mapper>

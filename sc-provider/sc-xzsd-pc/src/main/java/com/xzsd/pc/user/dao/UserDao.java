@@ -19,7 +19,7 @@ public interface UserDao {
      * @param userAcct 用户编码
      * @return
      */
-    int countUserAcct(String userAcct);
+    int countUserAcct(@Param("userAcct") String userAcct);
     /**
      * 新增用户
      * @param userInfo 用户信息

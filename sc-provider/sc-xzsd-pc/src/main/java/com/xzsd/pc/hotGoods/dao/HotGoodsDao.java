@@ -3,6 +3,7 @@ package com.xzsd.pc.hotGoods.dao;
 import com.xzsd.pc.hotGoods.entity.HotGoodsInfo;
 import org.apache.ibatis.annotations.Param;
 import org.mapstruct.Mapper;
+import org.springframework.security.access.method.P;
 
 import java.util.List;
 
@@ -20,7 +21,7 @@ public interface HotGoodsDao {
     * @Author: xukunyuan
     * @Date: 2020/4/15
     */
-    int countHotGoodsNum(int hotGoodsNum);
+    int countHotGoodsNum(@Param("hotGoodsNum") int hotGoodsNum);
     /**
      * @Description: 查询热门序号是否已存在(不包括当前行的情况 用于修改时判断)
      * @Param:  hotGoodsNum
@@ -36,7 +37,7 @@ public interface HotGoodsDao {
      * @Author: xukunyuan
      * @Date: 2020/3/27
      */
-    int countGoodsId(String goodsId);
+    int countGoodsId(@Param("goodsId") String goodsId);
     /**
      * @Description: 查询热门序号是否已存在
      * @Param:  hotGoodsNum
@@ -52,7 +53,7 @@ public interface HotGoodsDao {
      * @Author: xukunyuan
      * @Date: 2020/3/27
      */
-    int countHotGoodsId(String hotGoodsId);
+    int countHotGoodsId(@Param("hotGoodsId") String hotGoodsId);
     /**
      * @Description:  查询热门商品接口
      * @Param:  hotGoodsId
@@ -60,7 +61,7 @@ public interface HotGoodsDao {
      * @Author: xukunyuan
      * @Date: 2020/4/15
      */
-    HotGoodsInfo getHotGoods(String hotGoodsId);
+    HotGoodsInfo getHotGoods(@Param("hotGoodsId") String hotGoodsId);
     /**
      * @Description:  分页查询热门商品接口
      * @Param:  hotGoodsInfo

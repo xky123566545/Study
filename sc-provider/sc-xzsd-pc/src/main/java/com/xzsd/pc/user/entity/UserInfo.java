@@ -36,7 +36,7 @@ public class UserInfo {
     /**
      * 性别 0 男 1 女
      */
-    private int sex;
+    private String sex;
     /**
      * 手机号码
      */
@@ -56,7 +56,7 @@ public class UserInfo {
     /**
      * 角色
      */
-    private int role;
+    private String role;
     /**
      * 创建者
      */
@@ -130,11 +130,11 @@ public class UserInfo {
         this.idCard = idCard;
     }
 
-    public int getSex() {
+    public String getSex() {
         return sex;
     }
 
-    public void setSex(int sex) {
+    public void setSex(String sex) {
         this.sex = sex;
     }
 
@@ -170,11 +170,11 @@ public class UserInfo {
         this.createTime = createTime;
     }
 
-    public int getRole() {
+    public String getRole() {
         return role;
     }
 
-    public void setRole(int role) {
+    public void setRole(String role) {
         this.role = role;
     }
 
@@ -220,16 +220,16 @@ public class UserInfo {
                 ", userName='" + userName + '\'' +
                 ", userPassword='" + userPassword + '\'' +
                 ", idCard='" + idCard + '\'' +
-                ", sex=" + sex +
+                ", sex='" + sex + '\'' +
                 ", phone='" + phone + '\'' +
                 ", mail='" + mail + '\'' +
                 ", isDelete=" + isDelete +
                 ", createTime=" + createTime +
-                ", role=" + role +
+                ", role='" + role + '\'' +
                 ", createUser='" + createUser + '\'' +
                 ", updateTime=" + updateTime +
                 ", updateUser='" + updateUser + '\'' +
-                ", version='" + version + '\'' +
+                ", version=" + version +
                 '}';
     }
 }

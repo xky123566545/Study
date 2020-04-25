@@ -1,6 +1,7 @@
 package com.xzsd.pc.topOfColumn.dao;
 
 import com.xzsd.pc.topOfColumn.entity.TopOfColumnInfo;
+import org.apache.ibatis.annotations.Param;
 import org.mapstruct.Mapper;
 
 /**
@@ -17,5 +18,5 @@ public interface TopOfColumnDao {
      * @Author: xukunyuan
      * @Date: 2020/4/20
      */
-    TopOfColumnInfo getTopOfColumn(String userId);
+    TopOfColumnInfo getTopOfColumn(@Param("userId") String userId);
 }

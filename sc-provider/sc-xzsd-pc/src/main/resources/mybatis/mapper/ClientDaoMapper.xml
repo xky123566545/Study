@@ -4,6 +4,7 @@
 <!--    管理员分页查询客户信息-->
     <select id="listClients" parameterType="com.xzsd.pc.client.entity.ClientInfo" resultType="com.xzsd.pc.client.entity.ClientInfo">
         select
+            user_code   'userId',
             user_id     'userAcct',
             user_name   'userName',
             sex,

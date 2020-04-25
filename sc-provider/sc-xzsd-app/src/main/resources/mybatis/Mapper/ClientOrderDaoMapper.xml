@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzsd.app.clientOrder.dao.ClientOrderDao">
+<!--    新增订单信息-->
+    <insert id="addOrder" parameterType="com.xzsd.app.clientOrder.entity.ClientOrderInfo">
+        insert into order_table
+        (
+            order_id,
+            book_id,
+            good_price,
+            books_cnt,
+            order_price,
+            cart_id,
+            store_id,
+            create_user,
+            create_time,
+            update_user,
+            update_time,
+            is_delete,
+            order_state,
+            verson,
+            all_cnt,
+            is_pay,
+            pay_time_start,
+            pay_time,
+            user_code
+       )
+       values
+       (
+            #{orderId},
+            #{goodsId},
+            #{goodsPrice},
+            #{clientGoodsNum},
+            #{orderAllCost},
+            #{shopCartId},
+            #{storeId},
+            #{createUser},
+            now(),
+            #{createUser},
+            now(),
+            0,
+            0,
+            0,
+            #{orderAllGoodsCount},
+            1,
+            now(),
+            now(),
+            #{createUser}
+       )
+    </insert>
+<!--    新增订单明细表-->
+    <insert id="addOrderDetail" parameterType="java.lang.String">
+        insert into order_detail
+        (
+            order_id,
+            good_price,
+            book_id,
+            book_cnt,
+            create_user,
+            create_time,
+            update_user,
+            update_time,
+            is_delete,
+            verson,
+            order_state
+        )
+        values
+        <foreach collection="list" index="index" separator="," item="item">
+            (
+                #{item.orderId},
+                #{item.goodsPrice},
+                #{item.goodsId},
+                #{item.goodsCnt},
+                #{item.createUser},
+                #{item.createTime},
+                #{item.createUser},
+                #{item.createTime},
+                #{item.isDelete},
+                #{item.version},
+                #{item.orderStateId}
+            )
+        </foreach>
+
+
+    </insert>
+    <!--    订单商品映射集合-->
+    <resultMap id="clientOrderInfoList" type="com.xzsd.app.clientOrder.entity.ClientOrderInfo">
+        <id property="orderId" column="forder_id" jdbcType="VARCHAR"/>
+        <result property="orderStateId" column="forder_state" jdbcType="VARCHAR"/>
+        <result property="orderAllCost" column="forder_price" jdbcType="VARCHAR"/>
+        <result property="orderAllGoodsCount" column="fall_cnt" jdbcType="INTEGER"/>
+        <result property="version" column="fversion" jdbcType="VARCHAR"/>
+        <collection property="goodsList" ofType="com.xzsd.app.clientOrder.entity.GoodsList">
+            <result property="goodsId" column="sbook_id" jdbcType="VARCHAR"/>
+            <result property="goodsName" column="sbook_name" jdbcType="VARCHAR"/>
+            <result property="goodsImagePath" column="spicture_id" jdbcType="VARCHAR"/>
+            <result property="goodsPrice" column="spresent_price" jdbcType="VARCHAR"/>
+            <result property="goodsDescribe" column="sbook_introduce" jdbcType="VARCHAR"/>
+            <result property="cartGoodsCount" column="sbook_cnt" jdbcType="INTEGER"/>
+        </collection>
+    </resultMap>
+    <!--    查询订单商品列表-->
+    <select id="listOrder" resultMap="clientOrderInfoList">
+        select
+			s1.order_id				as forder_id,
+			s1.order_state		    as forder_state,
+			s1.order_price		    as forder_price,
+			s1.all_cnt				as fall_cnt,
+			s1.verson			    as fversion,
+			s2.book_id				as sbook_id,
+			s2.book_name			as sbook_name,
+			s2.picture_id			as spicture_id,
+			s2.present_price	    as spresent_price,
+			s2.book_introduce       as sbook_introduce,
+			s2.book_cnt				as sbook_cnt
+        from order_table s1
+        INNER JOIN
+            (select
+                c1.order_id        ,
+			    c1.book_cnt		    ,
+                c2.book_id         ,
+                c2.book_name       ,
+                c2.picture_id      ,
+                c2.present_price    ,
+                c2.book_introduce
+            from order_detail c1
+            left join goods c2
+            on c1.book_id = c2.book_id
+            and c1.is_delete = 0
+            and c2.is_delete = 0) s2
+        on s1.order_id = s2.order_id
+        and s1.is_delete=0
+        <if test="orderStateId != null and orderStateId != ''">
+            and s1.order_state = #{orderStateId}
+        </if>
+     </select>
+<!--    修改订单状态接口-->
+    <update id="updateOrderState" parameterType="com.xzsd.app.clientOrder.entity.ClientOrderInfo">
+        update order_table
+        set
+                order_state = #{orderStateId},
+                update_user = #{updateUser},
+                update_time = now(),
+                verson      = verson + 1
+        where order_id = #{orderId}
+        and verson = #{version}
+    </update>
+    <!--    订单详情商品映射集合-->
+    <resultMap id="clientOrderInfo" type="com.xzsd.app.clientOrder.entity.ClientOrderInfo">
+        <id property="orderId" column="forder_id" jdbcType="VARCHAR"/>
+        <result property="orderStateId" column="forder_state" jdbcType="VARCHAR"/>
+        <result property="orderAllCost" column="forder_price" jdbcType="VARCHAR"/>
+        <result property="orderAllGoodsCount" column="fall_cnt" jdbcType="INTEGER"/>
+        <result property="storeName" column="fstore_name" jdbcType="VARCHAR"/>
+        <result property="address" column="fstore_address" jdbcType="VARCHAR"/>
+        <result property="createTime" column="fcreate_time" jdbcType="DATE"/>
+        <collection property="goodsList" ofType="com.xzsd.app.clientOrder.entity.GoodsList">
+            <result property="goodsId" column="sbook_id" jdbcType="VARCHAR"/>
+            <result property="goodsName" column="sbook_name" jdbcType="VARCHAR"/>
+            <result property="goodsImagePath" column="spicture_id" jdbcType="VARCHAR"/>
+            <result property="goodsPrice" column="spresent_price" jdbcType="VARCHAR"/>
+            <result property="cartGoodsCount" column="sbook_cnt" jdbcType="INTEGER"/>
+        </collection>
+    </resultMap>
+    <!--    查询订单商品详情列表-->
+    <select id="listOrderDeepen" resultMap="clientOrderInfo">
+        select
+            s1.order_id         as forder_id,
+	        s1.order_state		as forder_state,
+	        s1.create_time		as fcreate_time,
+	        s1.order_price		as forder_price,
+	        s1.all_cnt			as fall_cnt,
+	        s1.store_name		as fstore_name,
+	        s1.store_address	as fstore_address,
+	        s2.book_id			as sbook_id,
+            s2.book_name		as sbook_name,
+            s2.picture_id		as spicture_id,
+            s2.present_price	as spresent_price,
+            s2.book_cnt			as sbook_cnt
+        from
+        (
+		    select
+		        t1.order_id,
+				t1.order_state,
+				t1.create_time,
+				t1.order_price,
+				t1.all_cnt,
+				t2.store_name,
+				t2.store_address
+		    from order_table t1
+		    LEFT JOIN store t2
+		    on t1.store_id = t2.store_id
+		    where t1.is_delete = 0
+		    and t2.is_delete = 0
+        ) s1
+        inner JOIN
+        (   select
+                c1.order_id        ,
+			    c1.book_cnt		,
+                c2.book_id         ,
+                c2.book_name       ,
+                c2.picture_id      ,
+                c2.present_price    ,
+                c2.book_introduce
+            from order_detail c1
+            left join goods c2
+            on c1.book_id = c2.book_id
+            and c1.is_delete = 0
+            and c2.is_delete = 0) s2
+        on s1.order_id = s2.order_id
+        where s1.order_id = #{orderId}
+    </select>
+<!--    新增订单评价商品信息列表-->
+    <insert id="addGoodsEvaluate" parameterType="com.xzsd.app.clientOrder.entity.OrderEva">
+        insert into goodseva
+        (
+            order_id,
+            book_id,
+            level,
+            content,
+            user_id,
+            is_delete,
+            create_user,
+            create_time,
+            update_user,
+            update_time,
+            verson
+        )
+        values 
+        <foreach collection="evaluateList" item="item" separator="," index="index">
+            (
+                #{orderId},
+                #{item.goodsId},
+                #{item.evaluateScore},
+                #{item.evaluateContent},
+                #{userId},
+                0,
+                #{userId},
+                now(),
+                #{userId},
+                now(),
+                0
+                            )
+        </foreach>
+    </insert>
+<!--    查询订单评价商品信息列表接口-->
+    <select id="listGoodsForEvaluate" parameterType="java.lang.String" resultType="com.xzsd.app.clientOrder.entity.ClientOrderInfo">
+        select
+            s1.book_id              'goodsId',
+            s1.picture_id           'goodsImagePath'
+        from goods s1
+        inner join order_detail s2
+        on s1.book_id = s2.book_id
+        where s1.is_delete = 0
+        and s2.is_delete = 0
+        and s2.order_id = #{orderId}
+    </select>
+</mapper>

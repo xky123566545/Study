@@ -3,6 +3,7 @@ package com.xzsd.pc.goodsClassify.service;
 import com.neusoft.security.client.utils.SecurityUtils;
 import com.xzsd.pc.goodsClassify.dao.GoodsClassifyDao;
 import com.xzsd.pc.goodsClassify.entity.GoodsClassifyInfo;
+import com.xzsd.pc.goodsClassify.entity.OneClassifyList;
 import com.xzsd.pc.util.AppResponse;
 import com.xzsd.pc.util.StringUtil;
 import org.springframework.stereotype.Service;
@@ -66,7 +67,9 @@ public class GoodsClassifyService {
     */
     public AppResponse listClassify(GoodsClassifyInfo goodsClassifyInfo){
         List<GoodsClassifyInfo> listMap = goodsClassifyDao.getListClassify(goodsClassifyInfo);
-        return AppResponse.success("查询成功",listMap);
+        OneClassifyList oneClassifyList = new OneClassifyList();
+        oneClassifyList.setOneClassifyList(listMap);
+        return AppResponse.success("查询成功",oneClassifyList);
     }
      /**
      * @Description:  修改商品分类

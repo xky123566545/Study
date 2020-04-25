@@ -52,14 +52,14 @@ public class GoodsClassifyInfo {
      * 版本号
      */
     private String version;
-    private List<GoodsClassifyVO> goodsClassifyVOS;
+    private List<GoodsClassifyVO> twoClassifyList;
 
-    public List<GoodsClassifyVO> getGoodsClassifyVOS() {
-        return goodsClassifyVOS;
+    public List<GoodsClassifyVO> getTwoClassifyList() {
+        return twoClassifyList;
     }
 
-    public void setGoodsClassifyVOS(List<GoodsClassifyVO> goodsClassifyVOS) {
-        this.goodsClassifyVOS = goodsClassifyVOS;
+    public void setTwoClassifyList(List<GoodsClassifyVO> twoClassifyList) {
+        this.twoClassifyList = twoClassifyList;
     }
 
     public String getClassifyId() {

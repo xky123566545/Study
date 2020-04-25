@@ -6,6 +6,7 @@ import com.github.pagehelper.PageInfo;
 import com.neusoft.security.client.utils.SecurityUtils;
 import com.xzsd.pc.menu.dao.MenuDao;
 import com.xzsd.pc.menu.entity.MenuInfo;
+import com.xzsd.pc.menu.entity.MenuList;
 import com.xzsd.pc.util.AppResponse;
 import com.xzsd.pc.util.StringUtil;
 import org.springframework.stereotype.Service;
@@ -77,13 +78,8 @@ public class MenuService {
     * @Date: 2020/3/26
     */
     public AppResponse listMenu(MenuInfo menuInfo){
-        PageHelper.startPage(menuInfo.getPageNum(),menuInfo.getPageSize());
-        List<MenuInfo> menuInfoList = menuDao.listMenu(menuInfo);
-        //包装page对象
-        PageInfo<MenuInfo> menuList = new PageInfo(menuInfoList);
-        if (menuInfoList.size() == 0){
-            return AppResponse.bizError("查询失败，请重试");
-        }
+        MenuList menuList = new MenuList();
+        menuList.setMenuList(menuDao.listMenu(menuInfo));
         return AppResponse.success("查询成功！",menuList);
     }
     /**
@@ -126,15 +122,10 @@ public class MenuService {
      * @Author: xukunyuan
      * @Date: 2020/3/26
      */
-    public AppResponse listMenuHome(MenuInfo menuInfo){
-        PageHelper.startPage(menuInfo.getPageNum(),menuInfo.getPageSize());
+    public AppResponse listMenuHome(String role){
         //角色为0或1能看全部菜单，角色为2只能查看商品，客户管理，订单管理、门店信息、司机信息
-        List<MenuInfo> menuInfoList = menuDao.listMenuHome(menuInfo);
-        //包装page对象
-        PageInfo<MenuInfo> menuList = new PageInfo(menuInfoList);
-        if (menuInfoList.size() == 0){
-            return AppResponse.bizError("查询失败，请重试");
-        }
+        MenuList menuList = new MenuList();
+        menuList.setMenuList(menuDao.listMenuHome(role));
         return AppResponse.success("查询成功！",menuList);
     }
 

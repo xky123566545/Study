@@ -70,5 +70,5 @@ public interface MenuDao {
      * @Author: xukunyuan
      * @Date: 2020/3/26
      */
-    List<MenuInfo> listMenuHome(MenuInfo menuInfo);
+    List<MenuInfo> listMenuHome(@Param("role") String role);
 }

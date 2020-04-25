@@ -127,9 +127,9 @@ public class MenuController {
      * @Date: 2020/3/26
      */
     @PostMapping("listMenuHome")
-    public AppResponse listMenuHome(MenuInfo menuInfo){
+    public AppResponse listMenuHome(String role){
         try {
-            return menuService.listMenuHome(menuInfo);
+            return menuService.listMenuHome(role);
         }catch (Exception e){
             logger.error("菜单列表查询失败，请重试",e);
             System.out.printf(e.toString());
