@@ -25,6 +25,10 @@ public class OrderDetailInfo {
      */
     private String goodsCnt;
     /**
+     * 商品数量
+     */
+    private int listCntInt;
+    /**
      * 作废标记
      */
     private int isDelete;
@@ -45,6 +49,13 @@ public class OrderDetailInfo {
      */
     private String version;
 
+    public int getListCntInt() {
+        return listCntInt;
+    }
+
+    public void setListCntInt(int listCntInt) {
+        this.listCntInt = listCntInt;
+    }
 
     public String getOrderStateId() {
         return orderStateId;

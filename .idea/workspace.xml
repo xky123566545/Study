@@ -2,69 +2,43 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9c8584e3-c1ce-4b77-932f-464935fa490b" name="Default" comment="111">
-      <change afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/clientOrder/controller/ClientOrderController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/clientOrder/dao/ClientOrderDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/clientOrder/entity/ClientOrderInfo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/clientOrder/entity/GoodList.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/clientOrder/entity/GoodsList.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/clientOrder/entity/OrderDetailInfo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/clientOrder/entity/OrderEva.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/clientOrder/service/ClientOrderService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/clientShopCart/controller/ClientShopCartController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/clientShopCart/dao/ClientShopCartDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/clientShopCart/entity/ClientShopCartInfo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/clientShopCart/service/ClientShopCartService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/resources/mybatis/Mapper/ClientOrderDaoMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/resources/mybatis/Mapper/ClientShopCartDaoMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/classes/java/main/com/xzsd/pc/goodsClassify/entity/OneClassifyList.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/classes/java/main/com/xzsd/pc/menu/entity/MenuList.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/goodsClassify/entity/OneClassifyList.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/menu/entity/MenuList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.3.1/fileContent/fileContent.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.3.1/fileContent/fileContent.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.3.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.3.1/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.3.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.3.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.3.1/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.3.1/taskHistory/taskHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.3.1/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.3.1/taskHistory/taskHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/clientHome/entity/SlideshowList.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/clientInformation/controller/ClientInformationController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/clientInformation/dao/ClientInformationDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/clientInformation/entity/ClientInformationInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/clientInformation/service/ClientInformationService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/driverHome/controller/DriverHomeController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/driverHome/dao/DriverHomeDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/driverHome/entity/DriverHomeInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/driverHome/service/DriverHomeService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/managerInformation/controller/ManagerInformationController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/managerInformation/dao/ManagerInformationDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/managerInformation/entity/ManagerInformationInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/managerInformation/service/ManagerInformationService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/managerOrder/controller/ManagerOrderController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/managerOrder/dao/ManagerOrderDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/managerOrder/entity/GoodsList.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/managerOrder/entity/ManagerOrderInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/managerOrder/service/ManagerOrderService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/resources/mybatis/Mapper/ClientInformationDaoMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/resources/mybatis/Mapper/DriverHomeDaoMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/resources/mybatis/Mapper/ManagerInformationDaoMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/resources/mybatis/Mapper/ManagerOrderDaoMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/classes/java/main/com/xzsd/pc/client/entity/ClientInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/classes/java/main/com/xzsd/pc/client/entity/ClientInfo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/classes/java/main/com/xzsd/pc/driver/dao/DriverDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/classes/java/main/com/xzsd/pc/driver/dao/DriverDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/classes/java/main/com/xzsd/pc/goods/dao/GoodsDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/classes/java/main/com/xzsd/pc/goods/dao/GoodsDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/classes/java/main/com/xzsd/pc/goodsClassify/dao/GoodsClassifyDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/classes/java/main/com/xzsd/pc/goodsClassify/dao/GoodsClassifyDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/classes/java/main/com/xzsd/pc/goodsClassify/entity/GoodsClassifyInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/classes/java/main/com/xzsd/pc/goodsClassify/entity/GoodsClassifyInfo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/classes/java/main/com/xzsd/pc/goodsClassify/service/GoodsClassifyService.class" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/classes/java/main/com/xzsd/pc/goodsClassify/service/GoodsClassifyService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/classes/java/main/com/xzsd/pc/hotGoods/dao/HotGoodsDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/classes/java/main/com/xzsd/pc/hotGoods/dao/HotGoodsDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/classes/java/main/com/xzsd/pc/menu/controller/MenuController.class" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/classes/java/main/com/xzsd/pc/menu/controller/MenuController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/classes/java/main/com/xzsd/pc/menu/dao/MenuDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/classes/java/main/com/xzsd/pc/menu/dao/MenuDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/classes/java/main/com/xzsd/pc/menu/service/MenuService.class" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/classes/java/main/com/xzsd/pc/menu/service/MenuService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/classes/java/main/com/xzsd/pc/order/dao/OrderDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/classes/java/main/com/xzsd/pc/order/dao/OrderDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/classes/java/main/com/xzsd/pc/store/dao/StoreDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/classes/java/main/com/xzsd/pc/store/dao/StoreDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/classes/java/main/com/xzsd/pc/topOfColumn/dao/TopOfColumnDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/classes/java/main/com/xzsd/pc/topOfColumn/dao/TopOfColumnDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/classes/java/main/com/xzsd/pc/user/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/classes/java/main/com/xzsd/pc/user/controller/UserController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/classes/java/main/com/xzsd/pc/user/dao/UserDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/classes/java/main/com/xzsd/pc/user/dao/UserDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/classes/java/main/com/xzsd/pc/user/entity/UserInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/classes/java/main/com/xzsd/pc/user/entity/UserInfo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/resources/main/mybatis/mapper/ClientDaoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/resources/main/mybatis/mapper/ClientDaoMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/resources/main/mybatis/mapper/GoodsClassifyMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/resources/main/mybatis/mapper/GoodsClassifyMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/resources/main/mybatis/mapper/MenuDaoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/resources/main/mybatis/mapper/MenuDaoMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/client/entity/ClientInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/client/entity/ClientInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/driver/dao/DriverDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/driver/dao/DriverDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/goods/dao/GoodsDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/goods/dao/GoodsDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/goodsClassify/dao/GoodsClassifyDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/goodsClassify/dao/GoodsClassifyDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/goodsClassify/entity/GoodsClassifyInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/goodsClassify/entity/GoodsClassifyInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/goodsClassify/service/GoodsClassifyService.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/goodsClassify/service/GoodsClassifyService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/hotGoods/dao/HotGoodsDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/hotGoods/dao/HotGoodsDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/menu/controller/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/menu/controller/MenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/menu/dao/MenuDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/menu/dao/MenuDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/menu/service/MenuService.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/menu/service/MenuService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/order/dao/OrderDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/order/dao/OrderDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/store/dao/StoreDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/store/dao/StoreDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/topOfColumn/dao/TopOfColumnDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/topOfColumn/dao/TopOfColumnDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/user/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/user/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/user/dao/UserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/user/dao/UserDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/user/entity/UserInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/user/entity/UserInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/resources/mybatis/mapper/ClientDaoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/resources/mybatis/mapper/ClientDaoMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/clientHome/service/ClientHomeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/clientHome/service/ClientHomeService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/clientOrder/dao/ClientOrderDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/clientOrder/dao/ClientOrderDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/clientOrder/entity/OrderDetailInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/clientOrder/entity/OrderDetailInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/clientOrder/service/ClientOrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/clientOrder/service/ClientOrderService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/clientShopCart/dao/ClientShopCartDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/clientShopCart/dao/ClientShopCartDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/clientShopCart/service/ClientShopCartService.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/clientShopCart/service/ClientShopCartService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/register/dao/RegisterDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/register/dao/RegisterDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/register/service/RegisterService.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/register/service/RegisterService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/resources/mybatis/Mapper/ClientHomeDaoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/resources/mybatis/Mapper/ClientHomeDaoMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/resources/mybatis/Mapper/ClientOrderDaoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/resources/mybatis/Mapper/ClientOrderDaoMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/resources/mybatis/Mapper/ClientShopCartDaoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/resources/mybatis/Mapper/ClientShopCartDaoMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/resources/mybatis/Mapper/RegisterDaoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/resources/mybatis/Mapper/RegisterDaoMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/goodsClassify/controller/GoodsClassifyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/goodsClassify/controller/GoodsClassifyController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/resources/mybatis/mapper/GoodsClassifyMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/resources/mybatis/mapper/GoodsClassifyMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/resources/mybatis/mapper/MenuDaoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/resources/mybatis/mapper/MenuDaoMapper.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,23 +79,15 @@
         <task path="$PROJECT_DIR$/sc-provider/sc-xzsd-app">
           <activation />
         </task>
+        <task path="$PROJECT_DIR$/sc-provider/sc-xzsd-pc">
+          <activation />
+        </task>
         <projects_view>
           <tree_state>
             <expand>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="sc2019" type="f1a62948:ProjectNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="sc2019" type="f1a62948:ProjectNode" />
-                <item name="sc-provider" type="2d1252cf:ModuleNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="sc2019" type="f1a62948:ProjectNode" />
-                <item name="sc-provider" type="2d1252cf:ModuleNode" />
-                <item name="sc-xzsd-app" type="2d1252cf:ModuleNode" />
               </path>
             </expand>
             <select />
@@ -441,11 +407,6 @@
               <path>
                 <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
                 <item name="Spring Boot" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-                <item name="Finished" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-              </path>
-              <path>
-                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-                <item name="Spring Boot" type="7427dc5b:ServiceModel$ServiceGroupNode" />
                 <item name="Not Started" type="7427dc5b:ServiceModel$ServiceGroupNode" />
               </path>
             </expand>
@@ -493,6 +454,8 @@
       <workItem from="1587647385607" duration="1277000" />
       <workItem from="1587695177359" duration="2861000" />
       <workItem from="1587818354995" duration="4837000" />
+      <workItem from="1587827421609" duration="62000" />
+      <workItem from="1587861377715" duration="21941000" />
     </task>
     <task id="LOCAL-00001" summary="111">
       <created>1586741936509</created>
@@ -528,10 +491,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="499" y="167" key="#com.intellij.codeInsight.editorActions.RestoreReferencesDialog/0.0.1536.824@0.0.1536.824" timestamp="1586422959430" />
-    <state x="626" y="144" key="#com.intellij.ide.util.MemberChooser" timestamp="1587628470254">
+    <state x="626" y="144" key="#com.intellij.ide.util.MemberChooser" timestamp="1587881132039">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="626" y="144" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1587628470254" />
+    <state x="626" y="144" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1587881132039" />
     <state x="225" y="346" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1587625271033">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -556,10 +519,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="209" y="68" key="DiffContextDialog/0.0.1536.824@0.0.1536.824" timestamp="1586741902146" />
-    <state x="511" y="167" key="FileChooserDialogImpl" timestamp="1587695226556">
+    <state x="511" y="167" key="FileChooserDialogImpl" timestamp="1587868656333">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="511" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1587695226556" />
+    <state x="511" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1587868656333" />
     <state width="1014" height="290" key="GridCell.Tab.0.bottom" timestamp="1587827076862">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -616,10 +579,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="457" y="241" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1587695177223" />
-    <state x="434" y="86" width="672" height="676" key="search.everywhere.popup" timestamp="1587471670219">
+    <state x="434" y="86" width="672" height="676" key="search.everywhere.popup" timestamp="1587863532210">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="434" y="86" width="672" height="676" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1587471670219" />
+    <state x="434" y="86" width="672" height="676" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1587863532210" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

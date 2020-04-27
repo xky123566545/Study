@@ -66,4 +66,25 @@
             #{item}
         </foreach>
     </delete>
+<!--    查询选择数量是否超过商品库存量-->
+    <select id="getGoodsCount" resultType="int" parameterType="int">
+        select
+            count(book_id)
+        from goods
+        where book_id = #{goodsId}
+        and is_delete = 0
+        and storage > #{goodsCount}
+    </select>
+<!--    查询选择数量是否超过商品库存量 根据购物车编号-->
+    <select id="getGoodsCountU" resultType="int" parameterType="int">
+        select
+            count(s1.book_id)
+        from goods s1
+        inner join cart s2
+        on s1.book_id = s2.book_id
+        where cart_id = #{cartId}
+        and s1.is_delete = 0
+        and s2.is_delete = 0
+        and s1.storage > #{goodsCount}
+    </select>
 </mapper>

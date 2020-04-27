@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzsd.app.managerOrder.dao.ManagerOrderDao">
+    <!--    订单商品映射集合-->
+    <resultMap id="managerOrderInfoList" type="com.xzsd.app.managerOrder.entity.ManagerOrderInfo">
+        <id property="orderId" column="forder_id" jdbcType="VARCHAR"/>
+        <result property="orderStateId" column="forder_state" jdbcType="VARCHAR"/>
+        <result property="orderAllCost" column="forder_price" jdbcType="VARCHAR"/>
+        <result property="orderAllGoodsCount" column="fall_cnt" jdbcType="INTEGER"/>
+        <result property="version" column="fversion" jdbcType="VARCHAR"/>
+        <result property="userId" column="fuser_code" jdbcType="VARCHAR"/>
+        <result property="userName" column="fuser_name" jdbcType="VARCHAR"/>
+        <result property="phone" column="fphone" jdbcType="VARCHAR"/>
+        <collection property="goodsList" ofType="com.xzsd.app.managerOrder.entity.GoodsList">
+            <result property="goodsId" column="sbook_id" jdbcType="VARCHAR"/>
+            <result property="goodsName" column="sbook_name" jdbcType="VARCHAR"/>
+            <result property="goodsImagePath" column="spicture_id" jdbcType="VARCHAR"/>
+            <result property="goodsPrice" column="spresent_price" jdbcType="VARCHAR"/>
+            <result property="goodsDescribe" column="sbook_introduce" jdbcType="VARCHAR"/>
+            <result property="cartGoodsCount" column="sbook_cnt" jdbcType="INTEGER"/>
+        </collection>
+    </resultMap>
+    <!--    查询店长门店订单商品列表-->
+    <select id="listManagerOrders" resultMap="managerOrderInfoList">
+        select
+		    s1.order_id				as forder_id,
+            s1.order_state		    as forder_state,
+            s1.order_price		    as forder_price,
+            s1.all_cnt				as fall_cnt,
+            s1.verson			    as fversion,
+		    s1.user_code			as fuser_code,
+		    s1.user_name			as fuser_name,
+		    s1.phone				as fphone,
+            s2.book_id				as sbook_id,
+            s2.book_name			as sbook_name,
+            s2.picture_id			as spicture_id,
+            s2.present_price	    as spresent_price,
+            s2.book_introduce       as sbook_introduce,
+            s2.book_cnt				as sbook_cnt
+        from
+            (select
+	            t1.order_id,
+	            t1.order_state,
+	            t1.order_price,
+	            t1.all_cnt,
+	            t1.user_code,
+	            t1.verson,
+	            t2.user_name,
+	            t2.phone
+            from
+                (select
+	                order_id,
+	                order_state,
+	                order_price,
+	                all_cnt,
+	                user_code,
+	                verson
+                from order_table
+                where store_id =
+                        (SELECT store_id
+                        from store
+                        where user_code = #{managerId})
+                and is_delete = 0) t1
+            inner join user t2
+            on t1.user_code = t2.user_code
+            where t2.is_delete = 0) s1
+            INNER JOIN
+                (select
+                    c1.order_id        ,
+                    c1.book_cnt		    ,
+                    c2.book_id         ,
+                    c2.book_name       ,
+                    c2.picture_id      ,
+                    c2.present_price    ,
+                    c2.book_introduce
+                from order_detail c1
+                left join goods c2
+                on c1.book_id = c2.book_id
+                and c1.is_delete = 0
+                and c2.is_delete = 0) s2
+        on s1.order_id = s2.order_id
+        <if test="orderStateId != null">
+            and s1.order_state = #{orderStateId}
+        </if>
+
+
+    </select>
+    <!--    订单商品映射集合-->
+    <resultMap id="managerOrderInfo" type="com.xzsd.app.managerOrder.entity.ManagerOrderInfo">
+        <id property="orderId" column="forder_id" jdbcType="VARCHAR"/>
+        <result property="orderStateId" column="forder_state" jdbcType="VARCHAR"/>
+        <result property="orderAllCost" column="forder_price" jdbcType="VARCHAR"/>
+        <result property="orderAllGoodsCount" column="fall_cnt" jdbcType="INTEGER"/>
+        <result property="createTime" column="fcreate_time" jdbcType="DATE"/>
+        <result property="userName" column="fuser_name" jdbcType="VARCHAR"/>
+        <result property="phone" column="fphone" jdbcType="VARCHAR"/>
+        <collection property="goodsList" ofType="com.xzsd.app.managerOrder.entity.GoodsList">
+            <result property="goodsId" column="sbook_id" jdbcType="VARCHAR"/>
+            <result property="goodsName" column="sbook_name" jdbcType="VARCHAR"/>
+            <result property="goodsImagePath" column="spicture_id" jdbcType="VARCHAR"/>
+            <result property="goodsPrice" column="spresent_price" jdbcType="VARCHAR"/>
+            <result property="goodsDescribe" column="sbook_introduce" jdbcType="VARCHAR"/>
+            <result property="cartGoodsCount" column="sbook_cnt" jdbcType="INTEGER"/>
+        </collection>
+    </resultMap>
+    <!--    查询店长门店订单商品列表-->
+    <select id="listManagerOrderDeepen" resultMap="managerOrderInfo">
+        select
+        s1.order_id				as forder_id,
+        s1.order_state		    as forder_state,
+        s1.order_price		    as forder_price,
+        s1.all_cnt				as fall_cnt,
+        s1.create_time			as fcreate_time,
+        s1.user_name			as fuser_name,
+        s1.phone				as fphone,
+        s2.book_id				as sbook_id,
+        s2.book_name			as sbook_name,
+        s2.picture_id			as spicture_id,
+        s2.present_price	    as spresent_price,
+        s2.book_introduce       as sbook_introduce,
+        s2.book_cnt				as sbook_cnt
+        from
+        (select
+        t1.order_id,
+        t1.order_state,
+        t1.order_price,
+        t1.all_cnt,
+        t1.user_code,
+        t1.create_time,
+        t2.user_name,
+        t2.phone
+        from
+        (select
+        order_id,
+        order_state,
+        order_price,
+        all_cnt,
+        user_code,
+        create_time
+        from order_table
+        where store_id =
+        (SELECT store_id
+        from store
+        where user_code = #{managerId})
+        and is_delete = 0
+        and order_id = #{orderId}) t1
+        inner join user t2
+        on t1.user_code = t2.user_code
+        where t2.is_delete = 0) s1
+        INNER JOIN
+        (select
+        c1.order_id        ,
+        c1.book_cnt		    ,
+        c2.book_id         ,
+        c2.book_name       ,
+        c2.picture_id      ,
+        c2.present_price    ,
+        c2.book_introduce
+        from order_detail c1
+        left join goods c2
+        on c1.book_id = c2.book_id
+        and c1.is_delete = 0
+        and c2.is_delete = 0) s2
+        on s1.order_id = s2.order_id
+    </select>
+<!--    查询店铺名称和地址-->
+    <select id="getStore" parameterType="java.lang.String" resultType="com.xzsd.app.managerOrder.entity.ManagerOrderInfo">
+        select
+            s1.store_name           'storeName',
+            s1.store_address        'address'
+        from store s1
+        inner join order_table s2
+        on s1.store_id = s2.store_id
+        where s2.order_id = #{orderId}
+        and s1.is_delete = 0
+        and s2.is_delete = 0
+    </select>
+<!--    修改订单状态接口-->
+    <update id="updateManagerOrderState" parameterType="com.xzsd.app.managerOrder.entity.ManagerOrderInfo">
+        update order_table
+        set
+                order_state = #{orderStateId},
+                update_user = #{userId},
+                update_time = now(),
+                verson      = verson + 1
+        where order_id = #{orderId}
+        and verson = #{version}
+    </update>
+</mapper>

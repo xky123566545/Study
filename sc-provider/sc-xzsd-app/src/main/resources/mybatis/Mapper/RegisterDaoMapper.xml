@@ -44,6 +44,12 @@
             4
        )
     </insert>
+<!--    检验门店邀请码-->
+    <select id="countInviteCode" resultType="int" parameterType="java.lang.String">
+        select count(invite_code)
+        from store
+        where invite_code = #{inviteCode}
+    </select>
 <!--    获取用户角色-->
     <select id="getRole" parameterType="java.lang.String" resultType="int">
         select

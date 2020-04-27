@@ -35,6 +35,12 @@ public class RegisterService {
         registerInfo.setCreateUser(registerInfo.getUserId());
         //密码加密
         registerInfo.setUserPassword(PasswordUtils.generatePassword(registerInfo.getUserPassword()));
+        //检验门店邀请码是否存在
+        if(registerInfo.getInviteCode() != null){
+            if (registerDao.countInviteCode(registerInfo.getInviteCode()) == 0){
+                return AppResponse.versionError("门店邀请码不存在，请重新输入");
+            }
+        }
         //检验用户账号是否存在
         if (registerDao.countUserAcct(registerInfo.getUserAcct()) != 0) {
             return AppResponse.versionError("用户账号已存在，请重新输入");

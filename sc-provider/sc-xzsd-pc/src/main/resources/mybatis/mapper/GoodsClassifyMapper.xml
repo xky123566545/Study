@@ -49,6 +49,7 @@
 <!--    查询商品分类信息-->
     <select id="getClassify" parameterType="java.lang.String" resultType="com.xzsd.pc.goodsClassify.entity.GoodsClassifyInfo">
         select
+            classify_id         'classifyId',
             classify_name       'classifyName',
             remarks             'classifyComment',
             parent_id           'classifyParent',

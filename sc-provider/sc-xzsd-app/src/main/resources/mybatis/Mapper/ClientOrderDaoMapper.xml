@@ -255,4 +255,75 @@
         and s2.is_delete = 0
         and s2.order_id = #{orderId}
     </select>
+    <!--    修改商品库存量-->
+    <update id="updateGoodsCount" parameterType="java.util.List">
+        update goods
+        <trim prefix="set">
+            <trim prefix="`storage` = case" suffix="end,">
+                <foreach collection="list" item="item">
+                    when book_id = #{item.goodsId} then `storage`-#{item.goodsCntInt}
+                </foreach>
+            </trim>
+            <trim prefix="update_user = case" suffix="end,">
+                <foreach collection="list" item="item1">
+                    when book_id = #{item1.goodsId} then #{item1.createUser}
+                </foreach>
+            </trim>
+            <trim prefix="update_time = case" suffix="end,">
+                <foreach collection="list" item="item2">
+                    when book_id = #{item2.goodsId} then now()
+                </foreach>
+            </trim>
+            <trim prefix="verson = case" suffix="end">
+                <foreach collection="list" item="item3">
+                    when book_id = #{item3.goodsId} then verson + 1
+                </foreach>
+            </trim>
+        </trim>
+        <where>
+            <foreach collection="list" separator="or" item="item4">
+                book_id = #{item4.goodsId}
+            </foreach>
+        </where>
+    </update>
+    <!--    查询订单名字表中订单信息-->
+    <select id="getGoodsDetail" parameterType="java.lang.String" resultType="com.clientOrder.entity.OrderDetailInfo">
+        select
+            book_id     'goodsId',
+            book_cnt    'goodsCntInt'
+        from order_detail
+        where order_id = #{orderId}
+        </select>
+
+    <!--    修改商品库存量-->
+    <update id="updateGoodsCountS" parameterType="java.util.List">
+        update goods
+        <trim prefix="set">
+            <trim prefix="`storage` = case" suffix="end,">
+                <foreach collection="list" item="item">
+                    when book_id = #{item.goodsId} then `storage`+#{item.goodsCntInt}
+                </foreach>
+            </trim>
+            <trim prefix="update_user = case" suffix="end,">
+                <foreach collection="list" item="item1">
+                    when book_id = #{item1.goodsId} then #{userId}
+                </foreach>
+            </trim>
+            <trim prefix="update_time = case" suffix="end,">
+                <foreach collection="list" item="item2">
+                    when book_id = #{item2.goodsId} then now()
+                </foreach>
+            </trim>
+            <trim prefix="verson = case" suffix="end">
+                <foreach collection="list" item="item3">
+                    when book_id = #{item3.goodsId} then verson + 1
+                </foreach>
+            </trim>
+        </trim>
+        <where>
+            <foreach collection="list" separator="or" item="item4">
+                book_id = #{item4.goodsId}
+            </foreach>
+        </where>
+    </update>
 </mapper>

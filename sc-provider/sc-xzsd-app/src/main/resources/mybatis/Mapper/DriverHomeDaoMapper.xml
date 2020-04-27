@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzsd.app.driverHome.dao.DriverHomeDao">
+<!--    查询司机负责的门店信息接口-->
+    <select id="listDriverStores" parameterType="java.lang.String" resultType="com.xzsd.app.driverHome.entity.DriverHomeInfo">
+        select
+	    s1.store_id		    'storeId',
+	    s1.store_name	    'storeName',
+	    s1.store_address	'address',
+	    s2.user_name		'userName',
+	    s2.phone
+        from
+        (select
+	        user_code,
+	        store_id,
+	        store_name,
+	        store_address
+        from store
+        where area_id =
+        (select
+            area_id
+        from `user`
+        where user_code = #{userId})
+        and is_delete = 0) s1
+        INNER JOIN user s2
+        on s1.user_code = s2.user_code
+        and s2.is_delete = 0
+    </select>
+</mapper>

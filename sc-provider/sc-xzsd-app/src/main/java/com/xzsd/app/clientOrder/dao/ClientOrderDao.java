@@ -71,4 +71,29 @@ public interface ClientOrderDao {
      * @Date: 2020/4/24
      */
     List<ClientOrderInfo> listGoodsForEvaluate(@Param("orderId") String orderId);
+    /**
+     * @Description:  新增时修改商品库存量
+     * @Param:  list
+     * @return:  int
+     * @Author: xukunyuan
+     * @Date: 2020/4/24
+     */
+    int updateGoodsCount(@Param("list") List<OrderDetailInfo> list);
+    /**
+     * @Description: 查询商品信息
+     * @Param:  orderId
+     * @return:  List
+     * @Author: xukunyuan
+     * @Date: 2020/4/26
+     */
+    List<OrderDetailInfo> getGoodsDetail(@Param("orderId") String orderId);
+
+    /**
+     * @Description:  修改订单状态时修改商品库存量
+     * @Param:  list
+     * @return:  int
+     * @Author: xukunyuan
+     * @Date: 2020/4/24
+     */
+    int updateGoodsCountS(@Param("list") List<OrderDetailInfo> list,@Param("userId") String userId);
 }

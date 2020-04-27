@@ -8,6 +8,8 @@
             book_id             'goodsId'
         from picture
         where is_delete = 0
+        and is_use = 1
+		and NOW() BETWEEN start_time and close_time
         order by sort_num
     </select>
 <!--    查询热门商品接口-->

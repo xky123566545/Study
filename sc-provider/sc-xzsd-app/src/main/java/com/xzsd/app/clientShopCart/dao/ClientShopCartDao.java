@@ -45,4 +45,22 @@ public interface ClientShopCartDao {
      * @Date: 2020/4/23
      */
     int deleteShoppingCart(@Param("listCode") List<String> listCode, @Param("userId") String userId);
+    /**
+     * @Description: 查询选择数量是否超过商品库存量(根据商品编号）
+     * @Param:  goodsCount
+     * @Param:  goodsId
+     * @return:  int
+     * @Author: xukunyuan
+     * @Date: 2020/4/26
+     */
+    int getGoodsCount(@Param("goodsCount") int goodsCount,@Param("goodsId") String goodsId);
+    /**
+     * @Description: 查询选择数量是否超过商品库存量（根据购物车编号）
+     * @Param:  goodsCount
+     * @Param: cartId
+     * @return:  int
+     * @Author: xukunyuan
+     * @Date: 2020/4/26
+     */
+    int getGoodsCountU(@Param("goodsCount") int goodsCount,@Param("cartId") String cartId);
 }

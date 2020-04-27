@@ -6,7 +6,6 @@ import com.xzsd.app.clientShopCart.entity.ClientShopCartInfo;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.xzsd.app.util.AppResponse;
-import com.xzsd.app.util.AuthUtils;
 import com.xzsd.app.util.StringUtil;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +33,10 @@ public class ClientShopCartService {
     public AppResponse addShoppingCart(ClientShopCartInfo clientShopCartInfo){
         clientShopCartInfo.setCreateUser(SecurityUtils.getCurrentUserId());
         clientShopCartInfo.setShopCartId(StringUtil.getCommonCode(2));
+        //判断购物车选择商品数量是否超过库存量
+        if (clientShopCartDao.getGoodsCount(clientShopCartInfo.getCartGoodsCount(),clientShopCartInfo.getGoodsId()) == 0){
+            return AppResponse.versionError("库存不足，请重新选择");
+        }
         if (clientShopCartDao.addShoppingCart(clientShopCartInfo) == 0){
             return AppResponse.versionError("新增失败，请重试");
         }
@@ -67,6 +70,10 @@ public class ClientShopCartService {
      */
     public AppResponse updateShoppingCart(ClientShopCartInfo clientShopCartInfo){
         clientShopCartInfo.setUpdateUser(SecurityUtils.getCurrentUserId());
+        //判断购物车选择商品数量是否超过库存量
+        if (clientShopCartDao.getGoodsCountU(clientShopCartInfo.getCartGoodsCount(),clientShopCartInfo.getShopCartId()) == 0){
+            return AppResponse.versionError("库存不足，请重新选择");
+        }
         if (clientShopCartDao.updateShoppingCart(clientShopCartInfo) == 0){
             return AppResponse.versionError("修改失败，请重试");
         }

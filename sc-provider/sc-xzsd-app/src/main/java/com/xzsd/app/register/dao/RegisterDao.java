@@ -20,6 +20,14 @@ public interface RegisterDao {
      * @Date: 2020/4/20
      */
     int clientRegister(RegisterInfo registerInfo);
+    /**
+    * @Description: 检验门店邀请码是否存在
+    * @Param:  inviteCode
+    * @return:  int
+    * @Author: xukunyuan
+    * @Date: 2020/4/26
+    */
+    int countInviteCode(@Param("inviteCode") String inviteCode);
     /** 
     * @Description:  获取用户编号
     * @Param:  userId

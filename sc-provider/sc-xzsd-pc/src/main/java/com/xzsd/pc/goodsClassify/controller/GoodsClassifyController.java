@@ -41,6 +41,13 @@ public class GoodsClassifyController {
             throw e;
         }
     }
+    /**
+     * @Description:  新增商品分类详情
+     * @Param:  classifyId
+     * @return:  Appresponse
+     * @Author: xukunyuan
+     * @Date: 2020/4/14
+     */
     @PostMapping("getGoodsClassify")
     private AppResponse getGoodsClassify(String classifyId){
         try{

@@ -1,6 +1,7 @@
 package com.xzsd.app.clientOrder.service;
 
 import com.alibaba.fastjson.JSON;
+import com.neusoft.security.client.utils.SecurityUtils;
 import com.xzsd.app.clientOrder.dao.ClientOrderDao;
 import com.xzsd.app.clientOrder.entity.ClientOrderInfo;
 import com.xzsd.app.clientOrder.entity.GoodList;
@@ -41,7 +42,7 @@ public class ClientOrderService {
      * @Date: 2020/4/24
      */
     public AppResponse addOrder(ClientOrderInfo clientOrderInfo) throws ScriptException {
-        String userId = AuthUtils.getCurrentUserId();
+        String userId = SecurityUtils.getCurrentUserId();
         clientOrderInfo.setCreateUser(userId);
         clientOrderInfo.setOrderId(StringUtil.getCommonCode(2));
         //将商品单价存入列表中
@@ -79,11 +80,17 @@ public class ClientOrderService {
         //将需要存入的数据存入list中，批量存入数据库中
         List<OrderDetailInfo> list = new ArrayList<>();
         String orderId = clientOrderInfo.getOrderId();
+        //将cnt转换成int类型
+        List<Integer> listCntInt = new ArrayList<>();
+        for (int j = 0; j < listCnt.size(); j++){
+            int temp = Integer.parseInt(listCnt.get(j));
+            listCntInt.add(temp);
+        }
         for (int j = 0; j < listGoodsId.size();j++){
             OrderDetailInfo t1 = new OrderDetailInfo();
             t1.setGoodsId(listGoodsId.get(j));
             t1.setGoodsPrice(listPrice.get(j));
-            t1.setGoodsCnt(listCnt.get(j));
+            t1.setGoodsCnt(listCntInt.get(j));
             t1.setCreateUser(userId);
             t1.setCreateTime(new Date());
             t1.setIsDelete(0);
@@ -95,6 +102,10 @@ public class ClientOrderService {
         //将订单分信息存入订单明细表中
         if (clientOrderDao.addOrderDetail(list) == 0){
             return AppResponse.versionError("将数据添加入订单明细表中失败，请重试");
+        }
+        //修改商品的库存的数量
+        if (clientOrderDao.updateGoodsCount(list) == 0){
+            return AppResponse.versionError("修改商品库存失败，请重试");
         }
         return AppResponse.success("新增成功");
     }
@@ -125,7 +136,17 @@ public class ClientOrderService {
      * @Date: 2020/4/24
      */
     public AppResponse updateOrderState(ClientOrderInfo clientOrderInfo) {
-        clientOrderInfo.setUpdateUser(AuthUtils.getCurrentUserId());
+        //根据商品编号，将商品信息查询出来
+        List<OrderDetailInfo> list = clientOrderDao.getGoodsDetail(clientOrderInfo.getOrderId());
+        //当订单状态变为1时，即订单已取消，修改商品库存量
+        if (clientOrderInfo.getOrderStateId().equals("1")) {
+            String userId = SecurityUtils.getCurrentUserId();
+            if (clientOrderDao.updateGoodsCountS(list,userId) == 0) {
+                return AppResponse.versionError("修改库存量失败，请重试");
+            }
+        }
+
+        clientOrderInfo.setUpdateUser(SecurityUtils.getCurrentUserId());
         if (clientOrderDao.updateOrderState(clientOrderInfo) == 0){
             return AppResponse.versionError("修改失败，请重试");
         }
@@ -172,7 +193,7 @@ public class ClientOrderService {
      */
     public AppResponse addGoodsEvaluate(@RequestBody String evaluateOrder) {
         OrderEva orderEva = JSON.parseObject(evaluateOrder,OrderEva.class);
-        orderEva.setUserId(AuthUtils.getCurrentUserId());
+        orderEva.setUserId(SecurityUtils.getCurrentUserId());
         if(clientOrderDao.addGoodsEvaluate(orderEva) == 0){
             return AppResponse.versionError("新增失败，请重试");
         }

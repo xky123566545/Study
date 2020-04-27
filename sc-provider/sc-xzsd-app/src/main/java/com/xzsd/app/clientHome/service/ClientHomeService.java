@@ -2,6 +2,7 @@ package com.xzsd.app.clientHome.service;
 
 import com.xzsd.app.clientHome.dao.ClientHomeDao;
 import com.xzsd.app.clientHome.entity.ClientHomeInfo;
+import com.xzsd.app.clientHome.entity.SlideshowList;
 import com.xzsd.app.util.AppResponse;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +28,8 @@ public class ClientHomeService {
      */
     public AppResponse listRotationCharHome(){
         List<ClientHomeInfo> slideshowList = clientHomeDao.listRotationCharHome();
+        SlideshowList slideshowList1 = new SlideshowList();
+        slideshowList1.setSlideshowList(slideshowList);
         if(slideshowList.size() == 0){
             return AppResponse.versionError("查询失败，请重试");
         }
@@ -41,8 +44,10 @@ public class ClientHomeService {
      * @Date: 2020/4/21
      */
     public AppResponse listHotGoods(){
-        List<ClientHomeInfo> list = clientHomeDao.listHotGoods();
-        if(list.size() == 0){
+        List<ClientHomeInfo> listInfo = clientHomeDao.listHotGoods();
+        SlideshowList list = new SlideshowList();
+        list.setList(listInfo);
+        if(listInfo.size() == 0){
             return AppResponse.versionError("查询失败，请重试");
         }
         return AppResponse.success("查询成功",list);
