@@ -30,7 +30,7 @@ public class TopOfColumnService {
         String userId = SecurityUtils.getCurrentUserId();
         TopOfColumnInfo topOfColumnInfo = topOfColumnDao.getTopOfColumn(userId);
         if (topOfColumnInfo == null){
-            return AppResponse.versionError("查询失败，请重试");
+            return AppResponse.bizError("查询失败，请重试");
         }
         return AppResponse.success("查询成功",topOfColumnInfo);
     }

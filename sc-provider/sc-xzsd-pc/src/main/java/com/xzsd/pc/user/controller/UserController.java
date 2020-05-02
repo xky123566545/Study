@@ -73,9 +73,9 @@ public class UserController {
      * @Date 2020-03-25
      */
     @PostMapping("deleteUser")
-    public AppResponse deleteUser(String userId) {
+    public AppResponse deleteUser(String userId,String role,String nowRole) {
         try {
-            return userService.deleteUser(userId);
+            return userService.deleteUser(userId,role,nowRole);
         } catch (Exception e) {
             logger.error("用户删除错误", e);
             System.out.println(e.toString());

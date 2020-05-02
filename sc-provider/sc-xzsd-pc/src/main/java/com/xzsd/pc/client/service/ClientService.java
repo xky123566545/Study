@@ -36,7 +36,7 @@ public class ClientService {
             List<ClientInfo> clientInfoList = clientDao.listClientsStore(clientInfo);
             PageInfo<ClientInfo> list = new PageInfo<>(clientInfoList);
             if(clientInfoList.size() == 0){
-                return AppResponse.bizError("查询失败，请重试");
+                return AppResponse.notFound("查询失败，请重试");
             }
             return AppResponse.success("查询成功",list);
         }

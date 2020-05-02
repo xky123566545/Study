@@ -38,6 +38,12 @@ public class GoodsClassifyService {
         if(goodsClassifyDao.addClassify(goodsClassifyInfo) == 0){
             return AppResponse.bizError("新增失败，请重试");
         }
+        //判断该分类是一级分类还是二级分类，若为二级分类则将其parent_id存入数据库中，该一级分类在删除时无法操作
+        if(!goodsClassifyInfo.getClassifyParent().equals("0")){
+                if (goodsClassifyDao.addOneClassify(goodsClassifyInfo.getClassifyParent(), "1",goodsClassifyInfo.getClassifyId()) == 0) {
+                    return AppResponse.bizError("添加一级分类进字典表失败，请重试");
+                }
+        }
         return AppResponse.success("新增菜单成功");
     }
     /** 
@@ -100,28 +106,15 @@ public class GoodsClassifyService {
     public AppResponse deleteClassify(String classifyId){
         List<String> listCode = Arrays.asList(classifyId.split(","));
         String userId = SecurityUtils.getCurrentUserId();
-        for (int i = 0;i < listCode.size();i++) {
-            //根据classifyId查看其属于一级分类还是二级分类
-            GoodsClassifyInfo goodsClassifyInfo = goodsClassifyDao.getClassify(listCode.get(i));
-            //当他是一级分类时，查看其是否存在二级分类
-            if (goodsClassifyInfo.getClassifyParent().equals("0")) {
-                //查看他是否存在二级分类
-                int count = goodsClassifyDao.countSecondClassify(listCode.get(i));
-                if (count != 0) {
-                    return AppResponse.versionError("分类id:" + listCode.get(i) + "为一级分类，且存在跟其关联的二级分类，无法删除！");
-                }
-            }
-            //该分类为二级分类，查看其分类下是否有商品存在
-            else {
-                int count = goodsClassifyDao.countgoods(listCode.get(i));
-                if (count != 0) {
-                    return AppResponse.versionError("分类id:" + listCode.get( i ) + "为二级分类，且存在跟其关联的商品，无法删除！");
-                }
-            }
+        //判断该分类下是否存在二级分类，或商品
+        if (goodsClassifyDao.countClassifyIdDelete(listCode) != 0){
+            return AppResponse.bizError("选择的分类下存在二级分类或者商品，无法删除");
         }
         if (goodsClassifyDao.deleteClassify(listCode,userId) == 0){
             return AppResponse.bizError("删除失败，请重试");
         }
+        //将字典表中classifyId删除
+        goodsClassifyDao.deleteDict(listCode);
         return AppResponse.success("删除成功");
     }
 }

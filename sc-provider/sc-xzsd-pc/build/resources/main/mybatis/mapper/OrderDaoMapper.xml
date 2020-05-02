@@ -4,38 +4,49 @@
 <!--    查询订单详情-->
     <select id="getListOrder" resultType="com.xzsd.pc.order.entity.OrderInfo" parameterType="java.lang.String">
         select
-            s1.user_code        'userId',
-            s1.order_id         'orderId',
-            s1.book_id          'goodsId',
-            s2.book_name        'goodsName',
-            s1.books_cnt        'goodsCount',
-            s1.order_price      'theGoodsAllPrice',
-            s2.cost_price       'goodsShelfCost',
-            s2.present_price    'goodsPrice'
-        from order_table s1
-        inner join goods s2
-        on s1.book_id = s2.book_id
-        where s1.is_delete = 0
-        and s2.is_delete = 0
-        and s1.order_id = #{orderId}
+		s2.user_code				'userId',
+		s2.order_id					'orderId',
+		s1.book_id					'goodsId',
+		s1.book_name				'goodsName',
+		s1.book_cnt					'goodsCount',
+		s1.goodAll_price			'theGoodsAllPrice',
+		s1.good_price		        'goodsPrice',
+		s1.cost_price				'goodsShelfCost'
+        from
+            (select
+	            t1.order_id,
+	            t1.book_id,
+	            t1.book_cnt,
+	            t2.book_name,
+                t2.cost_price,
+                t1.good_price,
+                t1.goodAll_price
+            from order_detail t1
+            inner join goods t2
+            on t1.book_id = t2.book_id
+            where t1.is_delete = 0
+            and t2.is_delete = 0
+            and t1.order_id = #{orderId}) s1
+        inner join order_table s2
+        on s1.order_id = s2.order_id
+        where s2.is_delete = 0
     </select>
 <!--    分页查询订单信息-->
     <select id="listOrders" parameterType="com.xzsd.pc.order.entity.OrderInfo" resultType="com.xzsd.pc.order.entity.OrderInfo">
         select
-            s1.order_id     'orderId',
-            s1.order_price  'orderAllCost',
-            s1.order_state  'orderStateId',
-            s1.store_id     'storeId',
-            s2.user_name    'userName',
-            s2.phone        'phone',
-            s1.verson       'version',
-            s1.pay_time     'payTime'
+        s1.order_id			'orderId',
+        s1.order_price	    'orderAllCost',
+        s1.order_state	    'orderStateId',
+        s1.store_id			'storeId',
+        s1.verson			'version',
+        s1.create_time	    'payTime',
+        s2.user_name		'userName',
+        s2.phone			'phone'
         from order_table s1
-        inner join user s2
+        inner JOIN user s2
         on s1.user_code = s2.user_code
         where s1.is_delete = 0
         and s2.is_delete = 0
-        and s2.role = #{role}
         <if test="userName != null and userName != ''">
             and s2.user_name = #{userName}
         </if>
@@ -73,4 +84,40 @@
             #{item}
         </foreach>
     </update>
+<!--    分页查询订单信息店长权限-->
+    <select id="listOrdersStore" parameterType="com.xzsd.pc.order.entity.OrderInfo" resultType="com.xzsd.pc.order.entity.OrderInfo">
+        select
+        s1.order_id			'orderId',
+        s1.order_price	    'orderAllCost',
+        s1.order_state	    'orderStateId',
+        s1.store_id			'storeId',
+        s1.verson			'version',
+        s1.create_time	    'payTime',
+        s2.user_name		'userName',
+        s2.phone			'phone'
+        from order_table s1
+        inner JOIN user s2
+        on s1.user_code = s2.user_code
+        where s1.is_delete = 0
+        and s2.is_delete = 0
+        and s1.store_id = (select store_id from store where user_code = #{userId} and is_delete = 0)
+        <if test="userName != null and userName != ''">
+            and s2.user_name = #{userName}
+        </if>
+        <if test="phone != null and phone != ''">
+            and s2.phone = #{phone}
+        </if>
+        <if test="orderId != null and orderId != ''">
+            and s1.order_id = #{orderId}
+        </if>
+        <if test="orderStateId != null and orderStateId != ''">
+            and s1.order_state = #{orderStateId}
+        </if>
+        <if test="payTimeStart != null and payTimeStart != ''">
+            and s1.pay_time_start = #{payTimeStart}
+        </if>
+        <if test="payTimeEnd != null and payTimeEnd != ''">
+            and s1.pay_time_end = #{payTimeEnd}
+        </if>
+    </select>
 </mapper>

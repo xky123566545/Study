@@ -42,7 +42,7 @@ public class GoodsClassifyController {
         }
     }
     /**
-     * @Description:  新增商品分类详情
+     * @Description:  查询商品分类详情
      * @Param:  classifyId
      * @return:  Appresponse
      * @Author: xukunyuan

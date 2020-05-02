@@ -34,7 +34,8 @@
             isbn,
             goodsShelfTime,
             update_user,
-            update_time
+            update_time,
+            page_view
 
         )
         values
@@ -61,15 +62,15 @@
             #{isbn},
             now(),
             #{createUser},
-            now()
+            now(),
+            #{pageView}
         )
     </insert>
 <!--    查询商品-->
-    <select id="getGoodsByGoodsId" parameterType="java.lang.String" resultType="com.xzsd.pc.goods.entity.GoodsVO">
+    <select id="getGoodsByGoodsId" parameterType="java.lang.String" resultType="com.xzsd.pc.goods.entity.GoodsInfo">
         select
+            book_id         'goodsId',
             book_name       'goodsName',
-            first_classfiy  'oneClassifyName',
-            second_classfiy 'twoClassifyName',
             advert          'goodsAdvertise',
             book_introduce  'goodsDescribe',
             store_name      'supplierName',
@@ -77,9 +78,16 @@
             present_price   'goodsPrice',
             author          'goodsAuthor',
             book_public     'goodsPress',
-            storage         'goodsOriginalCost',
+            storage         'goodsInventory',
             isbn,
-            picture_id      'goodsImagePath'
+            picture_id      'goodsImagePath',
+            verson          'version',
+            first_classfiy  'oneClassifyId',
+            second_classfiy 'twoClassifyId',
+						(select classify_name from goodsclassify where classify_id =
+						(select first_classfiy from goods where book_id = #{goodsId})) 'oneClassifyName',
+						(select classify_name from goodsclassify where classify_id =
+						(select second_classfiy from goods where book_id = #{goodsId})) 'twoClassifyName'
         from goods
         where is_delete = 0
         and book_id = #{goodsId}
@@ -103,7 +111,9 @@
             book_id         'goodsId',
             picture_id      'goodsImagePath',
             isbn,
-            verson          'version'
+            verson          'version',
+            author          'goodsAuthor',
+            book_public     'goodsPress'
         from goods
         where is_delete = 0
         <if test="goodsName != null and goodsName != ''">
@@ -179,8 +189,8 @@
             #{item}
         </foreach>
         and verson in
-        <foreach collection="listVersion" item="item" separator="," close=")" open="(" index="index">
-            #{item}
+        <foreach collection="listVersion" item="item1" separator="," close=")" open="(" index="index">
+            #{item1}
         </foreach>
     </update>
 <!--    查询商品分类下拉框接口-->
@@ -193,5 +203,30 @@
         and parent_id = #{classifyId}
     </select>
 
-
+<!--   轮播图删除-->
+    <update id="deletePicture" parameterType="java.lang.String">
+    update picture
+    set
+    is_delete   = 1,
+    update_user = #{userId},
+    update_time = now(),
+    verson      = verson + 1
+    where book_id in
+    <foreach collection="listCode" index="index" open="(" close=")" separator="," item="item">
+        #{item}
+    </foreach>
+    </update>
+    <!--    删除热门商品-->
+    <update id="deleteHotGoods" parameterType="com.xzsd.pc.hotGoods.entity.HotGoodsInfo">
+        update goodshot
+        set
+        is_delete   = 1,
+        update_user = #{userId},
+        update_time = now(),
+        verson      = verson + 1
+        where book_id in
+        <foreach collection="listCode" index="index" open="(" close=")" separator="," item="item">
+            #{item}
+        </foreach>
+    </update>
 </mapper>

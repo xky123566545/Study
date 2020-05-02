@@ -32,11 +32,11 @@ public class GoodsVO {
     /**
      * 原价
      */
-    private String goodsOriginalCost;
+    private double goodsOriginalCost;
     /**
      * 在售价
      */
-    private String goodsPrice;
+    private double goodsPrice;
     /**
      * 销售量
      */
@@ -90,6 +90,18 @@ public class GoodsVO {
      */
     private Date goodsShelfTime;
 
+    /**
+     * 版本号
+     */
+    private String version;
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
+    }
 
     public String getGoodsId() {
         return goodsId;
@@ -115,19 +127,19 @@ public class GoodsVO {
         this.goodsName = goodsName;
     }
 
-    public String getGoodsOriginalCost() {
+    public double getGoodsOriginalCost() {
         return goodsOriginalCost;
     }
 
-    public void setGoodsOriginalCost(String goodsOriginalCost) {
+    public void setGoodsOriginalCost(double goodsOriginalCost) {
         this.goodsOriginalCost = goodsOriginalCost;
     }
 
-    public String getGoodsPrice() {
+    public double getGoodsPrice() {
         return goodsPrice;
     }
 
-    public void setGoodsPrice(String goodsPrice) {
+    public void setGoodsPrice(double goodsPrice) {
         this.goodsPrice = goodsPrice;
     }
 

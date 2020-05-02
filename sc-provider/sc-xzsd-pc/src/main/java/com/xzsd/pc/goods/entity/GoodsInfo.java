@@ -31,11 +31,11 @@ public class GoodsInfo {
     /**
      * 原价
      */
-    private String goodsOriginalCost;
+    private double goodsOriginalCost;
     /**
      * 在售价
      */
-    private String goodsPrice;
+    private double goodsPrice;
     /**
      * 销售量
      */
@@ -79,7 +79,7 @@ public class GoodsInfo {
     /**
      * 库存量
      */
-    private int goodsInventory;
+    private String goodsInventory;
     /**
      * 图片路径
      */
@@ -124,10 +124,35 @@ public class GoodsInfo {
      */
     private Date updateTime;
     /**
+     * 浏览量
+     */
+    private String PageView;
+    /**
      * 版本号
      */
     private String version;
 
+    /**
+     * 商品库存
+     *
+     */
+    private String goodsInventories;
+
+    public String getGoodsInventories() {
+        return goodsInventories;
+    }
+
+    public void setGoodsInventories(String goodsInventories) {
+        this.goodsInventories = goodsInventories;
+    }
+
+    public String getPageView() {
+        return PageView;
+    }
+
+    public void setPageView(String pageView) {
+        PageView = pageView;
+    }
 
     public int getPageNum() {
         return pageNum;
@@ -169,19 +194,19 @@ public class GoodsInfo {
         this.goodsName = goodsName;
     }
 
-    public String getGoodsOriginalCost() {
+    public double getGoodsOriginalCost() {
         return goodsOriginalCost;
     }
 
-    public void setGoodsOriginalCost(String goodsOriginalCost) {
+    public void setGoodsOriginalCost(double goodsOriginalCost) {
         this.goodsOriginalCost = goodsOriginalCost;
     }
 
-    public String getGoodsPrice() {
+    public double getGoodsPrice() {
         return goodsPrice;
     }
 
-    public void setGoodsPrice(String goodsPrice) {
+    public void setGoodsPrice(double goodsPrice) {
         this.goodsPrice = goodsPrice;
     }
 
@@ -249,11 +274,11 @@ public class GoodsInfo {
         this.supplierName = supplierName;
     }
 
-    public int getGoodsInventory() {
+    public String getGoodsInventory() {
         return goodsInventory;
     }
 
-    public void setGoodsInventory(int goodsInventory) {
+    public void setGoodsInventory(String goodsInventory) {
         this.goodsInventory = goodsInventory;
     }
 
@@ -373,8 +398,8 @@ public class GoodsInfo {
                 ", goodsId='" + goodsId + '\'' +
                 ", isbn='" + isbn + '\'' +
                 ", goodsName='" + goodsName + '\'' +
-                ", goodsOriginalCost='" + goodsOriginalCost + '\'' +
-                ", goodsPrice='" + goodsPrice + '\'' +
+                ", goodsOriginalCost=" + goodsOriginalCost +
+                ", goodsPrice=" + goodsPrice +
                 ", goodsSales='" + goodsSales + '\'' +
                 ", oneClassifyName='" + oneClassifyName + '\'' +
                 ", twoClassifyName='" + twoClassifyName + '\'' +
@@ -385,8 +410,9 @@ public class GoodsInfo {
                 ", goodsStateId='" + goodsStateId + '\'' +
                 ", goodsViewsNum='" + goodsViewsNum + '\'' +
                 ", supplierName='" + supplierName + '\'' +
-                ", goodsInventory=" + goodsInventory +
+                ", goodsInventory='" + goodsInventory + '\'' +
                 ", goodsImagePath='" + goodsImagePath + '\'' +
+                ", imagePath='" + imagePath + '\'' +
                 ", goodsAuthor='" + goodsAuthor + '\'' +
                 ", goodsPress='" + goodsPress + '\'' +
                 ", goodsShelfTime=" + goodsShelfTime +
@@ -395,7 +421,8 @@ public class GoodsInfo {
                 ", createTime=" + createTime +
                 ", updateUser='" + updateUser + '\'' +
                 ", updateTime=" + updateTime +
-                ", version=" + version +
+                ", PageView='" + PageView + '\'' +
+                ", version='" + version + '\'' +
                 '}';
     }
 

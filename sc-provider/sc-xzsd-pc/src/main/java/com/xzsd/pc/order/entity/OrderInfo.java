@@ -41,6 +41,10 @@ public class OrderInfo {
      */
     private String theGoodsAllPrice;
     /**
+     * 订单总金额
+     */
+    private String orderAllCost;
+    /**
      * 付款时间范围起
      */
     private String payTimeStart;
@@ -105,6 +109,14 @@ public class OrderInfo {
      * 版本号
      */
     private String version;
+
+    public String getOrderAllCost() {
+        return orderAllCost;
+    }
+
+    public void setOrderAllCost(String orderAllCost) {
+        this.orderAllCost = orderAllCost;
+    }
 
     public int getPageNum() {
         return pageNum;
@@ -309,6 +321,7 @@ public class OrderInfo {
                 ", storeId='" + storeId + '\'' +
                 ", goodsCount=" + goodsCount +
                 ", theGoodsAllPrice='" + theGoodsAllPrice + '\'' +
+                ", orderAllCost='" + orderAllCost + '\'' +
                 ", payTimeStart='" + payTimeStart + '\'' +
                 ", payTimeEnd='" + payTimeEnd + '\'' +
                 ", payTime='" + payTime + '\'' +

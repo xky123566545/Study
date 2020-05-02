@@ -70,7 +70,7 @@
             store_name          'storeName',
             store_phone         'phone',
             user_code           'userId',
-            shop_code           'businessCode',
+            business_Code       'businessCode',
             store_address       'address',
             store_id            'storeId',
             verson              'version',

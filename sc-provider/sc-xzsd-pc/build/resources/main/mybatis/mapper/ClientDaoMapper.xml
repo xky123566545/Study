@@ -8,7 +8,7 @@
             user_id     'userAcct',
             user_name   'userName',
             sex,
-            phone,
+            phone       'phone',
             email       'mail',
             idcard     'idCard'
         from user
@@ -24,6 +24,7 @@
     <!--    店长分页查询客户信息-->
     <select id="listClientsStore" parameterType="com.xzsd.pc.client.entity.ClientInfo" resultType="com.xzsd.pc.client.entity.ClientInfo">
         select
+        s1.user_code    'userId',
         s1.user_id		'userAcct',
         s1.user_name	'userName',
         s1.sex,

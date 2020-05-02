@@ -34,10 +34,10 @@ public class HotGoodsService {
         hotGoodsInfo.setCreateUser(SecurityUtils.getCurrentUserId());
         hotGoodsInfo.setHotGoodsId(StringUtil.getCommonCode(2));
         if (hotGoodsDao.countHotGoodsNum(hotGoodsInfo.getHotGoodsNum()) != 0){
-            return AppResponse.bizError("热门商品序号已存在，请重新输入");
+            return AppResponse.notFound("热门商品序号已存在，请重新输入");
         }
         if (hotGoodsDao.countGoodsId(hotGoodsInfo.getGoodsId()) == 0){
-            return AppResponse.bizError("商品编号不存在，请重新输入");
+            return AppResponse.notFound("商品编号不存在，请重新输入");
         }
         if (hotGoodsDao.addHotGoods(hotGoodsInfo) == 0){
             return AppResponse.bizError("新增失败,请重试");
@@ -127,7 +127,7 @@ public class HotGoodsService {
         HotGoodsInfo hotGoodsInfo = hotGoodsDao.getHotGoodsNum();
         if (hotGoodsInfo == null)
         {
-            return AppResponse.versionError("查询失败,请重试");
+            return AppResponse.bizError("查询失败,请重试");
         }
         return AppResponse.success("查询成功",hotGoodsInfo);
     }
@@ -141,7 +141,7 @@ public class HotGoodsService {
     public AppResponse updateHotGoodsNum(HotGoodsInfo hotGoodsInfo){
         hotGoodsInfo.setUpdateUser(SecurityUtils.getCurrentUserId());
         if (hotGoodsDao.updateHotGoodsNum(hotGoodsInfo) == 0){
-            return AppResponse.versionError("修改失败,请重试");
+            return AppResponse.bizError("修改失败,请重试");
         }
         return AppResponse.success("修改成功");
     }

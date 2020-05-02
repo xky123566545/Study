@@ -8,6 +8,7 @@ import com.qcloud.cos.auth.COSCredentials;
 import com.qcloud.cos.model.PutObjectRequest;
 import com.qcloud.cos.model.PutObjectResult;
 import com.qcloud.cos.region.Region;
+import com.xzsd.pc.util.AppResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -34,7 +35,7 @@ public class UploadController {
     @Value("${spring.tengxun.bucketName}")
     private String bucketName;
     @Value("${spring.tengxun.path}")
-    private String path;
+    private String imagePath;
     @Value("${spring.tengxun.qianzui}")
     private String qianzui;
 
@@ -75,7 +76,9 @@ public class UploadController {
             String key = "/" + this.qianzui + "/" + year + "/" + month + "/" + day + "/" + newFileName;
             PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, key, localFile);
             PutObjectResult putObjectResult = cosclient.putObject(putObjectRequest);
-            return new UploadMsg(1, "上传成功", this.path + putObjectRequest.getKey());
+            UploadMsg uploadMsg = new UploadMsg();
+             uploadMsg.setImagePath(this.imagePath + putObjectRequest.getKey());
+            return AppResponse.success("查询成功",uploadMsg);
         } catch (IOException e) {
             return new UploadMsg(-1, e.getMessage(), null);
         } finally {
@@ -87,16 +90,24 @@ public class UploadController {
     private class UploadMsg {
         public int status;
         public String msg;
-        public String path;
+        public String imagePath;
 
         public UploadMsg() {
             super();
         }
 
-        public UploadMsg(int status, String msg, String path) {
+        public String getImagePath() {
+            return imagePath;
+        }
+
+        public void setImagePath(String imagePath) {
+            this.imagePath = imagePath;
+        }
+
+        public UploadMsg(int status, String msg, String imagePath) {
             this.status = status;
             this.msg = msg;
-            this.path = path;
+            this.imagePath = imagePath;
         }
     }
 }

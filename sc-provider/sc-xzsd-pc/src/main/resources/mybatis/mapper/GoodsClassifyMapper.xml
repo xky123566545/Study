@@ -14,7 +14,7 @@
         select count(classify_id)
         from goodsclassify
         where is_delete = 0
-        and classify_id = #{classifyid}
+        and classify_id = #{classifyId}
     </select>
 <!--    新增商品分类-->
     <insert id="addClassify" parameterType="com.xzsd.pc.goodsClassify.entity.GoodsClassifyInfo">
@@ -85,9 +85,8 @@
          from goodsclassify c1
          left join goodsclassify c2
          on c1.classify_id = c2.parent_id
-         and c1.is_delete = 0
-         and c2.is_delete = 0
-         where c1.parent_id = 0
+        where c1.is_delete = 0
+        and c1.parent_id = 0
         </select>
 <!--    修改商品分类信息-->
     <update id="updateClassify" parameterType="com.xzsd.pc.goodsClassify.entity.GoodsClassifyInfo">
@@ -105,35 +104,52 @@
         and verson      = #{version}
     </update>
 <!--    删除商品分类信息-->
-    <update id="deleteClassify" parameterType="java.lang.String">
-        update goodsclassify
-        set
-            is_delete   = 1,
-            update_user = #{userId},
-            update_time = now(),
-            verson      = verson + 1
+    <delete id="deleteClassify" parameterType="java.lang.String">
+        delete from goodsclassify
         where classify_id in
         <foreach collection="listCode" index="index" open="(" close=")" separator="," item="item">
             #{item}
         </foreach>
-        and is_delete = 0
-    </update>
-<!--    查看一级分类下是否存在二级分类-->
-    <select id="countSecondClassify" parameterType="java.lang.String" resultType="int">
+    </delete>
+<!--    将分类编号存入字典表-->
+    <insert id="addOneClassify" parameterType="java.lang.String">
+        insert into classify
+        (
+            classify_id,
+            classify_level,
+            twoClassify_id
+        )
+        values
+        (
+            #{classifyParent},
+            #{classifyLevel},
+            #{classifyId}
+        )
+    </insert>
+<!--    删除字典表中商品分类信息-->
+    <delete id="deleteDict" parameterType="java.lang.String">
+        delete from classify
+        where twoClassify_id in
+        <foreach collection="listCode" index="index" separator="," item="item" close=")" open="(">
+            #{item}
+        </foreach>
+    </delete>
+<!--    删除字典表中商品分类信息(商品分类接口)-->
+    <delete id="deleteClassifyId" parameterType="java.lang.String">
+        delete from classify
+        where classify_id in
+        <foreach collection="listCode" index="index" separator="," item="item" close=")" open="(">
+            #{item}
+        </foreach>
+    </delete>
+<!--    判断字典表中是否存在该商品信息-->
+    <select id="countClassifyIdDelete" parameterType="java.lang.String" resultType="int">
         select count(classify_id)
-        from goodsclassify
-        where is_delete = 0
-        and parent_id = #{classifyId}
-    </select>
-    <!--    查看二级分类下是否存在商品-->
-    <select id="countgoods" parameterType="java.lang.String" resultType="int">
-        select count(s2.book_id)
-        from goodsclassify s1
-        inner join goods s2
-        on s1.classify_name = s2.second_classfiy
-        where s1.is_delete = 0
-        and s2.is_delete = 0
-        and s1.classify_id = #{classifyId}
+        from classify
+        where classify_id in
+        <foreach collection="listCode" open="(" close=")" item="item" separator="," index="index">
+            #{item}
+        </foreach>
     </select>
 
 

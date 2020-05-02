@@ -45,7 +45,7 @@ public class RegisterController {
      * @Author: xukunyuan
      * @Date: 2020/4/20
      */
-    @GetMapping("/userInformation/getUser")
+    @PostMapping("/userInformation/getUser")
     public AppResponse getUser(){
         try{
             return registerService.getUser();

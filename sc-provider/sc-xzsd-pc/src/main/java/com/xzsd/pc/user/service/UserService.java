@@ -48,11 +48,24 @@ public class UserService {
             return AppResponse.bizError("用户账号已存在，请重新输入！");
         }
         // 新增用户
-        int count = userDao.addUser(userInfo);
-        if(0 == count) {
-            return AppResponse.bizError("新增失败，请重试！");
+        //超级管理员权限
+        if(userId.equals("2020041919582146587")) {
+            int count = userDao.addUser(userInfo);
+            if (0 == count) {
+                return AppResponse.bizError("新增失败，请重试！");
+            }
+            return AppResponse.success("新增成功！");
         }
-        return AppResponse.success("新增成功！");
+        //普通管理员只能新增店长
+        else{
+            if(userInfo.getRole().equals("1")){
+                return AppResponse.bizError("当前登录角色没有新增管理员的权限！");
+            }
+            if (0 == userDao.addUser(userInfo)){
+                return AppResponse.bizError("新增失败");
+            }
+            return AppResponse.success("新增成功");
+        }
     }
 
     /**
@@ -81,12 +94,26 @@ public class UserService {
      * @Date 2020-03-25
      */
     @Transactional(rollbackFor = Exception.class)
-    public AppResponse deleteUser(String userId) {
+    public AppResponse deleteUser(String userId,String role,String nowRole) {
         //获取用户id
         String userAcct = SecurityUtils.getCurrentUserId();
         List<String> listCode = Arrays.asList(userId.split(","));
         AppResponse appResponse = AppResponse.success("删除成功！");
         //删除用户
+        //若不是超级管理员
+        if (!userAcct.equals("2020041919582146587")){
+            List<String> listRole = Arrays.asList(role.split(","));
+            int temp = 1;
+            //判断选择的用户里面是否存在管理员，若存在则删除失败
+            for (int i = 0; i < listRole.size(); i++){
+                if (listRole.get(i).equals("1")){
+                    temp = 0;
+                }
+            }
+            if (temp == 0){
+                return AppResponse.notFound("该登录角色没有删除管理员权限，请重试");
+            }
+        }
         int count = userDao.deleteUser(listCode,userAcct);
         if(0 == count) {
             appResponse = AppResponse.bizError("删除失败，请重试！");
@@ -109,13 +136,23 @@ public class UserService {
         //密码加密
         userInfo.setUserPassword(PasswordUtils.generatePassword(userInfo.getUserPassword()));
         AppResponse appResponse = AppResponse.success("修改成功");
-        // 修改用户信息
-        int count = userDao.updateUser(userInfo);
-        if (0 == count) {
-            appResponse = AppResponse.versionError("数据有变化，请刷新！");
+        // 修改用户信息超级管理员权限
+        if(userId.equals("2020041919582146587")) {
+            int count = userDao.updateUser(userInfo);
+            if (0 == count) {
+                appResponse = AppResponse.bizError("删除失败，请重试！");
+                return appResponse;
+            }
             return appResponse;
         }
-        return appResponse;
+        else{
+            int count = userDao.updateUser(userInfo);
+            if (0 == count) {
+                appResponse = AppResponse.notFound("该登录角色没有修改管理员的的权限，请重试！");
+                return appResponse;
+            }
+            return appResponse;
+        }
     }
 
 

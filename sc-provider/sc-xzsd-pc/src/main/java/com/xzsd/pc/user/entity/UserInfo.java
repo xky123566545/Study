@@ -40,7 +40,8 @@ public class UserInfo {
     /**
      * 手机号码
      */
-    private String phone;
+    private long phone;
+
     /**
      * 电子邮件
      */
@@ -57,6 +58,10 @@ public class UserInfo {
      * 角色
      */
     private String role;
+    /***
+     * 当前登陆人角色
+     */
+    private String nowRole;
     /**
      * 创建者
      */
@@ -70,9 +75,41 @@ public class UserInfo {
      */
     private String updateUser;
     /**
+     * 图片地址
+     */
+    private String imagePath;
+    /**
+     * 图片地址
+     */
+    private String userImage;
+    /**
      * 版本号
      */
     private int version;
+
+    public String getNowRole() {
+        return nowRole;
+    }
+
+    public void setNowRole(String nowRole) {
+        this.nowRole = nowRole;
+    }
+
+    public String getUserImage() {
+        return userImage;
+    }
+
+    public void setUserImage(String userImage) {
+        this.userImage = userImage;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
 
     public int getPageSize() {
         return pageSize;
@@ -138,11 +175,11 @@ public class UserInfo {
         this.sex = sex;
     }
 
-    public String getPhone() {
+    public long getPhone() {
         return phone;
     }
 
-    public void setPhone(String phone) {
+    public void setPhone(long phone) {
         this.phone = phone;
     }
 

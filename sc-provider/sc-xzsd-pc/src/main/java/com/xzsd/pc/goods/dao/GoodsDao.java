@@ -38,7 +38,7 @@ public interface GoodsDao {
     * @Author: xukunyuan
     * @Date: 2020/3/27
     */
-    GoodsVO getGoodsByGoodsId(@Param("goodsId") String goodsId);
+    GoodsInfo getGoodsByGoodsId(@Param("goodsId") String goodsId);
     /**
     * @Description: 分页查询商品信息
     * @Param:  goodVOList
@@ -81,4 +81,20 @@ public interface GoodsDao {
     * @Date: 2020/4/13 
     */
     List<ClassifyInfo> listGoodsClassify(ClassifyInfo classifyInfo);
+    /**
+    * @Description: 删除轮播图中对应的商品
+    * @Param:  listcode
+    * @Param:  userId
+    * @Author: xukunyuan
+    * @Date: 2020/4/30
+    */
+    int deletePicture(@Param("listCode") List<String> listCode, @Param("userId") String userId);
+    /**
+     * @Description: 删除热门商品中对应的商品
+     * @Param:  listcode
+     * @Param:  userId
+     * @Author: xukunyuan
+     * @Date: 2020/4/30
+     */
+    int deleteHotGoods(@Param("listCode") List<String> listCode, @Param("userId") String userId);
 }

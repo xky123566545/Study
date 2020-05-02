@@ -35,6 +35,10 @@ public class AppResponse<T> implements Serializable {
 
     private T data;
 
+    @ApiModelProperty("返回图片")
+
+    private T imagePath;
+
     public int getCode() {
         return code;
     }
@@ -47,6 +51,9 @@ public class AppResponse<T> implements Serializable {
         return data;
     }
 
+    public T getImagePath() {
+        return imagePath;
+    }
     /**
      * 构建操作成功返回体
      *
@@ -76,6 +83,17 @@ public class AppResponse<T> implements Serializable {
      */
     public static <T> AppResponse success(String msg, T data) {
         return builder().code(AppResponseStatus.SUCCESS).msg(msg).data(data).build();
+    }
+
+    /**
+     * 构建操作成功返回体
+     *
+     * @param msg  操作说明
+     * @param imagePath 返回结果
+     * @return 结果
+     */
+    public static <T> AppResponse success(String msg,T date, T imagePath) {
+        return builder().code(AppResponseStatus.SUCCESS).msg(msg).imagePath(imagePath).build();
     }
 
     /**
@@ -197,7 +215,7 @@ public class AppResponse<T> implements Serializable {
      * @return
      */
     public static AppResponse bizError(String msg) {
-        return builder().code(AppResponseStatus.BIZ_ERROR).msg(msg).build();
+        return builder().code(AppResponseStatus.ERROR).msg(msg).build();
     }
 
     /**
@@ -223,10 +241,11 @@ public class AppResponse<T> implements Serializable {
     private AppResponse() {
     }
 
-    private AppResponse(int code, String msg, T data) {
+    private AppResponse(int code, String msg, T data,T imagePath) {
         this.code = code;
         this.msg = msg;
         this.data = data;
+        this.imagePath = imagePath;
     }
 
     public static <T> AppResponseBuilder builder() {
@@ -250,8 +269,10 @@ public class AppResponse<T> implements Serializable {
 
         private T data;
 
+        private T imagePath;
+
         public AppResponse build() {
-            AppResponse appResponse = new AppResponse<>(this.code, this.msg, this.data);
+            AppResponse appResponse = new AppResponse<>(this.code, this.msg, this.data,this.imagePath);
             return appResponse;
         }
 
@@ -267,6 +288,10 @@ public class AppResponse<T> implements Serializable {
 
         public AppResponseBuilder data(T data) {
             this.data = data;
+            return this;
+        }
+        public AppResponseBuilder imagePath(T imagePath) {
+            this.imagePath = imagePath;
             return this;
         }
     }

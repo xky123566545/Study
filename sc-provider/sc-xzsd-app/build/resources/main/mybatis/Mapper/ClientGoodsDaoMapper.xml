@@ -4,6 +4,7 @@
 <!--    查询商品信息详情接口-->
     <select id="getGoods"  parameterType="java.lang.String" resultType="com.xzsd.app.clientGoods.entity.ClientGoodsInfo">
         select
+            s1.book_id             'goodsId',
             s1.book_name           'goodsName',
             s1.isbn                'isbn',
             s1.book_introduce      'goodsDescribe',
@@ -14,25 +15,26 @@
             s1.book_public         'goodsPress',
             s1.store_name          'storeName'
         from goods s1
-        inner join goodseva s2
+        inner join goods_level s2
         on s1.book_id = s2.book_id
         where s1.is_delete = 0
-        and s2.is_delete = 0
         and s1.book_id = #{goodsId}
     </select>
 <!--    查询商品评价列表接口-->
     <select id="listGoodsEvaluates" parameterType="com.xzsd.app.clientGoods.entity.ClientGoodsInfo" resultType="com.xzsd.app.clientGoods.entity.ClientGoodsInfo">
         select
-            user_id         'userAcct',
-            content         'evaluateContent',
-            level           'evaluateScore',
-            create_time     'createTime',
-            imagePath       'imagePath'
-        from goodseva
-        where is_delete = 0
-        and book_id = #{goodsId}
-        <if test="evaluateScore != null and evaluateScore != ''">
-            and level = #{evaluateScore}
+            s1.user_id         'userAcct',
+            s1.content         'evaluateContent',
+            s1.level           'evaluateScore',
+            s1.create_time     'createTime',
+            s1.imagePath       'imagePath'
+        from goodseva s1
+        inner join goods_level s2
+        on s1.book_id = s2.book_id
+        where s1.is_delete = 0
+        and s1.book_id = #{goodsId}
+        <if test="goodsEvaluateScoreInt != null and goodsEvaluateScoreInt != ' '">
+            and s1.level between #{goodsEvaluateScoreInt} - 1 and #{goodsEvaluateScoreInt}
         </if>
     </select>
 <!--    查询一级分类列表接口-->
@@ -66,7 +68,7 @@
             c2.present_price    as spresent_price
          from goodsclassify c1
          left join goods c2
-         on c1.classify_name = c2.second_classfiy
+         on c1.classify_id = c2.second_classfiy
          and c1.is_delete = 0
          and c2.is_delete = 0
          where c1.parent_id = #{classifyId}

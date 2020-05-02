@@ -37,6 +37,10 @@ public class ManagerOrderInfo {
      */
     private String createTime;
     /**
+     * 创建时间
+     */
+    private String crateTime;
+    /**
      * 用户姓名
      */
     private String userName;
@@ -64,6 +68,15 @@ public class ManagerOrderInfo {
      *门店地址
      */
     private String address;
+
+    public String getCrateTime() {
+        return crateTime;
+    }
+
+    public void setCrateTime(String crateTime) {
+        this.crateTime = crateTime;
+    }
+
     /**
      * 商品信息列表
      */

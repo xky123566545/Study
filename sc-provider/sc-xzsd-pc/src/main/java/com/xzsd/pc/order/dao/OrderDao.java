@@ -15,7 +15,7 @@ public interface OrderDao {
     * @Author: xukunyuan
     * @Date: 2020/4/14
     */
-    OrderInfo getListOrder(@Param("orderId") String orderId);
+    List<OrderInfo> getListOrder(@Param("orderId") String orderId);
     /**
      * @Description: 分页查询列表接口
      * @Param:  orderInfo
@@ -35,4 +35,12 @@ public interface OrderDao {
     * @Date: 2020/4/14
     */
     int updateOrderState(@Param("listCode") List<String> listCode,@Param("listVersion") List<String> listVersion,@Param("orderStateId") String orderStateId,@Param("userId") String userId);
+    /**
+     * @Description: 分页查询列表接口（店长权限）
+     * @Param:  orderInfo
+     * @return:  List
+     * @Author: xukunyuan
+     * @Date: 2020/4/14
+     */
+    List<OrderInfo> listOrdersStore(OrderInfo orderInfo);
 }

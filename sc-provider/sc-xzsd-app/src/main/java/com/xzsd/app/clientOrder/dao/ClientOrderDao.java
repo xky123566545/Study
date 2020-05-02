@@ -70,7 +70,7 @@ public interface ClientOrderDao {
      * @Author: xukunyuan
      * @Date: 2020/4/24
      */
-    List<ClientOrderInfo> listGoodsForEvaluate(@Param("orderId") String orderId);
+    List<ClientOrderInfo> listGoodsForEvaluate(@Param("orderId") String orderId,@Param("evaluateScore") String evaluateScore);
     /**
      * @Description:  新增时修改商品库存量
      * @Param:  list
@@ -86,7 +86,7 @@ public interface ClientOrderDao {
      * @Author: xukunyuan
      * @Date: 2020/4/26
      */
-    List<OrderDetailInfo> getGoodsDetail(@Param("orderId") String orderId);
+    List<OrderDetailInfo> getGoodsDetail(@Param("orderId") String orderId );
 
     /**
      * @Description:  修改订单状态时修改商品库存量
@@ -96,4 +96,20 @@ public interface ClientOrderDao {
      * @Date: 2020/4/24
      */
     int updateGoodsCountS(@Param("list") List<OrderDetailInfo> list,@Param("userId") String userId);
+    /**
+    * @Description: 计算商品价格
+    * @Param:
+    * @return:  int
+    * @Author: xukunyuan
+    * @Date: 2020/4/27
+    */
+    int countGoodsPrice();
+    /**
+    * @Description: 修改商品星级
+    * @Param:
+    * @return:  int
+    * @Author: xukunyuan
+    * @Date: 2020/4/30
+    */
+    int addGoodsLevel(OrderEva orderEva);
 }

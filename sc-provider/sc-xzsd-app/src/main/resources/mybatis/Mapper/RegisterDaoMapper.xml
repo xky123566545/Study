@@ -63,7 +63,7 @@
             <if test="role == 2">
                 s1.user_name        'userName',
                 s1.image_path       'userImage',
-                s1.role,
+                s1.role             'role',
                 s2.store_id         'storeId',
                 s2.store_name       'storeName',
                 s2.invite_code      'inviteCode',
@@ -79,7 +79,10 @@
            <if test="role == 4">
                s1.user_name         'userName',
                s1.image_path        'userImage',
-               s1.role              'role'
+               s1.role              'role',
+               s2.store_id         'storeId',
+               s2.store_name       'storeName',
+               s2.store_address    'address'
            </if>
         from user s1
         <if test="role == 2">
@@ -87,8 +90,15 @@
         on s1.user_code = s2.user_code
         where role = #{role}
         and s1.user_code = #{userId}
+        and s1.is_delete = 0
+        and s2.is_delete = 0
         </if>
-        <if test="role != 2">
+        <if test="role == 3">
+            where s1.user_code = #{userId}
+        </if>
+        <if test="role == 4">
+            inner join store s2
+            on s1.invite_code = s2.invite_code
             where s1.user_code = #{userId}
         </if>
 

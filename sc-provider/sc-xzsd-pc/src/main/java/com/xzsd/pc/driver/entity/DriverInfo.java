@@ -43,7 +43,7 @@ public class DriverInfo {
     /**
      * 手机号码
      */
-    private String phone;
+    private Long phone;
     /**
      * 用户头像路径
      */
@@ -169,11 +169,11 @@ public class DriverInfo {
         this.idCard = idCard;
     }
 
-    public String getPhone() {
+    public Long getPhone() {
         return phone;
     }
 
-    public void setPhone(String phone) {
+    public void setPhone(Long phone) {
         this.phone = phone;
     }
 

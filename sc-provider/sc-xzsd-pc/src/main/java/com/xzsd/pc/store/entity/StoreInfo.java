@@ -50,7 +50,7 @@ public class StoreInfo {
     /**
      * 联系电话
      */
-    private String phone;
+    private Long phone;
     /**
      * 店长编号
      */
@@ -180,11 +180,11 @@ public class StoreInfo {
         this.storeName = storeName;
     }
 
-    public String getPhone() {
+    public Long getPhone() {
         return phone;
     }
 
-    public void setPhone(String phone) {
+    public void setPhone(Long phone) {
         this.phone = phone;
     }
 

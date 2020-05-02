@@ -70,20 +70,38 @@ public interface GoodsClassifyDao {
    * @Date: 2020/4/14
    */
    int deleteClassify(@Param("listCode") List<String> listCode,@Param("userId") String userId);
-   /**
-     * @Description: 查看一级分类下是否存在二级分类
-     * @Param:  classifyId
-     * @return:  int
-     * @Author: xukunyuan
-     * @Date: 2020/4/22
-     */
-    int countSecondClassify(@Param("classifyId") String classifyId);
     /**
-     * @Description: 查看二级级分类下是否存在商品
-     * @Param:  classifyId
+    * @Description: 新增分类编号
+    * @Param:  classifyParent
+     * @Param:  classifyLevel
+    * @return: int
+    * @Author: xukunyuan
+    * @Date: 2020/4/27
+    */
+    int addOneClassify(@Param("classifyParent") String classifyParent,@Param("classifyLevel") String classifyLevel,@Param("classifyId") String classifyId);
+    /**
+    * @Description:  删除字典表中分类信息(商品接口中)
+    * @Param:  listCode
+    * @return:  int
+    * @Author: xukunyuan
+    * @Date: 2020/4/27
+    */
+    int deleteDict(@Param("listCode") List<String> listCode);
+    /**
+     * @Description:  删除字典表中分类信息（商品分类接口中）
+     * @Param:  listCode
      * @return:  int
      * @Author: xukunyuan
-     * @Date: 2020/4/22
+     * @Date: 2020/4/27
      */
-    int countgoods(@Param("classifyId") String classifyId);
+    int deleteClassifyId(@Param("listCode") List<String> listCode);
+    /**
+     * @Description:  判断字典表中是否存在该商品信息
+     * @Param:  listCode
+     * @return:  int
+     * @Author: xukunyuan
+     * @Date: 2020/4/27
+     */
+    int countClassifyIdDelete(@Param("listCode") List<String> listCode);
+
 }

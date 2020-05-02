@@ -114,6 +114,9 @@
         <if test="role == 2">
             and menu_id in (5,7,8,9)
         </if>
+        <if test="role == 4 or role == 3">
+            and menu_id = -10000
+        </if>
         order by menu_id
 
 

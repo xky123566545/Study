@@ -14,6 +14,10 @@ public class ClientHomeInfo {
      */
     private String goodsId;
     /**
+     * 热门商品展示数量
+     */
+    private int hotGoodsNum;
+    /**
      * 商品名称
      */
     private String goodsName;
@@ -25,6 +29,14 @@ public class ClientHomeInfo {
      * 商品价格
      */
     private String goodsPrice;
+
+    public int getHotGoodsNum() {
+        return hotGoodsNum;
+    }
+
+    public void setHotGoodsNum(int hotGoodsNum) {
+        this.hotGoodsNum = hotGoodsNum;
+    }
 
     public String getSlideshowPath() {
         return slideshowPath;

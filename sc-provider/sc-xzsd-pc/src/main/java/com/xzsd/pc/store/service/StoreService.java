@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.neusoft.security.client.utils.SecurityUtils;
 import com.xzsd.pc.store.dao.StoreDao;
 import com.xzsd.pc.store.entity.AreaInfo;
+import com.xzsd.pc.store.entity.AreaList;
 import com.xzsd.pc.store.entity.StoreInfo;
 import com.xzsd.pc.user.dao.UserDao;
 import com.xzsd.pc.util.AppResponse;
@@ -37,10 +38,12 @@ public class StoreService {
      */
     public AppResponse listArea(String areaId){
         List<AreaInfo> areaList = storeDao.listArea(areaId);
+        AreaList areaLists = new AreaList();
+        areaLists.setAreaList(areaList);
         if(areaList.size() == 0){
-            return AppResponse.versionError("查询失败,请重试");
+            return AppResponse.bizError("查询失败,请重试");
         }
-        return AppResponse.success("查询成功",areaList);
+        return AppResponse.success("查询成功",areaLists);
     }
     /**
      * @Description: 新增门店信息接口
@@ -54,10 +57,10 @@ public class StoreService {
        storeInfo.setStoreId(StringUtil.getCommonCode(2));
        storeInfo.setInviteCode(InviteCode.getItemID(5));
        if (storeDao.countUserId(storeInfo.getUserId()) == 0){
-           return AppResponse.versionError("店长编号不存在,请重试");
+           return AppResponse.notFound("店长编号不存在,请重试");
        }
        if (storeDao.addStore(storeInfo) == 0){
-           return AppResponse.versionError("新增失败,请重试");
+           return AppResponse.bizError("新增失败,请重试");
        }
        return AppResponse.success("新增成功");
     }
@@ -70,12 +73,12 @@ public class StoreService {
      */
     public AppResponse getStore(String storeId){
         if (storeDao.countStoreId(storeId) == 0){
-            return AppResponse.versionError("店铺编号不存在，请重新输入");
+            return AppResponse.notFound("店铺编号不存在，请重新输入");
         }
         StoreInfo storeInfo = storeDao.getStore(storeId);
         if (storeInfo == null)
         {
-            return  AppResponse.versionError("查询失败，请重试");
+            return  AppResponse.bizError("查询失败，请重试");
         }
         //根据storeId获取省级名称
         storeInfo.setProvinceName(storeDao.getArea(storeInfo.getProvinceId()).getAreaName());
@@ -97,11 +100,11 @@ public class StoreService {
         //店长只可以查看自己门店的信息
         if (storeInfo.getRole().equals("2")){
             //获取当前登陆人编号
-            storeInfo.setUserId(AuthUtils.getCurrentUserId());
+            storeInfo.setUserId(SecurityUtils.getCurrentUserId());
             List<StoreInfo> storeInfoList = storeDao.listStores(storeInfo);
             PageInfo<StoreInfo> list = new PageInfo<>(storeInfoList);
             if (storeInfoList.size() == 0){
-                return AppResponse.versionError("查询失败，请重试");
+                return AppResponse.bizError("查询失败，请重试");
             }
             return AppResponse.success("查询成功",list);
         }
@@ -110,7 +113,7 @@ public class StoreService {
             List<StoreInfo> storeInfoList = storeDao.adminListStores(storeInfo);
             PageInfo<StoreInfo> list = new PageInfo<>(storeInfoList);
             if (storeInfoList.size() == 0){
-                return AppResponse.versionError("查询失败，请重试");
+                return AppResponse.bizError("查询失败，请重试");
             }
             return AppResponse.success("查询成功",list);
         }
@@ -125,7 +128,7 @@ public class StoreService {
     public AppResponse updateStore(StoreInfo storeInfo) {
         storeInfo.setUpdateUser(SecurityUtils.getCurrentUserId());
         if (storeDao.updateStore(storeInfo) == 0){
-            return AppResponse.versionError("修改失败，请重试");
+            return AppResponse.bizError("修改失败，请重试");
         }
         return AppResponse.success("修改成功");
     }
@@ -140,7 +143,7 @@ public class StoreService {
         List<String> listCode = Arrays.asList(storeId.split(","));
         String userId = SecurityUtils.getCurrentUserId();
         if(storeDao.deleteStore(listCode,userId) == 0){
-            return AppResponse.versionError("删除失败，请重试");
+            return AppResponse.bizError("删除失败，请重试");
         }
         return AppResponse.success("删除成功");
     }

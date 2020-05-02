@@ -25,6 +25,12 @@
         where s1.is_delete = 0
         and s2.is_delete = 0
         order by s2.sort_num
+        limit #{hotGoodsNum}
+    </select>
+<!--    获取商品展示数量-->
+    <select id="getHotGoodsNum" resultType="int">
+        select cnt
+        from goodshotnum
     </select>
 
 </mapper>

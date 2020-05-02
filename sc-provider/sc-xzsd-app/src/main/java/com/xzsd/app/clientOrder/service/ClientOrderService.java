@@ -9,6 +9,7 @@ import com.xzsd.app.clientOrder.entity.OrderDetailInfo;
 import com.xzsd.app.clientOrder.entity.OrderEva;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.xzsd.app.clientShopCart.dao.ClientShopCartDao;
 import com.xzsd.app.util.AppResponse;
 import com.xzsd.app.util.AuthUtils;
 import com.xzsd.app.util.StringUtil;
@@ -19,6 +20,7 @@ import javax.annotation.Resource;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -33,6 +35,8 @@ import java.util.List;
 public class ClientOrderService {
     @Resource
     private ClientOrderDao clientOrderDao;
+    @Resource
+    private ClientShopCartDao clientShopCartDao;
 
     /**
      * @Description:  新增订单接口
@@ -65,6 +69,9 @@ public class ClientOrderService {
         Double allCostPrice = (Double) se.eval(allPrice);
         //根据计算式计算出总数量
         Double allCostCnt = (Double) se.eval(allCnt);
+        //对价格数量取余
+        allCostPrice = new BigDecimal(allCostPrice).doubleValue();
+        allCostCnt = new BigDecimal(allCostCnt).doubleValue();
         //将总数量double类型转换成int类型
         int allCostCntI = Integer.parseInt(new java.text.DecimalFormat("0").format(allCostCnt));
         //将总数量set进类中
@@ -90,7 +97,7 @@ public class ClientOrderService {
             OrderDetailInfo t1 = new OrderDetailInfo();
             t1.setGoodsId(listGoodsId.get(j));
             t1.setGoodsPrice(listPrice.get(j));
-            t1.setGoodsCnt(listCntInt.get(j));
+            t1.setListCntInt(listCntInt.get(j));
             t1.setCreateUser(userId);
             t1.setCreateTime(new Date());
             t1.setIsDelete(0);
@@ -99,9 +106,21 @@ public class ClientOrderService {
             t1.setOrderStateId("0");
             list.add(t1);
         }
+        //判断该订单是从购物车下单还是其他页面下单
+        if(!clientOrderInfo.getShopCartId().equals("0")){
+            //删除购物车订单信息
+            List<String> listShopCartId = Arrays.asList(clientOrderInfo.getShopCartId().split(","));
+            if (clientShopCartDao.deleteShoppingCart(listShopCartId,userId) == 0){
+                return AppResponse.versionError("删除购物车信息失败，请重试");
+            }
+        }
         //将订单分信息存入订单明细表中
         if (clientOrderDao.addOrderDetail(list) == 0){
             return AppResponse.versionError("将数据添加入订单明细表中失败，请重试");
+        }
+        //计算商品的价格
+        if(clientOrderDao.countGoodsPrice() == 0){
+            return AppResponse.versionError("计算商品价格失败，请重试");
         }
         //修改商品的库存的数量
         if (clientOrderDao.updateGoodsCount(list) == 0){
@@ -174,8 +193,8 @@ public class ClientOrderService {
      * @Author: xukunyuan
      * @Date: 2020/4/24
      */
-    public AppResponse listGoodsForEvaluate(String orderId) {
-        List<ClientOrderInfo> goodsLists = clientOrderDao.listGoodsForEvaluate(orderId);
+    public AppResponse listGoodsForEvaluate(String orderId,String evaluateScore) {
+        List<ClientOrderInfo> goodsLists = clientOrderDao.listGoodsForEvaluate(orderId,evaluateScore);
         GoodList goodsList = new GoodList();
         goodsList.setGoodsList(goodsLists);
         if (goodsList == null){
@@ -197,6 +216,13 @@ public class ClientOrderService {
         if(clientOrderDao.addGoodsEvaluate(orderEva) == 0){
             return AppResponse.versionError("新增失败，请重试");
         }
+        //修改订单状态为已完成已评价
+        ClientOrderInfo clientOrderInfo = new ClientOrderInfo();
+        clientOrderInfo.setOrderId(orderEva.getOrderId());
+        clientOrderInfo.setOrderStateId("5");
+        clientOrderDao.updateOrderState(clientOrderInfo);
+        //修改商品星级
+        clientOrderDao.addGoodsLevel(orderEva);
         return AppResponse.success("新增成功");
     }
 

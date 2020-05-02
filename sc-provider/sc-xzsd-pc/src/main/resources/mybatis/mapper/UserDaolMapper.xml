@@ -27,6 +27,7 @@
          create_time,
          update_user,
          update_time,
+         image_path,
          verson)
         values
            (#{userId},
@@ -43,6 +44,7 @@
             now(),
             #{updateUser},
             now(),
+            #{imagePath},
             0)
     </insert>
 
@@ -61,8 +63,9 @@
         role
         from user
         where  is_delete = 0
+        and role in (1,2)
         <if test="userAcct != null and userAcct != ''">
-            and user_id like concat('%', #{userAcct}, '%')
+            and user_id = #{userAcct}
         </if>
         <if test="userName != null and userName != ''">
             and user_name like concat('%', #{userName}, '%')
@@ -105,6 +108,9 @@
         where user_code   = #{userId}
         and   is_delete   = 0
         and   verson      = #{version}
+        <if test="updateUser != '2020041919582146587'">
+            and role = 2
+        </if>
     </update>
 
     <!--获取用户信息-->
@@ -117,7 +123,10 @@
             idcard         'idCard',
             sex                     ,
             phone                   ,
-            email           'mail'
+            email           'mail',
+            user_code       'userId',
+            image_path      'userImage',
+            verson          'version'
         from user
         where user_code = #{userId}
         and is_delete = 0

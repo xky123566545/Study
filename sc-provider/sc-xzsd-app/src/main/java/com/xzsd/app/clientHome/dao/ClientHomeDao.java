@@ -1,6 +1,7 @@
 package com.xzsd.app.clientHome.dao;
 
 import com.xzsd.app.clientHome.entity.ClientHomeInfo;
+import org.apache.ibatis.annotations.Param;
 import org.mapstruct.Mapper;
 
 import java.util.List;
@@ -27,5 +28,13 @@ public interface ClientHomeDao {
      * @Author: xukunyuan
      * @Date: 2020/4/21
      */
-    List<ClientHomeInfo> listHotGoods();
+    List<ClientHomeInfo> listHotGoods(@Param("hotGoodsNum") int hotGoodsNum);
+    /**
+    * @Description: 查询热门商品展示数量
+    * @Param:
+    * @return:  int
+    * @Author: xukunyuan
+    * @Date: 2020/4/27
+    */
+    int getHotGoodsNum();
 }

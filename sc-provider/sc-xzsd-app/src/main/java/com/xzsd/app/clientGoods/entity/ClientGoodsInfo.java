@@ -47,6 +47,10 @@ public class ClientGoodsInfo {
      */
     private String goodsEvaluateScore;
     /**
+     * 商品评价星级
+     */
+    private Integer goodsEvaluateScoreInt;
+    /**
      * 作者
      */
     private String Author;
@@ -311,6 +315,14 @@ public class ClientGoodsInfo {
         this.version = version;
     }
 
+    public Integer getGoodsEvaluateScoreInt() {
+        return goodsEvaluateScoreInt;
+    }
+
+    public void setGoodsEvaluateScoreInt(Integer goodsEvaluateScoreInt) {
+        this.goodsEvaluateScoreInt = goodsEvaluateScoreInt;
+    }
+
     @Override
     public String toString() {
         return "ClientGoodsInfo{" +
@@ -323,6 +335,7 @@ public class ClientGoodsInfo {
                 ", goodsPrice='" + goodsPrice + '\'' +
                 ", goodsImagePath='" + goodsImagePath + '\'' +
                 ", goodsEvaluateScore='" + goodsEvaluateScore + '\'' +
+                ", goodsEvaluateScoreInt=" + goodsEvaluateScoreInt +
                 ", Author='" + Author + '\'' +
                 ", goodsPress='" + goodsPress + '\'' +
                 ", storeName='" + storeName + '\'' +
@@ -338,6 +351,7 @@ public class ClientGoodsInfo {
                 ", updateUser='" + updateUser + '\'' +
                 ", updateTime=" + updateTime +
                 ", version='" + version + '\'' +
+                ", goodsList=" + goodsList +
                 '}';
     }
 }

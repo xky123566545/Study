@@ -105,9 +105,9 @@ public class ClientOrderController {
      * @Date: 2020/4/24
      */
     @PostMapping("listGoodsForEvaluate")
-    public AppResponse listGoodsForEvaluate(String orderId) {
+    public AppResponse listGoodsForEvaluate(String orderId,String evaluateScore) {
         try{
-            return clientOrderService.listGoodsForEvaluate(orderId);
+            return clientOrderService.listGoodsForEvaluate(orderId,evaluateScore);
         }catch (Exception e){
             logger.error("查询失败，请重试");
             System.out.println(e.toString());

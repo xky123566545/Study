@@ -4,6 +4,7 @@ import com.xzsd.app.clientGoods.dao.ClientGoodsDao;
 import com.xzsd.app.clientGoods.entity.ClientGoodsInfo;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.xzsd.app.clientGoods.entity.OneClassifyList;
 import com.xzsd.app.util.AppResponse;
 import org.springframework.stereotype.Service;
 
@@ -44,6 +45,10 @@ public class ClientGoodsService {
      */
     public AppResponse listGoodsEvaluates(ClientGoodsInfo clientGoodsInfo) {
         PageHelper.startPage(clientGoodsInfo.getPageNum(), clientGoodsInfo.getPageSize());
+        //将星级String类型改为int类型
+        if (clientGoodsInfo.getEvaluateScore() != null) {
+            clientGoodsInfo.setGoodsEvaluateScoreInt(Integer.parseInt(clientGoodsInfo.getEvaluateScore()));
+        }
         List<ClientGoodsInfo> clientGoodsInfoList = clientGoodsDao.listGoodsEvaluates(clientGoodsInfo);
         //包装list
         PageInfo<ClientGoodsInfo> list = new PageInfo<>(clientGoodsInfoList);
@@ -60,8 +65,10 @@ public class ClientGoodsService {
      * @Date: 2020/4/22
      */
     public AppResponse listOneGoodsClassify(){
-        List<ClientGoodsInfo> oneClassifyList = clientGoodsDao.listOneGoodsClassify();
-        if (oneClassifyList.size() == 0){
+        List<ClientGoodsInfo> list = clientGoodsDao.listOneGoodsClassify();
+        OneClassifyList oneClassifyList = new OneClassifyList();
+        oneClassifyList.setOneClassifyList(list);
+        if (list.size() == 0){
             return AppResponse.versionError("查询失败，请重试");
         }
         return AppResponse.success("查询成功",oneClassifyList);
@@ -74,8 +81,10 @@ public class ClientGoodsService {
      * @Date: 2020/4/22
      */
     public AppResponse listGetClassGoods(ClientGoodsInfo clientGoodsInfo){
-        List<ClientGoodsInfo> twoClassifyList = clientGoodsDao.listGetClassGoods(clientGoodsInfo);
-        if (twoClassifyList.size() == 0){
+        List<ClientGoodsInfo> list = clientGoodsDao.listGetClassGoods(clientGoodsInfo);
+        OneClassifyList twoClassifyList = new OneClassifyList();
+        twoClassifyList.setTwoClassifyList(list);
+        if (list.size() == 0){
             return AppResponse.versionError("查询失败，请重试");
         }
         return AppResponse.success("查询成功",twoClassifyList);

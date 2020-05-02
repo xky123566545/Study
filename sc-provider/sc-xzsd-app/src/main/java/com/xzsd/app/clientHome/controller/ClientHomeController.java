@@ -5,6 +5,7 @@ import com.xzsd.app.util.AppResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,7 +29,7 @@ public class ClientHomeController {
     * @Author: xukunyuan
     * @Date: 2020/4/21 
     */
-    @GetMapping("listRotationCharHome")
+    @PostMapping("listRotationCharHome")
     public AppResponse listRotationCharHome(){
         try{
             return clientHomeService.listRotationCharHome();
@@ -46,7 +47,7 @@ public class ClientHomeController {
      * @Author: xukunyuan
      * @Date: 2020/4/21
      */
-    @GetMapping("listHotGoods")
+    @PostMapping("listHotGoods")
     public AppResponse listHotGoods(){
         try{
             return clientHomeService.listHotGoods();
